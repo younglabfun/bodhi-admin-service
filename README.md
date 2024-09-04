@@ -1,6 +1,6 @@
 # bodhi admin
-一个基础的后台管理系统，包含菜单、分类、连接管理以及RBAC角色授权管理
+一个基础的后台管理系统，包含用户管理、菜单管理以及RBAC角色授权管理
 
-将用于构建菩提辞典（https://bodhidict.com/ ） 的新版本
+该部分为前端
 
-添加了 simple 分支，移除category和link 模块
+后端：https://github.com/younglabfun/bodhi-admin-service
