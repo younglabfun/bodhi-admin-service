@@ -1,0 +1,21 @@
+Name: admin.rpc
+ListenOn: 0.0.0.0:8080
+
+DB:
+  DataSource: root:123456@tcp(127.0.0.1:33060)/bodhi-admin?charset=utf8&parseTime=true
+
+AdminConf:
+  Salt: "bodhi@20220501"
+  Master: "9324eeca-4ca6-11ef-b8ab-46a1f660a16e"
+  RefreshExpired: 86400  # 3600 * 24
+
+JwtAuthConf:
+  Secret: "!bodhi*JwtSec@20@$"
+  Expired: 86400
+
+Log:
+  Mode: file
+  Encoding: plain
+  Path: logs
+  Level: info
+  KeepDays: 1

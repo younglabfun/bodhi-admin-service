@@ -1,0 +1,11 @@
+version: '3.1'
+services:
+  admin:
+    image: admin-api
+    restart: always
+#    network_mode: "host"
+    volumes:
+      - /opt/admin/admin-api/logs:/opt/admin/logs
+      - /opt/admin/admin-api/etc:/opt/admin/etc
+    ports:
+      - 8081:8888

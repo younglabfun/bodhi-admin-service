@@ -1,0 +1,9 @@
+ersion: '3.1'
+services:
+  admin:
+    image: admin-rpc
+    restart: always
+    network_mode: "host"
+    volumes:
+      - /opt/admin/admin-rpc/logs:/opt/admin/logs
+      - /opt/admin/admin-rpc/etc:/opt/admin/etc

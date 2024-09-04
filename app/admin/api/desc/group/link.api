@@ -1,0 +1,64 @@
+syntax = "v1"
+
+info (
+	title:   "link api"
+	desc:    "链接管理定义"
+	author:  "jing.yang"
+	date:    "2024-04-14"
+	version: "v1"
+)
+
+
+type (
+	LinkReq {
+		Id         int64  `json:"id,optional"`
+		CategoryId int64  `json:"categoryId"`
+		Name       string `json:"name"`
+		Url        string `json:"url"`
+		Icon       string `json:"icon"`
+		Sort       int64  `json:"sort"`
+		IsEnabled  int64  `json:"isEnabled"`
+	}
+	LinkUnit {
+		Id         int64  `json:"id"`
+		CategoryId int64  `json:"categoryId"`
+		Category string  `json:"category"`
+		Name       string `json:"name"`
+		Url        string `json:"url"`
+		Icon       string `json:"icon"`
+		Sort       int64  `json:"sort"`
+		IsEnabled  int64  `json:"isEnabled"`
+		CreatedAt  string `json:"createdAt"`
+	}
+
+	ListLinkResp {
+		List       []*LinkUnit `json:"list"`
+		Total int64 `json:"total"`
+	}
+)
+
+@server (
+	group:  link
+	jwt: Auth
+	prefix: /api/v1/link
+)
+service adminapi-api {
+	@handler insertLink
+	post /insert (LinkReq) returns (AffectedResp)
+
+	@handler updateLink
+	post /update (LinkReq) returns (AffectedResp)
+
+	@handler updateLinkStatus
+	post /update-status (IdReq) returns (AffectedResp)
+
+	@handler removeLink
+	post /remove (IdReq) returns (AffectedResp)
+
+	@handler listLink
+	get /list (PageReq) returns (ListLinkResp)
+
+	@handler getLink
+	get /:id (IdPath) returns (LinkUnit)
+}
+

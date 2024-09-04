@@ -1,0 +1,58 @@
+syntax = "v1"
+
+info (
+	title:   "node group api"
+	desc:    "节点分组管理定义"
+	author:  "jing.yang"
+	date:    "2024-04-16"
+	version: "v1"
+)
+
+
+type (
+	NodeGroupReq {
+		Id         int64  `json:"id,optional"`
+		Title      string `json:"title"`
+		Name       string `json:"name"`
+		Sort       int64  `json:"sort"`
+	}
+	NodeGroupResp {
+		Id         int64  `json:"id"`
+		Title      string `json:"title"`
+		Name       string `json:"name"`
+		Sort       int64  `json:"sort"`
+	}
+	NodeGroupUnit {
+		Id         int64  `json:"id"`
+		Title      string `json:"title"`
+		Name       string `json:"name"`
+	}
+
+	ListNodeGroupResp {
+		List       []*NodeGroupUnit `json:"list"`
+	}
+)
+
+@server (
+	group:  nodeGroup
+	jwt: Auth
+	prefix: /api/v1/nodeGroup
+)
+service adminapi-api {
+	@handler insertGroup
+	post /insert (NodeGroupReq) returns (AffectedResp)
+
+	@handler updateGroup
+	post /update (NodeGroupReq) returns (AffectedResp)
+
+	@handler removeGroup
+	post /remove (IdReq) returns (AffectedResp)
+
+	@handler getGroup
+	get /get/:id (IdPath) returns (NodeGroupResp)
+
+	@handler getGroupList
+	get /get-list returns (ListNodeGroupResp)
+
+}
+

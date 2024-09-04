@@ -1,0 +1,72 @@
+syntax = "v1"
+
+info (
+	title:   "role api"
+	desc:    "角色管理定义"
+	author:  "jing.yang"
+	date:    "2024-04-18"
+	version: "v1"
+)
+
+type (
+	RoleReq {
+		RoleUuid         	string  `json:"roleUuid,optional"`
+		Name       			string `json:"name"`
+		Description        	string `json:"description,optional"`
+		AuthorizeJson       string `json:"authorizeJson"`
+		IsDefault       	int64  `json:"isDefault,optional"`
+	}
+	RoleResp {
+		RoleUuid         	string  `json:"roleUuid"`
+		Name       			string `json:"name"`
+		Description        	string `json:"description"`
+		AuthorizeJson       string `json:"authorizeJson"`
+		IsDefault       	int64  `json:"isDefault"`
+	}
+	RoleUnit {
+		RoleUuid         	string  `json:"roleUuid,optional"`
+		Name       			string `json:"name"`
+		Description        	string `json:"description"`
+		AuthorizeJson       string `json:"authorizeJson"`
+		IsDefault       	int64  `json:"isDefault"`
+		IsEnabled  			int64  `json:"isEnabled"`
+		CreatedAt  			string `json:"createdAt"`
+	}
+
+	ListRoleResp {
+		List       []*RoleUnit `json:"list"`
+		Total int64 `json:"total"`
+	}
+	RoleListResp {
+		List       []*RoleUnit `json:"list"`
+	}
+)
+
+@server (
+	group:  role
+	jwt: Auth
+	prefix: /api/v1/role
+)
+service adminapi-api {
+	@handler insertRole
+	post /insert (RoleReq) returns (AffectedResp)
+
+	@handler updateRole
+	post /update (RoleReq) returns (AffectedResp)
+
+	@handler updateStatus
+	post /update-status (UuidStatusReq) returns (AffectedResp)
+
+	@handler removeRole
+	post /remove (UuidReq) returns (AffectedResp)
+
+	@handler listRole
+	get /list (PageReq) returns (ListRoleResp)
+
+	@handler getList
+	get /get-list  returns (RoleListResp)
+
+	@handler getRole
+	get /get/:uuid (UuidPath) returns (RoleResp)
+}
+

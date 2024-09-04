@@ -1,0 +1,51 @@
+syntax = "v1"
+
+info (
+    title: "bodhi base api"
+    desc: "基础api定义"
+    author: "jing.yang"
+    date: "2024-03-26"
+    version: "v1"
+)
+
+type (
+    PageReq {
+        Page int64  `form:"page"`
+        Size int64  `form:"size"`
+        Sort string `form:"sort,optional"`
+        Order string `form:"order,optional"`
+        Field string `form:"field,optional"`
+        Value string `form:"value,optional"`
+    }
+    PageResp {
+        Total int64 `json:"total"`
+    }
+    AffectedResp {
+        Affected bool `json:"affected"`
+    }
+
+    UuidReq {
+        Uuid string `json:"uuid,optional"`
+    }
+    UuidPath {
+        Uuid string `path:"uuid"`
+    }
+    Id {
+        Id int64 `form:"id,optional"`
+    }
+    IdReq {
+        Id int64 `json:"id"`
+    }
+    IdPath {
+        Id int64 `path:"id,optional"`
+    }
+    StatusReq {
+        Id int64 `json:"id"`
+        Status string `json:"status"`
+    }
+    UuidStatusReq {
+        Uuid string `json:"uuid"`
+        Status string `json:"status"`
+    }
+)
+

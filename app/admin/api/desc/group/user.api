@@ -1,0 +1,108 @@
+syntax = "v1"
+
+info (
+    title:   "user api"
+    desc:    "用户管理定义"
+    author:  "jing.yang"
+    date:    "2024-05-18"
+    version: "v1"
+)
+
+type (
+
+    NewUserReq {
+        Username    string `json:"username"`
+        Password    string `json:"password"`
+        Email       string `json:"email"`
+        Name       	string  `json:"name"`
+        Remark string `json:"remark,optional"`
+    }
+    UserReq {
+        UserUuid string `json:"userUuid"`
+        Username string `json:"username"`
+        Email string `json:"email"`
+        Name string `json:"name"`
+        Avatar string `json:"avatar,optional"`
+        Remark string `json:"remark,optional"`
+        MailVerified int64 `json:"mailVerified,optional"`
+        IsEnabled int64 `json:"isEnabled,optional"`
+    }
+    UserResp {
+        UserUuid string `json:"userUuid"`
+        Username string `json:"username"`
+        Email string `json:"email"`
+        Name string `json:"name"`
+        Avatar string `json:"avatar"`
+        Remark string `json:"remark"`
+    }
+    UserUnit{
+        UserUuid string `json:"userUuid"`
+        Username string `json:"username"`
+        Email string `json:"email"`
+        Name string `json:"name"`
+        Remark string `json:"remark"`
+        IsEnabled int64 `json:"isEnabled"`
+        CreatedAt  			string `json:"createdAt"`
+    }
+    ListUserResp{
+        List       []*UserUnit `json:"list"`
+        Total int64 `json:"total"`
+    }
+    UserRoleReq {
+        UserUuid string `json:"userUuid"`
+        RoleUuid string `json:"roleUuid"`
+    }
+    ResetRoleReq {
+        Id int64 `json:"id"`
+        RoleUuid string `json:"roleUuid"`
+    }
+    UserPasswordReq {
+        Uuid string `json:"uuid"`
+        Password string `json:"password"`
+    }
+    UserRoleUnit{
+        Id int64 `json:"id"`
+        RoleUuid string `json:"roleUuid"`
+    }
+    UserRolesResp{
+        List       []*UserRoleUnit `json:"list"`
+    }
+)
+
+@server (
+    group:  user
+    jwt: Auth
+    prefix: /api/v1/user
+)
+service adminapi-api {
+    @handler insertUser
+    post /insert (NewUserReq) returns (AffectedResp)
+
+    @handler updateUser
+    post /update (UserReq) returns (AffectedResp)
+
+    @handler updateUserStatus
+    post /update-status (UuidReq) returns (AffectedResp)
+
+    @handler updatePassword
+    post /update-password (UserPasswordReq) returns (AffectedResp)
+
+    @handler removeUser
+    post /remove (UuidReq) returns (AffectedResp)
+
+    @handler listUser
+    get /list (PageReq) returns (ListUserResp)
+
+    @handler getUser
+    get /get/:uuid (UuidPath) returns (UserResp)
+
+    @handler getUserRoles
+    get /get-user-roles/:uuid (UuidPath) returns (UserRolesResp)
+
+    @handler setUserRole
+    post /set-user-role (UserRoleReq) returns (AffectedResp)
+
+    @handler removeUserRole
+    post /remove-user-role (IdReq) returns (AffectedResp)
+
+}

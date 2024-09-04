@@ -1,0 +1,20 @@
+Name: adminapi-api
+Host: 0.0.0.0
+Port: 8888
+
+AdminRpcConf:
+  Endpoints:
+    - 127.0.0.1:8080
+  NonBlock: true
+
+Auth:
+  AccessSecret: "!bodhi*JwtSec@20@$"
+  AccessExpired: 86400
+
+Log:
+  ServiceName: admin.api
+  Mode: file
+  Encoding: plain
+  Path: logs
+  Level: error
+  KeepDays: 1

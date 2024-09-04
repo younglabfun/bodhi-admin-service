@@ -1,0 +1,336 @@
+syntax = "proto3";
+
+package bodhi;
+option go_package="./admin";
+
+//base
+message Empty {}
+message AffectedResp {
+  bool Affected = 1;
+}
+
+message Id {
+  int64 Id = 1;
+}
+message Uuid {
+  string Uuid = 1;
+}
+message StatusReq {
+  int64 Id = 1;
+  string Status = 2;
+}
+message UuidStatusReq {
+  string Uuid = 1;
+  string Status = 2;
+}
+
+message PageReq {
+  int64 Page = 1;
+  int64 Size = 2;
+  string Sort = 3;
+  string Order = 4;
+  string Field = 5;
+  string Value = 6;
+}
+
+//node group
+message NodeGroupReq{
+  int64 Id = 1;
+  string Name = 2;
+  string Title = 3;
+  int64 Sort = 4;
+}
+message NodeGroupUnit{
+  int64 Id = 1;
+  string Name = 2;
+  string Title = 3;
+  int64 Sort = 4;
+}
+message NodeGroupList {
+  repeated NodeGroupUnit List = 1;
+}
+
+service NodeGroup {
+  rpc insertNodeGroup(NodeGroupReq) returns (AffectedResp);
+  rpc updateNodeGroup(NodeGroupReq) returns (AffectedResp);
+  rpc removeNodeGroup(Id) returns (AffectedResp);
+  rpc getNodeGroup(Id) returns (NodeGroupUnit);
+  rpc getNodeGroupList(Empty) returns (NodeGroupList);
+}
+
+//node
+message NodeReq {
+  int64 Id = 1;
+  int64 GroupId = 2;
+  string FuncCode = 3;
+  string Name = 4;
+  string Description = 5;
+}
+
+message NodeUnit {
+  int64 Id = 1;
+  int64 GroupId = 2;
+  string FuncCode = 3;
+  string Name = 4;
+  string Description = 5;
+  int64 IsEnabled = 6;
+  int64 CreatedAt = 7;
+}
+
+message NodeListResp {
+  repeated NodeUnit List = 1;
+}
+message ListNodeResp {
+  repeated NodeUnit List = 1;
+  int64 Total = 2;
+}
+message MoveReq {
+  int64 GroupId = 1;
+  repeated int64 Ids = 2;
+}
+message BatchIdsReq {
+  repeated int64 Ids = 1;
+}
+
+service Node {
+  rpc insertNode(NodeReq) returns (AffectedResp);
+  rpc updateNode(NodeReq) returns (AffectedResp);
+  rpc updateStatus(Id) returns (AffectedResp);
+  rpc removeNode(Id) returns (AffectedResp);
+  rpc getNode(Id) returns (NodeUnit);
+  rpc getList(Empty) returns (NodeListResp);
+  rpc getNodeListByGid(Id) returns (NodeListResp);
+  rpc listNode(PageReq) returns (ListNodeResp);
+  rpc batchMove(MoveReq) returns (AffectedResp);
+  rpc batchRemove(BatchIdsReq) returns (AffectedResp);
+}
+
+message MenuReq {
+  int64 Id = 1;
+  int64 Pid = 2;
+  int64 Type = 3;
+  string Title = 4;
+  string FuncCode = 5;
+  string Route = 6;
+  string Component = 7;
+  string Icon = 8;
+  string Href = 9;
+  int64 Sort = 10;
+  int64 IsShow = 11;
+}
+message MenuResp {
+  int64 Id = 1;
+  int64 Pid = 2;
+  int64 Type = 3;
+  string Title = 4;
+  string FuncCode = 5;
+  string Route = 6;
+  string Component = 7;
+  string Icon = 8;
+  string Href = 9;
+  int64 Sort = 10;
+  int64 IsShow = 11;
+}
+message ListMenuReq {
+  int64 Pid = 1;
+  int64 MenuType = 2;
+}
+message MenuUnit {
+  int64 Id = 1;
+  int64 Pid = 2;
+  int64 Type = 3;
+  string Title = 4;
+  string FuncCode = 5;
+  string Route = 6;
+  string Component = 7;
+  string Icon = 8;
+  string Href = 9;
+  int64 Sort = 10;
+  int64 IsShow = 11;
+  int64 IsEnabled = 12;
+  int64 CreatedAt = 13;
+}
+message MenuListResp {
+  repeated MenuUnit List = 1;
+}
+message MenuTypeResp {
+  int64 MenuType = 1;
+}
+
+service Menu {
+  rpc insertMenu(MenuReq) returns (AffectedResp);
+  rpc updateMenu(MenuReq) returns (AffectedResp);
+  rpc updateStatus(StatusReq) returns (AffectedResp);
+  rpc removeMenu(Id) returns (AffectedResp);
+  rpc getMenu(Id) returns (MenuResp);
+  rpc getMenuListByPid(ListMenuReq) returns (MenuListResp);
+  rpc getMenuListByType(MenuTypeResp) returns (MenuListResp);
+}
+
+
+//role
+message RoleReq {
+  string RoleUuid = 1;
+  string Name = 2;
+  string Description = 3;
+  string AuthorizeJson = 4;
+}
+message RoleUnit {
+  string RoleUuid = 1;
+  string Name = 2;
+  string Description = 3;
+  string AuthorizeJson = 4;
+  int64 IsDefault = 5;
+  int64 IsEnabled = 6;
+  int64 CreatedAt = 7;
+}
+message ListRoleResp {
+  repeated RoleUnit List = 1;
+  int64 Total = 2;
+}
+
+message RoleListResp {
+  repeated RoleUnit List = 1;
+}
+
+service Role {
+  rpc insertRole(RoleReq) returns (AffectedResp);
+  rpc updateRole(RoleReq) returns (AffectedResp);
+  rpc updateStatus(UuidStatusReq) returns (AffectedResp);
+  rpc removeRole(Uuid) returns (AffectedResp);
+  rpc getRole(Uuid) returns (RoleUnit);
+  rpc listRole(PageReq) returns(ListRoleResp);
+  rpc getList(Empty) returns (RoleListResp);
+}
+
+//user
+message LoginReq {
+  string Username = 1;
+  string Password = 2;
+  string ClientIp = 3;
+}
+
+message TokenUnit {
+  string AccessToken = 1;
+  string RefreshToken = 2;
+  int64 AccessExpire = 3;
+  int64 RefreshAfter = 4;
+}
+message UserResp {
+  string UserUuid = 1;
+  string Username = 2;
+  string Name = 3;
+  string Avatar = 4;
+}
+message LoginResp {
+  UserResp User = 1;
+  TokenUnit Token = 2;
+}
+message RegisterReq {
+  string Username = 1;
+  string Password = 2;
+  string Email = 3;
+  string Name = 4;
+  string Avatar = 5;
+}
+message TokenReq {
+  string UserUuid = 1;
+  string Token = 2;
+}
+message TokenResp {
+  TokenUnit Token = 1;
+}
+message PasswordReq {
+  string UserUuid = 1;
+  string Password = 2;
+  string NewPassword = 3;
+  bool VerifyPassword = 4;
+}
+message PermissionResp {
+  repeated string Permission = 1;
+}
+
+service Account {
+  rpc login(LoginReq) returns (LoginResp);
+  rpc register(RegisterReq) returns (AffectedResp);
+  rpc refreshToken(TokenReq) returns (TokenResp);
+  rpc setPassword(PasswordReq) returns (AffectedResp);
+  rpc getPermission(Uuid) returns (PermissionResp);
+}
+
+message NewUserReq {
+  string Username = 1;
+  string Password = 2;
+  string Email = 3;
+  string Name = 4;
+  string Remark = 5;
+}
+
+message UserReq {
+  string UserUuid = 1;
+  string Username = 2;
+  string Email = 3;
+  string Name = 4;
+  string Avatar = 5;
+  string Remark = 6;
+  int64 MailVerified = 7;
+  int64 IsEnabled = 8;
+}
+
+message UserUnit {
+  string UserUuid = 1;
+  string Username = 2;
+  string Email = 3;
+  string Name = 4;
+  string Avatar = 5;
+  string Remark = 6;
+  int64 MailVerified = 7;
+  int64 IsEnabled = 8;
+  int64 CreatedAt = 9;
+  int64 LastLoginTime = 10;
+  int64 LastActiveTime = 11;
+}
+
+message ListUserResp {
+  repeated UserUnit List = 1;
+  int64 Total = 2;
+}
+message UserPasswordReq {
+  string UserUuid = 1;
+  string Password = 2;
+}
+
+service User {
+  rpc insertUser(NewUserReq) returns (AffectedResp);
+  rpc updateUser(UserReq) returns (AffectedResp);
+  rpc updateStatus(Uuid) returns (AffectedResp);
+  rpc updatePassword(UserPasswordReq) returns (AffectedResp);
+  rpc removeUser(Uuid) returns (AffectedResp);
+  rpc getUser(Uuid) returns (UserUnit);
+  rpc listUser(PageReq) returns (ListUserResp);
+}
+
+//user role
+message UserRoleReq {
+  string UserUuid = 1;
+  string RoleUuid = 2;
+}
+message UpdateUserRoleReq {
+  int64 Id = 1;
+  string RoleUuid = 2;
+}
+message UserRoleUnit {
+  int64 Id = 1;
+  string RoleUuid = 2;
+  string RoleName = 3;
+}
+message UserRoleListResp {
+  repeated UserRoleUnit List =1;
+}
+
+service UserRole {
+  rpc insertUserRole(UserRoleReq) returns (AffectedResp);
+  rpc updateUserRole(UpdateUserRoleReq) returns (AffectedResp);
+  rpc removeUserRole(Id) returns (AffectedResp);
+  rpc getUserRoles(Uuid) returns (UserRoleListResp);
+}

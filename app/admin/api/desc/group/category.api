@@ -1,0 +1,59 @@
+syntax = "v1"
+
+info (
+    title: "category api"
+    desc: "分类管理定义"
+    author: "jing.yang"
+    date: "2024-03-30"
+    version: "v1"
+)
+
+type (
+    CategoryReq {
+        Id int64 `json:"id,optional"`
+        Type int64 `json:"type"`
+        ParentId int64 `json:"parentId"`
+        Name string `json:"name"`
+        Sort int64 `json:"sort"`
+        IsEnabled int64 `json:"isEnabled"`
+    }
+    CategoryUnit {
+        Id int64 `json:"id"`
+        Type int64 `json:"type"`
+        ParentId int64 `json:"parentId"`
+        Name string `json:"name"`
+        Sort int64 `json:"sort"`
+        IsEnabled int64 `json:"isEnabled"`
+        CreatedAt string `json:"createdAt"`
+    }
+    CategoryListResp {
+        List []*CategoryUnit `json:"list"`
+    }
+)
+
+@server(
+    group: category
+    jwt: Auth
+    prefix: /api/v1/category
+)
+
+service adminapi-api {
+    @handler insertCategory
+    post /insert (CategoryReq) returns (AffectedResp)
+
+    @handler updateCategory
+    post /update (CategoryReq) returns (AffectedResp)
+
+    @handler updateCategoryStatus
+    post /updateStatus (IdReq) returns (AffectedResp)
+
+    @handler removeCategory
+    post /remove (IdReq) returns (AffectedResp)
+
+    @handler getChildren
+    get /getChildren(Id) returns (CategoryListResp)
+
+    @handler getCategory
+    get /:id (IdPath) returns (CategoryUnit)
+}
+

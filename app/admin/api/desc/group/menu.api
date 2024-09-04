@@ -1,0 +1,103 @@
+syntax = "v1"
+
+info (
+    title:   "menu api"
+    desc:    "菜单管理定义"
+    author:  "jing.yang"
+    date:    "2024-08-06"
+    version: "v1"
+)
+
+type (
+    MenuReq {
+        Id          int64  `json:"id,optional"`
+        Pid         int64  `json:"pid"`
+        Type        int64  `json:"type"`
+        Title       string `json:"title"`
+        FuncCode    string `json:"funcCode"`
+        Route        string `json:"route"`
+        Component   string `json:"component"`
+        Icon        string `json:"icon,optional"`
+        Href        string `json:"href,optional"`
+        Sort  	    int64  `json:"sort"`
+        IsShow       int64  `json:"isShow"`
+    }
+    MenuResp {
+        Id          int64  `json:"id"`
+        Pid         int64  `json:"pid"`
+        Type        int64  `json:"type"`
+        Title       string `json:"title"`
+        FuncCode    string `json:"funcCode"`
+        Route        string `json:"route"`
+        Component   string `json:"component"`
+        Icon        string `json:"icon"`
+        Href        string `json:"href"`
+        Sort  	    int64  `json:"sort"`
+        IsShow       int64  `json:"isShow"`
+    }
+    MenuUnit {
+        Id          int64  `json:"id"`
+        Pid         int64  `json:"pid"`
+        Type        int64  `json:"type"`
+        Title       string `json:"title"`
+        FuncCode    string `json:"funcCode"`
+        Route        string `json:"route"`
+        Component   string `json:"component"`
+        Icon        string `json:"icon"`
+        Href        string `json:"href"`
+        Sort  	    int64  `json:"sort"`
+        IsShow       int64  `json:"isShow"`
+        IsEnabled  	 int64  `json:"isEnabled"`
+        CreatedAt  string `json:"createdAt"`
+    }
+
+    ListMenuReq {
+        Pid         int64  `form:"pid"`
+        Type        int64  `form:"type"`
+    }
+    ListMenuResp {
+        List       []*MenuUnit `json:"list"`
+    }
+    ListTypeReq {
+        Type        int64  `form:"type"`
+    }
+    MenuTreeUnit {
+        MenuUnit
+        Children []*MenuUnit `json:"children"`
+    }
+    MenuTreeResp {
+        Tree []*MenuTreeUnit `json:"tree"`
+    }
+)
+
+@server (
+    group:  menu
+    jwt: Auth
+    prefix: /api/v1/menu
+)
+service adminapi-api {
+    @handler insert
+    post /insert (MenuReq) returns (AffectedResp)
+
+    @handler update
+    post /update (MenuReq) returns (AffectedResp)
+
+    @handler updateStatus
+    post /update-status (StatusReq) returns (AffectedResp)
+
+    @handler remove
+    post /remove (IdReq) returns (AffectedResp)
+
+    @handler getMenu
+    get /get/:id (IdPath) returns (MenuResp)
+
+    @handler getMenuListByPid
+    get /get-menu-list (ListMenuReq) returns (ListMenuResp)
+
+    @handler getMenuListByType
+    get /get-menu-tree (ListTypeReq) returns (MenuTreeResp)
+
+    @handler getAdminMenu
+    get /get-admin-menu returns (MenuTreeResp)
+}
+

@@ -1,0 +1,89 @@
+syntax = "v1"
+
+info (
+	title:   "node api"
+	desc:    "节点管理定义"
+	author:  "jing.yang"
+	date:    "2024-04-16"
+	version: "v1"
+)
+
+
+type (
+	NodeReq {
+		Id           int64  `json:"id,optional"`
+		GroupId      int64  `json:"groupId"`
+		FuncCode     string `json:"funcCode"`
+		Name         string `json:"name"`
+		Description  string `json:"description,optional"`
+	}
+	NodeResp {
+		Id           int64  `json:"id"`
+		GroupId      int64  `json:"groupId"`
+		FuncCode     string `json:"funcCode"`
+		Name         string `json:"name"`
+		Description  string `json:"description"`
+	}
+	NodeUnit {
+		Id         int64  `json:"id"`
+		GroupId      int64  `json:"groupId"`
+		FuncCode     string `json:"funcCode"`
+		Name         string `json:"name"`
+		Description  string `json:"description"`
+		IsEnabled  	 int64  `json:"isEnabled"`
+		CreatedAt  string `json:"createdAt"`
+	}
+
+	NodeListResp {
+		List       []*NodeUnit `json:"list"`
+	}
+	ListNodeResp {
+		List       []*NodeUnit `json:"list"`
+		Total int64 `json:"total"`
+	}
+	MoveReq {
+		GroupId	int64 `json:"groupId"`
+		Ids	string `json:"ids"`
+	}
+	BatchRemoveReq {
+		Ids string `json:"ids"`
+	}
+)
+
+@server (
+	group:  node
+	jwt: Auth
+	prefix: /api/v1/node
+)
+service adminapi-api {
+	@handler insertNode
+	post /insert (NodeReq) returns (AffectedResp)
+
+	@handler updateNode
+	post /update (NodeReq) returns (AffectedResp)
+
+	@handler updateNodeStatus
+	post /update-status (IdReq) returns (AffectedResp)
+
+	@handler removeNode
+	post /remove (IdReq) returns (AffectedResp)
+
+	@handler getNode
+	get /get/:id (IdPath) returns (NodeResp)
+
+	@handler getListData
+	get /get-list-data returns (NodeListResp)
+
+	@handler getNodeList
+	get /get-list/:id(IdPath) returns (NodeListResp)
+
+	@handler ListNodeByGroup
+	get /list-group-node (PageReq) returns (ListNodeResp)
+
+	@handler BatchMoveGroup
+	post /batch-move-group (MoveReq) returns (AffectedResp)
+
+	@handler BatchRemove
+	post /batch-remove (BatchRemoveReq) returns (AffectedResp)
+}
+

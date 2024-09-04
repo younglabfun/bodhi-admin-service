@@ -1,0 +1,16 @@
+syntax = "v1"
+
+info (
+	title:   "admin api"
+	author:  "jing.yang"
+	date:    "2024-07-16"
+	version: "v0.1"
+)
+
+import "group/account.api"
+import "group/base.api"
+import "group/menu.api"
+import "group/node.api"
+import "group/nodeGroup.api"
+import "group/role.api"
+import "group/user.api"

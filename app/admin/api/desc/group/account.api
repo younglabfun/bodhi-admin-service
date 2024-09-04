@@ -1,0 +1,101 @@
+syntax = "v1"
+
+info (
+    title: "account api"
+    desc: "账户api定义"
+    author: "jing.yang"
+    date: "2024-07-27"
+    version: "v1"
+)
+
+type (
+    LoginReq {
+        Username string `json:"username"`
+        Password string `json:"password"`
+    }
+    LoginResp {
+        UserUuid string `json:"userUuid"`
+        Username string `json:"username"`
+        Name string `json:"name"`
+        Avatar string `json:"avatar"`
+        Token TokenUnit `json:"token"`
+    }
+    TokenUnit {
+        AccessToken  string `json:"accessToken"`
+        RefreshToken string `json:"refreshToken"`
+        AccessExpire int64  `json:"accessExpire"`
+        RefreshAfter int64  `json:"refreshAfter"`
+    }
+    RegisterReq {
+        Username string `json:"username"`
+        Password string `json:"password"`
+        Email string `json:"email"`
+        Name string `json:"name"`
+        Avatar string `json:"avatar"`
+    }
+    TokenReq {
+        Token string `json:"token"`
+    }
+    TokenResp {
+        Token TokenUnit `json:"token"`
+    }
+    PasswordReq {
+        password string `json:"password"`
+        NewPassword string `json:"newPassword"`
+    }
+    AccountReq {
+        UserUuid string `json:"userUuid"`
+        Email string `json:"email"`
+        Name string `json:"name"`
+        Avatar string `json:"Avatar"`
+    }
+    AccountResp {
+        Uuid string `json:"uuid"`
+        Name string `json:"name"`
+        Avatar string `json:"Avatar"`
+    }
+)
+
+@server(
+    group: account
+    prefix: /api/v1/account
+)
+
+service adminapi-api {
+    @handler login
+    post /login (LoginReq) returns (LoginResp)
+
+    @handler register
+    post /register (RegisterReq) returns (AffectedResp)
+}
+
+type (
+    PermissionResp {
+        Permission []string `json:"permission"`
+    }
+)
+
+@server(
+    group: account
+    jwt: Auth
+    prefix: /api/v1/account
+)
+
+service adminapi-api {
+
+    @handler refreshToken
+    post /refresh-token (TokenReq) returns (TokenResp)
+
+    @handler setPassword
+    post /reset-password (PasswordReq) returns (AffectedResp)
+
+    @handler updateAccount
+    post /update (AccountReq) returns (AffectedResp)
+
+    @handler getAccount
+    get /info returns (AccountResp)
+
+    @handler getPermission
+    get /get-permission returns (PermissionResp)
+}
+
