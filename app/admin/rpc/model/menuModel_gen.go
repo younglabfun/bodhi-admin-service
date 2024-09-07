@@ -115,7 +115,7 @@ func (m *defaultMenuModel) FindAllByType(ctx context.Context, menuType int64) ([
 }
 
 func (m *defaultMenuModel) Update(ctx context.Context, data *Menu) error {
-	err := m.conn.WithContext(ctx).Save(data).Error
+	err := m.conn.WithContext(ctx).Omit("is_enabled").Save(data).Error
 	return err
 }
 
