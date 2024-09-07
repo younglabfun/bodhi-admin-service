@@ -89,7 +89,7 @@ func (m *defaultNodeModel) FindOneByFuncCode(ctx context.Context, funcCode strin
 }
 
 func (m *defaultNodeModel) Update(ctx context.Context, data *Node) error {
-	err := m.conn.WithContext(ctx).Save(data).Error
+	err := m.conn.WithContext(ctx).Omit("is_enabled").Save(data).Error
 	return err
 }
 
