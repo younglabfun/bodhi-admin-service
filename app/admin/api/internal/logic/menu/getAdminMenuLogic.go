@@ -76,7 +76,14 @@ func (l *GetAdminMenuLogic) GetAdminMenu() (*types.MenuTreeResp, error) {
 
 				children = append(children, &child)
 			}
-			item.Children = children
+			if len(children) == 0 {
+				//一级目录，check permissions
+				if permissions == nil || !utils.ContainsStr(permissions, v.FuncCode) {
+					continue
+				}
+			} else {
+				item.Children = children
+			}
 
 			data = append(data, &item)
 		}
