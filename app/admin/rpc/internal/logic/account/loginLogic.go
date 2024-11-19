@@ -45,7 +45,7 @@ func (l *LoginLogic) Login(in *admin.LoginReq) (*admin.LoginResp, error) {
 
 	//build token
 	var jwtAuth utils.JwtAuth
-	_ = copier.Copy(&jwtAuth, l.svcCtx.Config.JwtAuthConf)
+	_ = copier.Copy(&jwtAuth, l.svcCtx.Config.AuthConf)
 	tokenData := utils.UserData{
 		UserUuid: user.UserUuid,
 	}

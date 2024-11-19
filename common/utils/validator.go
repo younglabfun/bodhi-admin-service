@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"net"
 	"regexp"
 	"strings"
 	"unicode"
@@ -93,7 +94,7 @@ func ValidatorPassword(pwd string, minLen, maxLen int) bool {
 		}
 	}
 	// 包含两种以上字符即可
-	if level < 2 {
+	if level <= 2 {
 		return false
 	}
 
@@ -134,4 +135,28 @@ func ValidatorSpecialSymbol(str string) bool {
 		return false
 	}
 	return true
+}
+
+func ValidatorIp(str string) bool {
+	address := net.ParseIP(str)
+	if address == nil {
+		return false
+	}
+	return true
+}
+
+func ValidatorPort(port int64) bool {
+	if port < 1 || port > 65535 {
+		return false
+	}
+	return true
+}
+
+func ContainsStr(slice []string, element string) bool {
+	for _, e := range slice {
+		if e == element {
+			return true
+		}
+	}
+	return false
 }

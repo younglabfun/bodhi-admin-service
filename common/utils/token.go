@@ -8,8 +8,8 @@ import (
 )
 
 type JwtAuth struct {
-	Secret  string `json:"secret"`
-	Expired int64  `json:"expired"`
+	AccessSecret  string
+	AccessExpired int64
 }
 
 type UserData struct {
@@ -38,15 +38,15 @@ func BuildToken(jwtAuth JwtAuth, user UserData) *jwtToken {
 
 func BuildAccessToken(jwtAuth JwtAuth, payloads map[string]interface{}) (*jwtToken, error) {
 	now := time.Now().Unix()
-	accessToken, err := GenToken(now, jwtAuth.Secret, payloads, jwtAuth.Expired)
+	accessToken, err := GenToken(now, jwtAuth.AccessSecret, payloads, jwtAuth.AccessExpired)
 	if err != nil {
 		return nil, err
 	}
 
 	return &jwtToken{
 		AccessToken:  accessToken,
-		AccessExpire: now + jwtAuth.Expired,
-		RefreshAfter: now + jwtAuth.Expired/2,
+		AccessExpire: now + jwtAuth.AccessExpired,
+		RefreshAfter: now + jwtAuth.AccessExpired/2,
 	}, nil
 }
 

@@ -34,7 +34,7 @@ func (l *RefreshTokenLogic) RefreshToken(in *admin.TokenReq) (*admin.TokenResp, 
 	}
 	//build new token
 	var jwtAuth utils.JwtAuth
-	_ = copier.Copy(&jwtAuth, l.svcCtx.Config.JwtAuthConf)
+	_ = copier.Copy(&jwtAuth, l.svcCtx.Config.AuthConf)
 	tokenData := utils.UserData{
 		UserUuid: in.UserUuid,
 	}

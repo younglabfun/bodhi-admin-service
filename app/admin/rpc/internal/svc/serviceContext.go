@@ -3,11 +3,8 @@ package svc
 import (
 	"bodhiadmin/app/admin/rpc/internal/config"
 	"bodhiadmin/app/admin/rpc/model"
+	"bodhiadmin/common/utils"
 	"github.com/zeromicro/go-zero/core/logx"
-	"gorm.io/driver/mysql"
-	"gorm.io/gorm"
-	"gorm.io/gorm/logger"
-	"gorm.io/gorm/schema"
 )
 
 type ServiceContext struct {
@@ -23,16 +20,12 @@ type ServiceContext struct {
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
-	db, err := gorm.Open(mysql.Open(c.DB.DataSource), &gorm.Config{
-		NamingStrategy: schema.NamingStrategy{
-			SingularTable: true, // 使用单数表名，启用该选项后，`User` 表将是`user`
-		},
-		Logger: logger.Default.LogMode(logger.Info),
-	})
+	db, err := utils.InitMySQL(c.MySql.Host, c.MySql.User, c.MySql.Password, c.MySql.Database, c.MySql.Port)
 	if err != nil {
-		logx.Error("Init Mysql connect error:", err)
+		logx.Error("Init MySQL connect error:", err)
 		panic(any(err))
 	}
+	logx.Infof("Init MySQL connected...")
 
 	menuModel := model.NewMenuModel(db)
 	nodeModel := model.NewNodeModel(db)

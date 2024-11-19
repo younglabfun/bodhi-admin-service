@@ -6,11 +6,25 @@ import (
 
 type Config struct {
 	zrpc.RpcServerConf
-	DB struct {
-		DataSource string
-	}
-	JwtAuthConf JwtAuthConf
-	AdminConf   AdminConf
+	AdminConf AdminConf
+	AuthConf  Auth
+	MySql     MySql
+	RedisConf Redis `json:"optional"`
+}
+
+type MySql struct {
+	Database string
+	Host     string
+	Port     int64
+	User     string
+	Password string
+}
+
+type Redis struct {
+	Host     string `json:",optional"`
+	Port     int64  `json:",optional"`
+	DBIndex  int    `json:",optional"`
+	Password string `json:",optional"`
 }
 
 type AdminConf struct {
@@ -19,7 +33,7 @@ type AdminConf struct {
 	RefreshExpired int64  `json:"refreshExpired"`
 }
 
-type JwtAuthConf struct {
-	Secret  string `json:"secret"`
-	Expired int64  `json:"expired"`
+type Auth struct {
+	AccessSecret  string
+	AccessExpired int64
 }
