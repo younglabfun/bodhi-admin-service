@@ -1,8 +1,6 @@
 <center class="half">
-<img src="https://github.com/younglabfun/younglabfun/blob/main/image/bodhi-admin-logo.png?raw=true" />
+<img src="https://github.com/younglabfun/younglabfun/blob/main/image/bodhi-admin.png?raw=true" />
 </center>
-
-<center style="font-size:36px">Bodhi Admin</center>
 
 <center style="font-size:12px;">Copyright 2024 younglabfun.Distributed under MIT license.Bodhi Admin based on go-zero,vue-admin-template</center>
 
