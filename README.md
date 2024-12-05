@@ -1,13 +1,14 @@
-# bodhi admin
-Copyright 2024 younglabfun (https://younglab.fun/)
+<center class="half">
+<img src="https://github.com/younglabfun/younglabfun/blob/main/image/bodhi-admin-logo.png?raw=true" />
+</center>
 
-Distributed under MIT license.
+<center style="font-size:36px">Bodhi Admin</center>
 
-Bodhi Admin based on go-zero,vue-admin-template
+<center style="font-size:12px;">Copyright 2024 younglabfun.Distributed under MIT license.Bodhi Admin based on go-zero,vue-admin-template</center>
 
 
 
-## bodhi admin
+# Bodhi Admin
 
 bodhi admin 是一个基础的后台管理系统。bodhi admin 本是为菩提辞典( https://bodhidict.com/ )开发的管理后台，在开发过程中改为独立项目开源。该项目包括后端服务、web前端两部分，包含管理后台的基本功能，用户登录、注册，菜单管理以及基于RBAC模型的角色授权控制。
 
