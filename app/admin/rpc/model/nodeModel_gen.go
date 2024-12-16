@@ -155,7 +155,7 @@ func (m *defaultNodeModel) FindListByPage(ctx context.Context, req PageReq) ([]*
 	err := db.Find(&list).Error
 
 	if err != nil {
-		return nil, 0, nil
+		return nil, 0, err
 	}
 	return list, total, nil
 }
