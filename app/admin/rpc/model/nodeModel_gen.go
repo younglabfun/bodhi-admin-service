@@ -170,7 +170,7 @@ func (m *defaultNodeModel) BatchUpdateNodeGroup(ctx context.Context, ids []int64
 
 func (m *defaultNodeModel) UpdateStatus(ctx context.Context, id int64) error {
 	old, err := m.FindOne(ctx, id)
-	if err != nil && err != ErrNotFound {
+	if err != nil {
 		return err
 	}
 

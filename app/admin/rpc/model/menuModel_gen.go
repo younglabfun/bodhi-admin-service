@@ -121,7 +121,7 @@ func (m *defaultMenuModel) Update(ctx context.Context, data *Menu) error {
 
 func (m *defaultMenuModel) UpdateStatus(ctx context.Context, id int64, column string) error {
 	old, err := m.FindOne(ctx, id)
-	if err != nil && err != ErrNotFound {
+	if err != nil {
 		return err
 	}
 	data := 0
