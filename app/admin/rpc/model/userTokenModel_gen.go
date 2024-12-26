@@ -30,11 +30,11 @@ type (
 	}
 
 	UserToken struct {
-		Id           int64  `gorm:"column:id"`
-		UserUuid     string `gorm:"column:user_uuid"`     // 用户UUID
-		RefreshToken string `gorm:"column:refresh_token"` // 更新token
-		ExpiresTime  int64  `gorm:"column:expires_time"`  // 过期时间（秒）
-		CreatedAt    int64  `gorm:"column:created_at"`    // 添加时间(毫秒)
+		Id           int64  `gorm:"column:id;primaryKey;unique;autoIncrement"`
+		UserUuid     string `gorm:"column:user_uuid;primaryKey"` // 用户UUID
+		RefreshToken string `gorm:"column:refresh_token"`        // 更新token
+		ExpiresTime  int64  `gorm:"column:expires_time"`         // 过期时间（秒）
+		CreatedAt    int64  `gorm:"<-:create;autoCreateTime"`    // 添加时间(毫秒)
 	}
 )
 

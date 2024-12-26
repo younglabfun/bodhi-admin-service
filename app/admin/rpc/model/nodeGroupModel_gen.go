@@ -28,12 +28,12 @@ type (
 	}
 
 	NodeGroup struct {
-		Id        int64                 `gorm:"column:id"`                 // 功能分组ID
-		Title     string                `gorm:"column:title"`              // 分组名称
-		Name      string                `gorm:"column:name"`               // 分组id
-		Sort      int64                 `gorm:"column:sort"`               // 排序
-		IsDeleted soft_delete.DeletedAt `gorm:"softDelete:flag,default:0"` // 是否删除
-		CreatedAt int64                 `gorm:"<-:create;autoCreateTime"`  // 添加时间
+		Id        int64                 `gorm:"column:id;primaryKey;unique"` // 功能分组ID
+		Title     string                `gorm:"column:title"`                // 分组名称
+		Name      string                `gorm:"column:name"`                 // 分组id
+		Sort      int64                 `gorm:"column:sort"`                 // 排序
+		IsDeleted soft_delete.DeletedAt `gorm:"softDelete:flag,default:0"`   // 是否删除
+		CreatedAt int64                 `gorm:"<-:create;autoCreateTime"`    // 添加时间
 	}
 )
 

@@ -30,7 +30,7 @@ type (
 	}
 
 	Menu struct {
-		Id        int64                 `gorm:"column:id"`
+		Id        int64                 `gorm:"column:id;primaryKey;unique"`
 		Pid       int64                 `gorm:"column:pid"`                // 父id
 		Type      int64                 `gorm:"column:type"`               // 菜单类型，0管理后台，1前台
 		Title     string                `gorm:"column:title"`              // 菜单名

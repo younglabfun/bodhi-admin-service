@@ -26,11 +26,12 @@ type (
 	}
 
 	UserRole struct {
-		Id        int64  `gorm:"column:id"`
-		UserUuid  string `gorm:"column:user_uuid"`         // 用户UUID
-		RoleUuid  string `gorm:"column:role_uuid"`         // 角色UUID
-		CreatedAt int64  `gorm:"<-:create;autoCreateTime"` // 添加时间
-		Role      Role   `gorm:"foreignKey:RoleUuid;references:RoleUuid"`
+		Id        int64  `gorm:"column:id;primaryKey;unique"`
+		UserUuid  string `gorm:"column:user_uuid;primaryKey"` // 用户UUID
+		RoleUuid  string `gorm:"column:role_uuid;primaryKey"` // 角色UUID
+		CreatedAt int64  `gorm:"<-:create;autoCreateTime"`    // 添加时间
+
+		Role Role `gorm:"foreignKey:RoleUuid;references:RoleUuid"`
 	}
 )
 

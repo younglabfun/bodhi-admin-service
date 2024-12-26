@@ -5,7 +5,6 @@ package model
 import (
 	"bodhiadmin/common/utils"
 	"context"
-	"database/sql"
 	"github.com/SpectatorNan/gorm-zero/gormc"
 	"gorm.io/gorm"
 	"gorm.io/plugin/soft_delete"
@@ -36,22 +35,22 @@ type (
 	}
 
 	User struct {
-		UserUuid       string                `gorm:"column:user_uuid"`          // 用户UUID
-		Username       string                `gorm:"column:username"`           // 用户名
-		Password       string                `gorm:"column:password"`           // 密码
-		Email          string                `gorm:"column:email"`              // Email
-		Name           string                `gorm:"column:name"`               // 名称
-		Avatar         string                `gorm:"column:avatar"`             // 头像
-		Remark         string                `gorm:"column:remark"`             // 备注
-		LastLoginIp    string                `gorm:"column:last_login_ip"`      // 最后登陆IP
-		LastLoginTime  int64                 `gorm:"column:last_login_time"`    // 最后登陆时间
-		LastActiveIp   string                `gorm:"column:last_active_ip"`     // 最后活跃ip
-		LastActiveTime int64                 `gorm:"column:last_active_time"`   // 最后活跃时间（毫秒）
-		CustomData     sql.NullString        `gorm:"column:custom_data"`        // 用户数据json
-		MailVerified   int64                 `gorm:"column:mail_verified"`      // 邮箱验证
-		IsEnabled      int64                 `gorm:"default:1"`                 // 是否启用
-		IsDeleted      soft_delete.DeletedAt `gorm:"softDelete:flag,default:0"` // 是否删除
-		CreatedAt      int64                 `gorm:"<-:create;autoCreateTime"`  // 添加时间
+		UserUuid       string                `gorm:"column:user_uuid;primaryKey;unique"` // 用户UUID
+		Username       string                `gorm:"column:username"`                    // 用户名
+		Password       string                `gorm:"column:password"`                    // 密码
+		Email          string                `gorm:"column:email"`                       // Email
+		Name           string                `gorm:"column:name"`                        // 名称
+		Avatar         string                `gorm:"column:avatar"`                      // 头像
+		Remark         string                `gorm:"column:remark"`                      // 备注
+		LastLoginIp    string                `gorm:"column:last_login_ip"`               // 最后登陆IP
+		LastLoginTime  int64                 `gorm:"column:last_login_time"`             // 最后登陆时间
+		LastActiveIp   string                `gorm:"column:last_active_ip"`              // 最后活跃ip
+		LastActiveTime int64                 `gorm:"column:last_active_time"`            // 最后活跃时间（毫秒）
+		CustomData     string                `gorm:"serializer:json"`                    // 用户数据json
+		MailVerified   int64                 `gorm:"default:0"`                          // 邮箱验证
+		IsEnabled      int64                 `gorm:"default:1"`                          // 是否启用
+		IsDeleted      soft_delete.DeletedAt `gorm:"softDelete:flag,default:0"`          // 是否删除
+		CreatedAt      int64                 `gorm:"<-:create;autoCreateTime"`           // 添加时间
 	}
 )
 

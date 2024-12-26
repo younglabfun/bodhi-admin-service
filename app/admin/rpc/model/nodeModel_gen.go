@@ -35,14 +35,14 @@ type (
 	}
 
 	Node struct {
-		Id          int64                 `gorm:"column:id"`                 // 功能ID
-		GroupId     int64                 `gorm:"column:group_id"`           // 应用功能分组ID
-		FuncCode    string                `gorm:"column:func_code"`          // 功能标识
-		Name        string                `gorm:"column:name"`               // 功能名称
-		Description string                `gorm:"column:description"`        // 功能描述
-		IsEnabled   int64                 `gorm:"default:1"`                 // 是否启用
-		IsDeleted   soft_delete.DeletedAt `gorm:"softDelete:flag,default:0"` // 是否删除
-		CreatedAt   int64                 `gorm:"<-:create;autoCreateTime"`  // 添加时间
+		Id          int64                 `gorm:"column:id;primaryKey;unique"` // 功能ID
+		GroupId     int64                 `gorm:"column:group_id"`             // 应用功能分组ID
+		FuncCode    string                `gorm:"column:func_code"`            // 功能标识
+		Name        string                `gorm:"column:name"`                 // 功能名称
+		Description string                `gorm:"column:description"`          // 功能描述
+		IsEnabled   int64                 `gorm:"default:1"`                   // 是否启用
+		IsDeleted   soft_delete.DeletedAt `gorm:"softDelete:flag,default:0"`   // 是否删除
+		CreatedAt   int64                 `gorm:"<-:create;autoCreateTime"`    // 添加时间
 	}
 )
 

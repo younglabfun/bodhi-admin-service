@@ -30,14 +30,14 @@ type (
 	}
 
 	Role struct {
-		RoleUuid      string                `gorm:"column:role_uuid"`          // 角色UUID
-		Name          string                `gorm:"column:name"`               // 角色名称
-		Description   string                `gorm:"column:description"`        // 角色说明
-		AuthorizeJson string                `gorm:"column:authorize_json"`     // 应用功能授权
-		IsDefault     int64                 `gorm:"default:0"`                 // 是否默认角色模版
-		IsEnabled     int64                 `gorm:"default:1"`                 // 是否启用
-		IsDeleted     soft_delete.DeletedAt `gorm:"softDelete:flag,default:0"` // 是否删除
-		CreatedAt     int64                 `gorm:"<-:create;autoCreateTime"`  // 添加时间
+		RoleUuid      string                `gorm:"column:role_uuid;primaryKey"`           // 角色UUID
+		Name          string                `gorm:"column:name"`                           // 角色名称
+		Description   string                `gorm:"column:description"`                    // 角色说明
+		AuthorizeJson string                `gorm:"column:authorize_json;serializer:json"` // 应用功能授权
+		IsDefault     int64                 `gorm:"default:0"`                             // 是否默认角色模版
+		IsEnabled     int64                 `gorm:"default:1"`                             // 是否启用
+		IsDeleted     soft_delete.DeletedAt `gorm:"softDelete:flag,default:0"`             // 是否删除
+		CreatedAt     int64                 `gorm:"<-:create;autoCreateTime"`              // 添加时间
 	}
 )
 
