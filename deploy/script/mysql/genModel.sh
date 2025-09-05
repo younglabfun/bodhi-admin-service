@@ -21,7 +21,7 @@ modeldir=./genModel
 # 数据库配置
 host=127.0.0.1
 port=33060
-dbname=bodhi-admin
+dbname=bodhi_admin
 username=root
 passwd=123456
 cache=false

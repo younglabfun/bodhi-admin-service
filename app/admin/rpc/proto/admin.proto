@@ -334,3 +334,4 @@ service UserRole {
   rpc removeUserRole(Id) returns (AffectedResp);
   rpc getUserRoles(Uuid) returns (UserRoleListResp);
 }
+

@@ -154,7 +154,7 @@ func (m *defaultUserModel) FindListByPage(ctx context.Context, req PageReq) ([]*
 	sortBy := utils.GetSortByStr(req.Sort, req.Order, User{})
 	db := m.conn.WithContext(ctx).Model(User{})
 	if len(req.Field) == 0 && len(req.Value) != 0 {
-		db.Where("`username` LIKE ? OR `email` LIKE ? OR `name` LIKE ?")
+		db.Where("`username` LIKE ? OR `email` LIKE ? OR `name` LIKE ?", req.Value)
 	}
 	db.Count(&total)
 	db.Scopes(utils.Paginate(req.Page, req.Size))

@@ -144,7 +144,3 @@ func (m *defaultMenuModel) Delete(ctx context.Context, id int64) error {
 
 	return err
 }
-
-func (m *defaultMenuModel) tableName() string {
-	return m.table
-}
