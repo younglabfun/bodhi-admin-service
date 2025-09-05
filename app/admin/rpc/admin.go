@@ -4,7 +4,9 @@ import (
 	"bodhiadmin/common/utils"
 	"flag"
 	"fmt"
+	"github.com/zeromicro/go-zero/core/logx"
 	"gorm.io/gorm"
+	"os"
 	"time"
 
 	"bodhiadmin/app/admin/rpc/internal/config"
@@ -24,6 +26,10 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
+
+const APP = "BodhiAdmin"
+const Version = "v1.0"
+const Debug = "true"
 
 const CONFFILE = "etc/admin.yaml"
 const APPNAME = "admin.rpc"
@@ -57,6 +63,15 @@ func main() {
 		flag.Parse()
 		conf.MustLoad(*configFile, &c)
 	}
+
+	logx.SetUp(c.Log)
+	// 输出至屏幕
+	if c.AdminConf.Debug {
+		logx.AddWriter(logx.NewWriter(os.Stdout))
+	}
+	logx.Infof("------ Start Server %s %s", c.AdminConf.App, c.AdminConf.Version)
+	logx.Infof("-- Init Log path: %s, level: %s, debug: %v", c.Log.Path, c.Log.Level, c.AdminConf.Debug)
+
 	ctx := svc.NewServiceContext(c)
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
@@ -496,6 +511,9 @@ func SetAdminConf() error {
 	masterUuid = utils.CreateUuid()
 	expiredTime := utils.Int64ToStr(3600 * refreshExpired)
 	var conf = "AdminConf:\n" +
+		TAB + "App: " + APP + "\n" +
+		TAB + "Version: " + Version + "\n" +
+		TAB + "Debug: " + Debug + "\n" +
 		TAB + "Salt: " + salt + "\n" +
 		TAB + "Master: " + masterUuid + "\n" +
 		TAB + "RefreshExpired: " + expiredTime + "\n\n"

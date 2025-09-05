@@ -28,6 +28,9 @@ type Redis struct {
 }
 
 type AdminConf struct {
+	App            string `json:"app"`
+	Version        string `json:"version"`
+	Debug          bool   `json:"debug"`
 	Salt           string `json:"salt"`
 	Master         string `json:"master"`
 	RefreshExpired int64  `json:"refreshExpired"`
