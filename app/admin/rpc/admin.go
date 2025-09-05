@@ -28,8 +28,8 @@ import (
 )
 
 const APP = "BodhiAdmin"
-const Version = "v1.0"
-const Debug = "true"
+const VERSION = "v1.0"
+const DEBUG = "true"
 
 const CONFFILE = "etc/admin.yaml"
 const APPNAME = "admin.rpc"
@@ -157,6 +157,10 @@ func InitApiConf() error {
 			if err != nil {
 				return err
 			}
+			err = SetAdminApiConf()
+			if err != nil {
+				return err
+			}
 			err = SetRpcConf()
 			if err != nil {
 				return err
@@ -172,6 +176,17 @@ func InitApiConf() error {
 	return nil
 }
 
+func SetAdminApiConf() error {
+	var conf = "AdminConf:\n" +
+		TAB + "APP: " + APP + "API\n" +
+		TAB + "Version: " + VERSION + "\n" +
+		TAB + "Debug: " + DEBUG + "\n\n"
+	err := utils.WriteFile(CONFFILE, conf)
+	if err != nil {
+		return err
+	}
+	return nil
+}
 func SetRpcConf() error {
 	rpcConf := "AdminRpcConf: \n"
 	if setEtcd == "y" {
@@ -512,8 +527,8 @@ func SetAdminConf() error {
 	expiredTime := utils.Int64ToStr(3600 * refreshExpired)
 	var conf = "AdminConf:\n" +
 		TAB + "App: " + APP + "\n" +
-		TAB + "Version: " + Version + "\n" +
-		TAB + "Debug: " + Debug + "\n" +
+		TAB + "Version: " + VERSION + "\n" +
+		TAB + "Debug: " + DEBUG + "\n" +
 		TAB + "Salt: " + salt + "\n" +
 		TAB + "Master: " + masterUuid + "\n" +
 		TAB + "RefreshExpired: " + expiredTime + "\n\n"

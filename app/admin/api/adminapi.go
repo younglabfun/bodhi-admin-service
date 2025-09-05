@@ -3,6 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/zeromicro/go-zero/core/logx"
+	"os"
 
 	"bodhiadmin/app/admin/api/internal/config"
 	"bodhiadmin/app/admin/api/internal/handler"
@@ -19,6 +21,14 @@ func main() {
 
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
+	logx.SetUp(c.Log)
+	// 输出至屏幕
+	if c.AdminConf.Debug {
+		logx.AddWriter(logx.NewWriter(os.Stdout))
+	}
+
+	logx.Infof("------ Start Server %s %s", c.AdminConf.App, c.AdminConf.Version)
+	logx.Infof("-- Init Log path: %s, level: %s, debug: %v", c.Log.Path, c.Log.Level, c.AdminConf.Debug)
 
 	server := rest.MustNewServer(c.RestConf)
 	defer server.Stop()
