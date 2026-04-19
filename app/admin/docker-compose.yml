@@ -1,0 +1,65 @@
+services:
+  admin-rpc:
+    image: admin-rpc
+    container_name: admin-rpc
+    build:
+      context: .
+      dockerfile: ./rpc/Dockerfile
+    restart: unless-stopped
+    environment:
+      - TZ=Asia/Shanghai
+      - DB_HOST=mysql-server  # 重点：这里使用第一个项目里的 container_name
+    volumes:
+      - ./rpc/logs:/opt/admin/logs
+      - ./rpc/etc:/opt/admin/etc
+    ports:
+      - 9020:9020
+    healthcheck:
+      test: ["CMD", "nc", "-z", "127.0.0.1", "9020"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s   # 【重要】容器启动后的前 30 秒内如果检查失败
+#    networks:
+#      - common_network
+
+  admin-api:
+    image: admin-api
+    container_name: admin-api
+    build:
+      context: .
+      dockerfile: ./api/Dockerfile
+    restart: unless-stopped
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - ./api/logs:/opt/admin/logs
+      - ./api/etc:/opt/admin/etc
+    ports:
+      - 9021:9021
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "9021"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s   # 【重要】容器启动后的前 30 秒内如果检查失败
+#    networks:
+#      - common_network
+
+  # 前端服务
+#  edc-admin:
+#    build: ./frontend
+#    container_name: edc-admin
+#    restart: always
+#    environment:
+#      TZ: Asia/Shanghai
+#    volumes:
+#      - ./frontend/logs:/var/log/nginx                       # 挂载日志目录
+#    ports:
+#      - 9528:80
+#    networks:
+#      - common_network
+#
+#networks:
+#  common_network:
+#    external: true  # 声明这个网络是在外部定义的，不要尝试创建它

@@ -97,7 +97,7 @@ func (m *defaultUserModel) FindOneByEmail(ctx context.Context, email string) (*U
 }
 
 func (m *defaultUserModel) Update(ctx context.Context, data *User) error {
-	err := m.conn.WithContext(ctx).Omit("is_enabled", "password").Save(data).Error
+	err := m.conn.WithContext(ctx).Omit("is_enabled", "password", "custom_data").Save(data).Error
 	return err
 }
 
