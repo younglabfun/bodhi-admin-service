@@ -11,20 +11,19 @@ import (
 	"fmt"
 	"github.com/chai2010/webp"
 	"github.com/disintegration/imaging"
-	"github.com/google/uuid"
+	"github.com/sony/sonyflake"
+	"github.com/zeromicro/go-zero/core/logx"
 	_ "golang.org/x/image/webp" // 关键！注册 WebP 编码器
 	"image"
 	_ "image/jpeg" // 必须注册解码器
 	_ "image/png"  // 必须注册解码器
 	"io"
-	"mime/multipart"
+	"k8s.io/apimachinery/pkg/util/rand"
 	"net/http"
 	"os"
 	"path/filepath"
 	"strings"
 	"time"
-
-	"github.com/zeromicro/go-zero/core/logx"
 )
 
 type UploadLogic struct {
@@ -80,10 +79,14 @@ func (l *UploadLogic) Upload(r *http.Request) (*types.AffectedResp, error) {
 		return nil, err
 	}
 	go func() {
-		fmt.Println("file--- ", dstPath)
-		_ = processImage(file, filename, uploadDir)
+		fmt.Println("process file--- ", filename)
+		err = processImage(filename, uploadDir)
+		if err != nil {
+			fmt.Printf("process err: %v\n", err)
+		}
 	}()
 
+	title := strings.TrimSuffix(handler.Filename, filepath.Ext(handler.Filename))
 	fileType := handler.Header.Get("Content-Type")
 	path := dateDir + filename
 	size := handler.Size
@@ -98,7 +101,7 @@ func (l *UploadLogic) Upload(r *http.Request) (*types.AffectedResp, error) {
 		metaJson, _ = json.Marshal(meta)
 	}
 	resp, err := l.svcCtx.MediaRpc.InsertMedia(l.ctx, &admin.MediaReq{
-		Title:    "",
+		Title:    title,
 		Filename: handler.Filename,
 		Type:     fileType,
 		Path:     path,
@@ -116,14 +119,9 @@ func (l *UploadLogic) Upload(r *http.Request) (*types.AffectedResp, error) {
 }
 
 // 处理上传图片的函数
-func processImage(file multipart.File, filename string, outputDir string) error {
+func processImage(filename, outputDir string) error {
 	// 1. 加载原图
-	//src, err := imaging.Open(filePath)
-	//if err != nil {
-	//	return err
-	//}
-	// file 是 multipart.File 类型
-	src, _, err := image.Decode(file) // 使用标准库的 image.Decode 获取 image.Image
+	src, err := imaging.Open(outputDir + "/" + filename)
 	if err != nil {
 		return err
 	}
@@ -137,16 +135,18 @@ func processImage(file multipart.File, filename string, outputDir string) error 
 	}
 	defer smallImg.Close()
 	err = webp.Encode(smallImg, small, &webp.Options{Lossless: false, Quality: 85})
+	fmt.Println("p small--- ", smallFilename, err)
 
 	// 3. 生成详情页预览图 (宽度 800px)
 	medium := imaging.Resize(src, 800, 0, imaging.Lanczos)
 	mediumFilename := generateThumbnailFilename(filename, "medium")
-	err = imaging.Save(medium, outputDir+"/"+mediumFilename)
-	fmt.Println("p medium--- ", err)
-
-	// 使用 webp 编码器直接编码
-	//err = imaging.Encode(out, medium, imaging.Format(webp.WebP))
-	//err = webp.Encode(out, src, &webp.Options{Lossless: false, Quality: 85})
+	mediumImg, err := os.Create(outputDir + "/" + mediumFilename)
+	if err != nil {
+		return err
+	}
+	defer mediumImg.Close()
+	err = webp.Encode(mediumImg, medium, &webp.Options{Lossless: false, Quality: 95})
+	fmt.Println("p medium--- ", mediumFilename, err)
 
 	return err
 }
@@ -161,21 +161,49 @@ func generateThumbnailFilename(originalFilename, suffix string) string {
 
 // 生成唯一文件名（如果存在则添加时间戳）
 func generateUniqueFilename(uploadDir, originalFilename string) (string, string) {
-	dstPath := filepath.Join(uploadDir, originalFilename)
+	// 1. 获取后缀
+	ext := filepath.Ext(originalFilename) // 获取扩展名，如 ".jpg"
 
-	// 检查文件是否存在
-	if _, err := os.Stat(dstPath); err == nil {
-		// 文件存在，处理逻辑：文件名 + 时间戳 + 后缀
-		ext := filepath.Ext(originalFilename)                 // 获取扩展名，如 ".jpg"
-		nameOnly := strings.TrimSuffix(originalFilename, ext) // 获取文件名主体，如 "photo"
-		newFilename := fmt.Sprintf("%s-%s%s", nameOnly, uuid.New().String(), ext)
-
-		return filepath.Join(uploadDir, newFilename), newFilename
+	// 2. 生成唯一 ID (雪花算法)
+	var (
+		sonyFlake     *sonyflake.Sonyflake
+		sonyMachineID uint16
+		st            time.Time
+		err           error
+	)
+	startTime := "2018-08-24" // 初始化一个开始的时间，表示从这个时间开始算起
+	machineID := 1            // 机器 ID
+	st, err = time.Parse("2006-01-02", startTime)
+	if err != nil {
+		panic(err)
 	}
 
-	// 文件不存在，直接返回原路径
-	return dstPath, originalFilename
+	sonyMachineID = uint16(machineID)
+	settings := sonyflake.Settings{
+		StartTime: st,
+		MachineID: func() (uint16, error) { return sonyMachineID, nil },
+	}
+	sonyFlake = sonyflake.NewSonyflake(settings)
+	if sonyFlake == nil {
+		panic("sonyflake not created")
+	}
+
+	id, err := sonyFlake.NextID()
+	if err != nil {
+		panic(err)
+	}
+
+	// 3. 生成日期前缀
+	//datePrefix := time.Now().Format("2006/01/02")
+
+	// 4. 生成随机码
+	randomSuffix := rand.String(6)
+
+	// 5. 组合
+	newFilename := fmt.Sprintf("%d_%s%s", id, randomSuffix, ext)
+	return filepath.Join(uploadDir, newFilename), newFilename
 }
+
 func getImageDimensions(filePath string) (float64, float64, error) {
 	file, err := os.Open(filePath)
 	if err != nil {
