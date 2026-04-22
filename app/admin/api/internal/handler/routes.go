@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	account "bodhiadmin/app/admin/api/internal/handler/account"
+	media "bodhiadmin/app/admin/api/internal/handler/media"
 	menu "bodhiadmin/app/admin/api/internal/handler/menu"
 	node "bodhiadmin/app/admin/api/internal/handler/node"
 	nodeGroup "bodhiadmin/app/admin/api/internal/handler/nodeGroup"
@@ -16,6 +17,34 @@ import (
 )
 
 func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/upload",
+				Handler: media.UploadHandler(serverCtx),
+			},
+		},
+		rest.WithPrefix("/media"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodGet,
+				Path:    "/list",
+				Handler: media.ListMediaHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/get/:id",
+				Handler: media.GetMediaHandler(serverCtx),
+			},
+		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/v1/media"),
+	)
+
 	server.AddRoutes(
 		[]rest.Route{
 			{

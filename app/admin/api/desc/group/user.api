@@ -42,6 +42,8 @@ type (
         Name string `json:"name"`
         Remark string `json:"remark"`
         IsEnabled int64 `json:"isEnabled"`
+        LastLogin  			string `json:"lastLogin"`
+        LastActive  			string `json:"lastActive"`
         CreatedAt  			string `json:"createdAt"`
     }
     ListUserResp{

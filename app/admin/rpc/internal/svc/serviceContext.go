@@ -10,6 +10,7 @@ import (
 type ServiceContext struct {
 	Config config.Config
 
+	MediaModel     model.MediaModel
 	MenuModel      model.MenuModel
 	NodeModel      model.NodeModel
 	NodeGroupModel model.NodeGroupModel
@@ -27,6 +28,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	}
 	logx.Infof("Init MySQL connected...")
 
+	mediaModel := model.NewMediaModel(db)
 	menuModel := model.NewMenuModel(db)
 	nodeModel := model.NewNodeModel(db)
 	nodeGroupModel := model.NewNodeGroupModel(db)
@@ -39,6 +41,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	return &ServiceContext{
 		Config: c,
 
+		MediaModel:     mediaModel,
 		MenuModel:      menuModel,
 		NodeModel:      nodeModel,
 		NodeGroupModel: nodeGroupModel,

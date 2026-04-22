@@ -16,7 +16,8 @@ type Auth struct {
 	AccessExpired int64
 }
 type AdminConf struct {
-	App     string `json:"app"`
-	Version string `json:"version"`
-	Debug   bool   `json:"debug"`
+	App        string `json:"app"`
+	Version    string `json:"version"`
+	UploadPath string `json:"uploadPath"`
+	Debug      bool   `json:"debug"`
 }

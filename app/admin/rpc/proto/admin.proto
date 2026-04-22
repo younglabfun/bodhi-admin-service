@@ -32,6 +32,37 @@ message PageReq {
   string Field = 5;
   string Value = 6;
 }
+// media
+message MediaReq{
+  int64 Id = 1;
+  string Title = 2;
+  string Filename = 3;
+  string Type = 4;
+  string Path = 5;
+  int64 Size = 6;
+  string Meta = 7;
+}
+message MediaUnit{
+  int64 Id = 1;
+  string Title = 2;
+  string Filename = 3;
+  string Type = 4;
+  string Path = 5;
+  int64 Size = 6;
+  string Meta = 7;
+  int64 CreatedAt = 8;
+}
+message ListMediaResp {
+  repeated MediaUnit List = 1;
+  int64 Total = 2;
+}
+service Media {
+  rpc insertMedia(MediaReq) returns (AffectedResp);
+  rpc updateMedia(MediaReq) returns (AffectedResp);
+  rpc getMedia(Id) returns (MediaUnit);
+  rpc removeMedia(Id) returns (AffectedResp);
+  rpc listMedia(PageReq) returns (ListMediaResp);
+}
 
 //node group
 message NodeGroupReq{

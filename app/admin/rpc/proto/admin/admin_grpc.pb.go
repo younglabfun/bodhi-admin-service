@@ -19,6 +19,260 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	Media_InsertMedia_FullMethodName = "/bodhi.Media/insertMedia"
+	Media_UpdateMedia_FullMethodName = "/bodhi.Media/updateMedia"
+	Media_GetMedia_FullMethodName    = "/bodhi.Media/getMedia"
+	Media_RemoveMedia_FullMethodName = "/bodhi.Media/removeMedia"
+	Media_ListMedia_FullMethodName   = "/bodhi.Media/listMedia"
+)
+
+// MediaClient is the client API for Media service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type MediaClient interface {
+	InsertMedia(ctx context.Context, in *MediaReq, opts ...grpc.CallOption) (*AffectedResp, error)
+	UpdateMedia(ctx context.Context, in *MediaReq, opts ...grpc.CallOption) (*AffectedResp, error)
+	GetMedia(ctx context.Context, in *Id, opts ...grpc.CallOption) (*MediaUnit, error)
+	RemoveMedia(ctx context.Context, in *Id, opts ...grpc.CallOption) (*AffectedResp, error)
+	ListMedia(ctx context.Context, in *PageReq, opts ...grpc.CallOption) (*ListMediaResp, error)
+}
+
+type mediaClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewMediaClient(cc grpc.ClientConnInterface) MediaClient {
+	return &mediaClient{cc}
+}
+
+func (c *mediaClient) InsertMedia(ctx context.Context, in *MediaReq, opts ...grpc.CallOption) (*AffectedResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AffectedResp)
+	err := c.cc.Invoke(ctx, Media_InsertMedia_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *mediaClient) UpdateMedia(ctx context.Context, in *MediaReq, opts ...grpc.CallOption) (*AffectedResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AffectedResp)
+	err := c.cc.Invoke(ctx, Media_UpdateMedia_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *mediaClient) GetMedia(ctx context.Context, in *Id, opts ...grpc.CallOption) (*MediaUnit, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MediaUnit)
+	err := c.cc.Invoke(ctx, Media_GetMedia_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *mediaClient) RemoveMedia(ctx context.Context, in *Id, opts ...grpc.CallOption) (*AffectedResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AffectedResp)
+	err := c.cc.Invoke(ctx, Media_RemoveMedia_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *mediaClient) ListMedia(ctx context.Context, in *PageReq, opts ...grpc.CallOption) (*ListMediaResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListMediaResp)
+	err := c.cc.Invoke(ctx, Media_ListMedia_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// MediaServer is the server API for Media service.
+// All implementations must embed UnimplementedMediaServer
+// for forward compatibility.
+type MediaServer interface {
+	InsertMedia(context.Context, *MediaReq) (*AffectedResp, error)
+	UpdateMedia(context.Context, *MediaReq) (*AffectedResp, error)
+	GetMedia(context.Context, *Id) (*MediaUnit, error)
+	RemoveMedia(context.Context, *Id) (*AffectedResp, error)
+	ListMedia(context.Context, *PageReq) (*ListMediaResp, error)
+	mustEmbedUnimplementedMediaServer()
+}
+
+// UnimplementedMediaServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedMediaServer struct{}
+
+func (UnimplementedMediaServer) InsertMedia(context.Context, *MediaReq) (*AffectedResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method InsertMedia not implemented")
+}
+func (UnimplementedMediaServer) UpdateMedia(context.Context, *MediaReq) (*AffectedResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateMedia not implemented")
+}
+func (UnimplementedMediaServer) GetMedia(context.Context, *Id) (*MediaUnit, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMedia not implemented")
+}
+func (UnimplementedMediaServer) RemoveMedia(context.Context, *Id) (*AffectedResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveMedia not implemented")
+}
+func (UnimplementedMediaServer) ListMedia(context.Context, *PageReq) (*ListMediaResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListMedia not implemented")
+}
+func (UnimplementedMediaServer) mustEmbedUnimplementedMediaServer() {}
+func (UnimplementedMediaServer) testEmbeddedByValue()               {}
+
+// UnsafeMediaServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to MediaServer will
+// result in compilation errors.
+type UnsafeMediaServer interface {
+	mustEmbedUnimplementedMediaServer()
+}
+
+func RegisterMediaServer(s grpc.ServiceRegistrar, srv MediaServer) {
+	// If the following call pancis, it indicates UnimplementedMediaServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&Media_ServiceDesc, srv)
+}
+
+func _Media_InsertMedia_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MediaReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MediaServer).InsertMedia(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Media_InsertMedia_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MediaServer).InsertMedia(ctx, req.(*MediaReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Media_UpdateMedia_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MediaReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MediaServer).UpdateMedia(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Media_UpdateMedia_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MediaServer).UpdateMedia(ctx, req.(*MediaReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Media_GetMedia_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MediaServer).GetMedia(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Media_GetMedia_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MediaServer).GetMedia(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Media_RemoveMedia_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MediaServer).RemoveMedia(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Media_RemoveMedia_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MediaServer).RemoveMedia(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Media_ListMedia_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PageReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MediaServer).ListMedia(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Media_ListMedia_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MediaServer).ListMedia(ctx, req.(*PageReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// Media_ServiceDesc is the grpc.ServiceDesc for Media service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var Media_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "bodhi.Media",
+	HandlerType: (*MediaServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "insertMedia",
+			Handler:    _Media_InsertMedia_Handler,
+		},
+		{
+			MethodName: "updateMedia",
+			Handler:    _Media_UpdateMedia_Handler,
+		},
+		{
+			MethodName: "getMedia",
+			Handler:    _Media_GetMedia_Handler,
+		},
+		{
+			MethodName: "removeMedia",
+			Handler:    _Media_RemoveMedia_Handler,
+		},
+		{
+			MethodName: "listMedia",
+			Handler:    _Media_ListMedia_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "admin.proto",
+}
+
+const (
 	NodeGroup_InsertNodeGroup_FullMethodName  = "/bodhi.NodeGroup/insertNodeGroup"
 	NodeGroup_UpdateNodeGroup_FullMethodName  = "/bodhi.NodeGroup/updateNodeGroup"
 	NodeGroup_RemoveNodeGroup_FullMethodName  = "/bodhi.NodeGroup/removeNodeGroup"

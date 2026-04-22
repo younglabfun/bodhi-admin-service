@@ -18,12 +18,15 @@ type (
 	BatchIdsReq       = admin.BatchIdsReq
 	Empty             = admin.Empty
 	Id                = admin.Id
+	ListMediaResp     = admin.ListMediaResp
 	ListMenuReq       = admin.ListMenuReq
 	ListNodeResp      = admin.ListNodeResp
 	ListRoleResp      = admin.ListRoleResp
 	ListUserResp      = admin.ListUserResp
 	LoginReq          = admin.LoginReq
 	LoginResp         = admin.LoginResp
+	MediaReq          = admin.MediaReq
+	MediaUnit         = admin.MediaUnit
 	MenuListResp      = admin.MenuListResp
 	MenuReq           = admin.MenuReq
 	MenuResp          = admin.MenuResp

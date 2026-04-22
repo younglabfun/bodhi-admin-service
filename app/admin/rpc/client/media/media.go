@@ -2,7 +2,7 @@
 // goctl 1.8.5
 // Source: admin.proto
 
-package userrole
+package media
 
 import (
 	"context"
@@ -62,40 +62,46 @@ type (
 	Uuid              = admin.Uuid
 	UuidStatusReq     = admin.UuidStatusReq
 
-	UserRole interface {
-		InsertUserRole(ctx context.Context, in *UserRoleReq, opts ...grpc.CallOption) (*AffectedResp, error)
-		UpdateUserRole(ctx context.Context, in *UpdateUserRoleReq, opts ...grpc.CallOption) (*AffectedResp, error)
-		RemoveUserRole(ctx context.Context, in *Id, opts ...grpc.CallOption) (*AffectedResp, error)
-		GetUserRoles(ctx context.Context, in *Uuid, opts ...grpc.CallOption) (*UserRoleListResp, error)
+	Media interface {
+		InsertMedia(ctx context.Context, in *MediaReq, opts ...grpc.CallOption) (*AffectedResp, error)
+		UpdateMedia(ctx context.Context, in *MediaReq, opts ...grpc.CallOption) (*AffectedResp, error)
+		GetMedia(ctx context.Context, in *Id, opts ...grpc.CallOption) (*MediaUnit, error)
+		RemoveMedia(ctx context.Context, in *Id, opts ...grpc.CallOption) (*AffectedResp, error)
+		ListMedia(ctx context.Context, in *PageReq, opts ...grpc.CallOption) (*ListMediaResp, error)
 	}
 
-	defaultUserRole struct {
+	defaultMedia struct {
 		cli zrpc.Client
 	}
 )
 
-func NewUserRole(cli zrpc.Client) UserRole {
-	return &defaultUserRole{
+func NewMedia(cli zrpc.Client) Media {
+	return &defaultMedia{
 		cli: cli,
 	}
 }
 
-func (m *defaultUserRole) InsertUserRole(ctx context.Context, in *UserRoleReq, opts ...grpc.CallOption) (*AffectedResp, error) {
-	client := admin.NewUserRoleClient(m.cli.Conn())
-	return client.InsertUserRole(ctx, in, opts...)
+func (m *defaultMedia) InsertMedia(ctx context.Context, in *MediaReq, opts ...grpc.CallOption) (*AffectedResp, error) {
+	client := admin.NewMediaClient(m.cli.Conn())
+	return client.InsertMedia(ctx, in, opts...)
 }
 
-func (m *defaultUserRole) UpdateUserRole(ctx context.Context, in *UpdateUserRoleReq, opts ...grpc.CallOption) (*AffectedResp, error) {
-	client := admin.NewUserRoleClient(m.cli.Conn())
-	return client.UpdateUserRole(ctx, in, opts...)
+func (m *defaultMedia) UpdateMedia(ctx context.Context, in *MediaReq, opts ...grpc.CallOption) (*AffectedResp, error) {
+	client := admin.NewMediaClient(m.cli.Conn())
+	return client.UpdateMedia(ctx, in, opts...)
 }
 
-func (m *defaultUserRole) RemoveUserRole(ctx context.Context, in *Id, opts ...grpc.CallOption) (*AffectedResp, error) {
-	client := admin.NewUserRoleClient(m.cli.Conn())
-	return client.RemoveUserRole(ctx, in, opts...)
+func (m *defaultMedia) GetMedia(ctx context.Context, in *Id, opts ...grpc.CallOption) (*MediaUnit, error) {
+	client := admin.NewMediaClient(m.cli.Conn())
+	return client.GetMedia(ctx, in, opts...)
 }
 
-func (m *defaultUserRole) GetUserRoles(ctx context.Context, in *Uuid, opts ...grpc.CallOption) (*UserRoleListResp, error) {
-	client := admin.NewUserRoleClient(m.cli.Conn())
-	return client.GetUserRoles(ctx, in, opts...)
+func (m *defaultMedia) RemoveMedia(ctx context.Context, in *Id, opts ...grpc.CallOption) (*AffectedResp, error) {
+	client := admin.NewMediaClient(m.cli.Conn())
+	return client.RemoveMedia(ctx, in, opts...)
+}
+
+func (m *defaultMedia) ListMedia(ctx context.Context, in *PageReq, opts ...grpc.CallOption) (*ListMediaResp, error) {
+	client := admin.NewMediaClient(m.cli.Conn())
+	return client.ListMedia(ctx, in, opts...)
 }

@@ -216,6 +216,20 @@ CREATE TABLE `user_token` (
   UNIQUE KEY `user_token` (`user_uuid`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='token表';
 
+DROP TABLE IF EXISTS `media`;
+CREATE TABLE `media` (
+`id` int unsigned NOT NULL AUTO_INCREMENT,
+`title` varchar(127) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '文件标题',
+`filename` varchar(127) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '文件名',
+`path` varchar(127) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '路径',
+`type` varchar(127) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '类型',
+`size` int NOT NULL COMMENT '文件大小',
+`meta` varchar(254) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '属性',
+`is_deleted` tinyint unsigned DEFAULT '0' COMMENT '是否删除 0未删 1已删',
+`created_at` int unsigned NOT NULL DEFAULT '0' COMMENT '添加时间',
+`updated_at` int unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 -- ----------------------------
 -- Records of user_token
 -- ----------------------------

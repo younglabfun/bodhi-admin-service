@@ -11,6 +11,7 @@ import (
 
 	"bodhiadmin/app/admin/rpc/internal/config"
 	accountServer "bodhiadmin/app/admin/rpc/internal/server/account"
+	mediaServer "bodhiadmin/app/admin/rpc/internal/server/media"
 	menuServer "bodhiadmin/app/admin/rpc/internal/server/menu"
 	nodeServer "bodhiadmin/app/admin/rpc/internal/server/node"
 	nodegroupServer "bodhiadmin/app/admin/rpc/internal/server/nodegroup"
@@ -75,6 +76,7 @@ func main() {
 	ctx := svc.NewServiceContext(c)
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
+		admin.RegisterMediaServer(grpcServer, mediaServer.NewMediaServer(ctx))
 		admin.RegisterAccountServer(grpcServer, accountServer.NewAccountServer(ctx))
 		admin.RegisterMenuServer(grpcServer, menuServer.NewMenuServer(ctx))
 		admin.RegisterNodeServer(grpcServer, nodeServer.NewNodeServer(ctx))

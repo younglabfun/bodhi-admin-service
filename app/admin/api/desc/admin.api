@@ -7,6 +7,7 @@ info (
 	version: "v0.1"
 )
 
+import "group/media.api"
 import "group/account.api"
 import "group/base.api"
 import "group/menu.api"

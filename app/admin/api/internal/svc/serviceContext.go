@@ -3,6 +3,7 @@ package svc
 import (
 	"bodhiadmin/app/admin/api/internal/config"
 	"bodhiadmin/app/admin/rpc/client/account"
+	"bodhiadmin/app/admin/rpc/client/media"
 	"bodhiadmin/app/admin/rpc/client/menu"
 	"bodhiadmin/app/admin/rpc/client/node"
 	"bodhiadmin/app/admin/rpc/client/nodegroup"
@@ -15,6 +16,7 @@ import (
 type ServiceContext struct {
 	Config config.Config
 
+	MediaRpc     media.Media
 	AccountRpc   account.Account
 	MenuRpc      menu.Menu
 	NodeRpc      node.Node
@@ -25,6 +27,7 @@ type ServiceContext struct {
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
+	mediaRpc := media.NewMedia(zrpc.MustNewClient(c.AdminRpcConf))
 	accountRpc := account.NewAccount(zrpc.MustNewClient(c.AdminRpcConf))
 	menuRpc := menu.NewMenu(zrpc.MustNewClient(c.AdminRpcConf))
 	nodeRpc := node.NewNode(zrpc.MustNewClient(c.AdminRpcConf))
@@ -36,6 +39,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	return &ServiceContext{
 		Config: c,
 
+		MediaRpc:     mediaRpc,
 		AccountRpc:   accountRpc,
 		MenuRpc:      menuRpc,
 		NodeRpc:      nodeRpc,
