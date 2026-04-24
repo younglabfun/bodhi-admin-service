@@ -16,8 +16,12 @@ import (
 type (
 	AffectedResp      = admin.AffectedResp
 	BatchIdsReq       = admin.BatchIdsReq
+	CategoryReq       = admin.CategoryReq
+	CategoryUnit      = admin.CategoryUnit
+	ClassReq          = admin.ClassReq
 	Empty             = admin.Empty
 	Id                = admin.Id
+	ListCategoryResp  = admin.ListCategoryResp
 	ListMediaResp     = admin.ListMediaResp
 	ListMenuReq       = admin.ListMenuReq
 	ListNodeResp      = admin.ListNodeResp
@@ -26,6 +30,7 @@ type (
 	LoginReq          = admin.LoginReq
 	LoginResp         = admin.LoginResp
 	MediaReq          = admin.MediaReq
+	MediaTitleReq     = admin.MediaTitleReq
 	MediaUnit         = admin.MediaUnit
 	MenuListResp      = admin.MenuListResp
 	MenuReq           = admin.MenuReq

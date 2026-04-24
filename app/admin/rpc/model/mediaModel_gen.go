@@ -21,6 +21,7 @@ type (
 		Delete(ctx context.Context, id int64) error
 
 		FindListByPage(ctx context.Context, req PageReq) ([]*Media, int64, error)
+		UpdateTitle(ctx context.Context, id int64, title string) error
 	}
 
 	defaultMediaModel struct {
@@ -75,6 +76,12 @@ func (m *defaultMediaModel) Update(ctx context.Context, data *Media) error {
 	err := m.conn.WithContext(ctx).Omit("is_enabled").Save(data).Error
 	return err
 }
+func (m *defaultMediaModel) UpdateTitle(ctx context.Context, id int64, title string) error {
+
+	db := m.conn.WithContext(ctx).Model(Media{})
+	err := db.Where("id = ?", id).Update("title", strings.TrimSpace(title)).Error
+	return err
+}
 
 func (m *defaultMediaModel) Delete(ctx context.Context, id int64) error {
 	err := m.conn.WithContext(ctx).Delete(&Media{}, id).Error
@@ -86,8 +93,8 @@ func (m *defaultMediaModel) FindListByPage(ctx context.Context, req PageReq) ([]
 	var total int64
 
 	sortBy := utils.GetSortByStr(req.Sort, req.Order, Media{})
-	db := m.conn.WithContext(ctx).Model(Media{})
 	value := strings.TrimSpace(req.Value)
+	db := m.conn.WithContext(ctx).Model(Media{})
 	if len(req.Field) == 0 && len(value) != 0 {
 		db.Where("`title` LIKE ? OR `filename` LIKE ?", value, value)
 	}

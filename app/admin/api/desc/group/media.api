@@ -16,21 +16,28 @@ type (
         Type        string `json:"type"`
         Size        int64 `json:"size"`
         Meta        string `json:"meta"`
+        Path         string  `json:"path"`
+        Mini         string  `json:"mini"`
+        Preview         string  `json:"preview"`
         CreatedAt  	string `json:"createdAt"`
     }
     ListMediaResp{
         List       []*MediaUnit `json:"list"`
         Total int64 `json:"total"`
     }
+    MediaReq {
+        Id          int64  `json:"id"`
+        Title       string `json:"title"`
+    }
 )
 
 @server(
     group: media
-//    jwt: Auth
+    jwt: Auth
     prefix: /media
 )
 
-service adminapi-api {
+service admin-api {
     @handler upload
     post /upload returns (AffectedResp)
 }
@@ -41,7 +48,7 @@ service adminapi-api {
     prefix: /api/v1/media
 )
 
-service adminapi-api {
+service admin-api {
     @handler listMedia
     get /list (PageReq) returns (ListMediaResp)
 
@@ -50,4 +57,13 @@ service adminapi-api {
 
     @handler getImage
     get /image/:id (IdPath) returns (MediaUnit)
+
+    @handler rebuildThumbnail
+    get /thumbnail/:id (IdPath) returns (AffectedResp)
+
+    @handler updateMedia
+    post /update (MediaReq) returns (AffectedResp)
+
+    @handler removeMedia
+    post /remove (IdReq) returns (AffectedResp)
 }

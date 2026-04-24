@@ -11,6 +11,7 @@ import (
 
 	"bodhiadmin/app/admin/rpc/internal/config"
 	accountServer "bodhiadmin/app/admin/rpc/internal/server/account"
+	categoryServer "bodhiadmin/app/admin/rpc/internal/server/category"
 	mediaServer "bodhiadmin/app/admin/rpc/internal/server/media"
 	menuServer "bodhiadmin/app/admin/rpc/internal/server/menu"
 	nodeServer "bodhiadmin/app/admin/rpc/internal/server/node"
@@ -84,6 +85,7 @@ func main() {
 		admin.RegisterRoleServer(grpcServer, roleServer.NewRoleServer(ctx))
 		admin.RegisterUserServer(grpcServer, userServer.NewUserServer(ctx))
 		admin.RegisterUserRoleServer(grpcServer, userroleServer.NewUserRoleServer(ctx))
+		admin.RegisterCategoryServer(grpcServer, categoryServer.NewCategoryServer(ctx))
 
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {
 			reflection.Register(grpcServer)
@@ -154,6 +156,7 @@ func InitApiConf() error {
 		if reset == "y" {
 			base := "Name: " + APINAME + "\n" +
 				"Host: 0.0.0.0" + "\n" +
+				"MaxBytes: 67108864" + "\n" +
 				"Port: " + APIDEFAULTPORT + "\n\n"
 			err := utils.WriteFile(APICONFFILE, base)
 			if err != nil {
@@ -182,6 +185,8 @@ func SetAdminApiConf() error {
 	var conf = "AdminConf:\n" +
 		TAB + "APP: " + APP + "API\n" +
 		TAB + "Version: " + VERSION + "\n" +
+		TAB + "UploadPath: uploads/" + "\n" +
+		TAB + "ImagePath: /images/" + "\n" +
 		TAB + "Debug: " + DEBUG + "\n\n"
 	err := utils.WriteFile(CONFFILE, conf)
 	if err != nil {
@@ -199,6 +204,7 @@ func SetRpcConf() error {
 	} else {
 		rpcConf += TAB + "Endpoints: \n" +
 			TAB + TAB + "- 127.0.0.1:" + DEFAULTPORT + "\n" +
+			TAB + "Timeout: 100000 \n" +
 			TAB + "NonBlock: true \n\n"
 	}
 	err := utils.WriteFile(APICONFFILE, rpcConf)

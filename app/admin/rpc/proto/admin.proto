@@ -42,6 +42,10 @@ message MediaReq{
   int64 Size = 6;
   string Meta = 7;
 }
+message MediaTitleReq{
+  int64 Id = 1;
+  string Title = 2;
+}
 message MediaUnit{
   int64 Id = 1;
   string Title = 2;
@@ -59,6 +63,7 @@ message ListMediaResp {
 service Media {
   rpc insertMedia(MediaReq) returns (AffectedResp);
   rpc updateMedia(MediaReq) returns (AffectedResp);
+  rpc updateMediaTitle(MediaTitleReq) returns (AffectedResp);
   rpc getMedia(Id) returns (MediaUnit);
   rpc removeMedia(Id) returns (AffectedResp);
   rpc listMedia(PageReq) returns (ListMediaResp);
@@ -364,5 +369,40 @@ service UserRole {
   rpc updateUserRole(UpdateUserRoleReq) returns (AffectedResp);
   rpc removeUserRole(Id) returns (AffectedResp);
   rpc getUserRoles(Uuid) returns (UserRoleListResp);
+}
+
+message CategoryReq {
+  int64 Id = 1;
+  int64 ParentId = 2;
+  string Title = 3;
+  string Class = 4;
+  int64 Sort = 5;
+}
+message CategoryUnit {
+  int64 Id = 1;
+  int64 ParentId = 2;
+  string Title = 3;
+  string Class = 4;
+  int64 Sort = 5;
+  int64 IsEnabled = 6;
+  int64 CreatedAt = 7;
+  bool  hasChildren = 8;
+}
+message ListCategoryResp {
+  repeated CategoryUnit List = 1;
+}
+message ClassReq {
+  string Class = 1;
+}
+
+service Category {
+  rpc insertCategory(CategoryReq) returns (AffectedResp);
+  rpc updateCategory(CategoryReq) returns (AffectedResp);
+  rpc updateStatus(Id) returns (AffectedResp);
+  rpc removeCategory(Id) returns (AffectedResp);
+  rpc getCategory(Id) returns (CategoryUnit);
+  rpc getList(Empty) returns (ListCategoryResp);
+  rpc getListByParent(Id) returns (ListCategoryResp);
+  rpc getListByClass(ClassReq) returns (ListCategoryResp);
 }
 

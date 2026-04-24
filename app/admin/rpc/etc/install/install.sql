@@ -138,13 +138,6 @@ CREATE TABLE `role` (
   PRIMARY KEY (`role_uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='角色表';
 
--- ----------------------------
--- Records of role
--- ----------------------------
-# BEGIN;
-# INSERT INTO `role` (`role_uuid`, `name`, `description`, `authorize_json`, `is_default`, `is_enabled`, `is_deleted`, `created_at`) VALUES ('b071e6f0-6843-11ef-a2d3-46a1f660a16d', '111', '有一个', '[5]', 0, 1, 0, 1725182540);
-# INSERT INTO `role` (`role_uuid`, `name`, `description`, `authorize_json`, `is_default`, `is_enabled`, `is_deleted`, `created_at`) VALUES ('eec1f8c6-6831-11ef-a2d3-46a1f660a16d', '超级管理员', 'it\'s test role\n', '[1,2,5,6]', 0, 1, 0, 1725174914);
-# COMMIT;
 
 -- ----------------------------
 -- Table structure for user
@@ -172,15 +165,6 @@ CREATE TABLE `user` (
   KEY `user_uuid` (`user_uuid`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='用户信息表';
 
--- ----------------------------
--- Records of user
--- ----------------------------
-# BEGIN;
-# INSERT INTO `user` (`user_uuid`, `username`, `password`, `email`, `name`, `avatar`, `remark`, `last_login_ip`, `last_login_time`, `last_active_ip`, `last_active_time`, `custom_data`, `mail_verified`, `is_deleted`, `is_enabled`, `created_at`) VALUES ('101af57c-6607-11ef-a3df-46a1f660a16e', 'new123', '0ec431f146fdb2a3281092895d436577', '2@qq.com', '12', '', '', '', 0, '', 0, '', 0, 1, 0, 1724936599);
-# INSERT INTO `user` (`user_uuid`, `username`, `password`, `email`, `name`, `avatar`, `remark`, `last_login_ip`, `last_login_time`, `last_active_ip`, `last_active_time`, `custom_data`, `mail_verified`, `is_deleted`, `is_enabled`, `created_at`) VALUES ('9324eeca-4ca6-11ef-b8ab-46a1f660a16e', 'admin', '376095d3bc790b5661434fd7aa603021', '55811858@qq.com', 'Admin', '', '', '192.168.0.100', 1725191963, '192.168.0.100', 1725191963, '', 0, 0, 1, 1722146378);
-# INSERT INTO `user` (`user_uuid`, `username`, `password`, `email`, `name`, `avatar`, `remark`, `last_login_ip`, `last_login_time`, `last_active_ip`, `last_active_time`, `custom_data`, `mail_verified`, `is_deleted`, `is_enabled`, `created_at`) VALUES ('c44fc128-660f-11ef-b835-46a1f660a16e', 'WWWWWWWWWWW', 'f0e9d83998ee50ccac75eda1692e684a', 'w12@ww.com', 'Mr12W', '', 'Q12qwer1234', '192.168.0.100', 1724945250, '192.168.0.100', 1724945250, '', 0, 0, 1, 1724940337);
-# INSERT INTO `user` (`user_uuid`, `username`, `password`, `email`, `name`, `avatar`, `remark`, `last_login_ip`, `last_login_time`, `last_active_ip`, `last_active_time`, `custom_data`, `mail_verified`, `is_deleted`, `is_enabled`, `created_at`) VALUES ('e9b7e4c6-6610-11ef-a866-46a1f660a16e', '12geo', '04a7cf3d12880756113ebc7642e458dc', 'o12@oo.com', '12o', '', 'O12qwer1234', '192.168.0.100', 1725185956, '192.168.0.100', 1725185956, '', 0, 0, 1, 1724940829);
-# COMMIT;
 
 -- ----------------------------
 -- Table structure for user_role
@@ -195,12 +179,6 @@ CREATE TABLE `user_role` (
   KEY `user_role` (`user_uuid`,`role_uuid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='用户角色关系表';
 
--- ----------------------------
--- Records of user_role
--- ----------------------------
-# BEGIN;
-# INSERT INTO `user_role` (`id`, `user_uuid`, `role_uuid`, `created_at`) VALUES (5, 'e9b7e4c6-6610-11ef-a866-46a1f660a16e', 'eec1f8c6-6831-11ef-a2d3-46a1f660a16d', 1725182545);
-# COMMIT;
 
 -- ----------------------------
 -- Table structure for user_token
@@ -230,6 +208,21 @@ CREATE TABLE `media` (
 `updated_at` int unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
 PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `category`;
+CREATE TABLE `category` (
+`id` int unsigned NOT NULL AUTO_INCREMENT,
+`parent_id` int NOT NULL DEFAULT '0' COMMENT '父id',
+`title` varchar(127) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '分类名称',
+`class` varchar(127) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '分类标识',
+`sort` int NOT NULL DEFAULT '0' COMMENT '排序',
+`is_enabled` tinyint unsigned DEFAULT '1' COMMENT '是否有效 0无效 1有效',
+`is_deleted` tinyint unsigned DEFAULT '0' COMMENT '是否删除 0未删 1已删',
+`created_at` int unsigned NOT NULL DEFAULT '0' COMMENT '添加时间',
+`updated_at` int unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='分类表';
+
 -- ----------------------------
 -- Records of user_token
 -- ----------------------------

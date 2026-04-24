@@ -8,12 +8,20 @@ type MediaUnit struct {
 	Type      string `json:"type"`
 	Size      int64  `json:"size"`
 	Meta      string `json:"meta"`
+	Path      string `json:"path"`
+	Mini      string `json:"mini"`
+	Preview   string `json:"preview"`
 	CreatedAt string `json:"createdAt"`
 }
 
 type ListMediaResp struct {
 	List  []*MediaUnit `json:"list"`
 	Total int64        `json:"total"`
+}
+
+type MediaReq struct {
+	Id    int64  `json:"id"`
+	Title string `json:"title"`
 }
 
 type LoginReq struct {
@@ -357,4 +365,26 @@ type UserRoleUnit struct {
 
 type UserRolesResp struct {
 	List []*UserRoleUnit `json:"list"`
+}
+
+type CategoryReq struct {
+	Id       int64  `json:"id,optional"`
+	ParentId int64  `json:"parentId"`
+	Title    string `json:"title"`
+	Class    string `json:"class,optional"`
+	Sort     int64  `json:"sort"`
+}
+
+type CategoryUnit struct {
+	Id          int64  `json:"id"`
+	ParentId    int64  `json:"parentId"`
+	Class       string `json:"class"`
+	Title       string `json:"title"`
+	Sort        int64  `json:"sort"`
+	IsEnabled   int64  `json:"isEnabled"`
+	HasChildren bool   `json:"hasChildren"`
+}
+
+type CategoryListResp struct {
+	List []*CategoryUnit `json:"list"`
 }

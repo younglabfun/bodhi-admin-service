@@ -61,7 +61,7 @@ type (
     prefix: /api/v1/account
 )
 
-service adminapi-api {
+service admin-api {
     @handler login
     post /login (LoginReq) returns (LoginResp)
 
@@ -81,7 +81,7 @@ type (
     prefix: /api/v1/account
 )
 
-service adminapi-api {
+service admin-api {
 
     @handler refreshToken
     post /refresh-token (TokenReq) returns (TokenResp)

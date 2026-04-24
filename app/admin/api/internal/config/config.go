@@ -19,5 +19,6 @@ type AdminConf struct {
 	App        string `json:"app"`
 	Version    string `json:"version"`
 	UploadPath string `json:"uploadPath"`
+	ImagePath  string `json:"imagePath"`
 	Debug      bool   `json:"debug"`
 }

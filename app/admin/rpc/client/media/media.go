@@ -16,8 +16,12 @@ import (
 type (
 	AffectedResp      = admin.AffectedResp
 	BatchIdsReq       = admin.BatchIdsReq
+	CategoryReq       = admin.CategoryReq
+	CategoryUnit      = admin.CategoryUnit
+	ClassReq          = admin.ClassReq
 	Empty             = admin.Empty
 	Id                = admin.Id
+	ListCategoryResp  = admin.ListCategoryResp
 	ListMediaResp     = admin.ListMediaResp
 	ListMenuReq       = admin.ListMenuReq
 	ListNodeResp      = admin.ListNodeResp
@@ -26,6 +30,7 @@ type (
 	LoginReq          = admin.LoginReq
 	LoginResp         = admin.LoginResp
 	MediaReq          = admin.MediaReq
+	MediaTitleReq     = admin.MediaTitleReq
 	MediaUnit         = admin.MediaUnit
 	MenuListResp      = admin.MenuListResp
 	MenuReq           = admin.MenuReq
@@ -65,6 +70,7 @@ type (
 	Media interface {
 		InsertMedia(ctx context.Context, in *MediaReq, opts ...grpc.CallOption) (*AffectedResp, error)
 		UpdateMedia(ctx context.Context, in *MediaReq, opts ...grpc.CallOption) (*AffectedResp, error)
+		UpdateMediaTitle(ctx context.Context, in *MediaTitleReq, opts ...grpc.CallOption) (*AffectedResp, error)
 		GetMedia(ctx context.Context, in *Id, opts ...grpc.CallOption) (*MediaUnit, error)
 		RemoveMedia(ctx context.Context, in *Id, opts ...grpc.CallOption) (*AffectedResp, error)
 		ListMedia(ctx context.Context, in *PageReq, opts ...grpc.CallOption) (*ListMediaResp, error)
@@ -89,6 +95,11 @@ func (m *defaultMedia) InsertMedia(ctx context.Context, in *MediaReq, opts ...gr
 func (m *defaultMedia) UpdateMedia(ctx context.Context, in *MediaReq, opts ...grpc.CallOption) (*AffectedResp, error) {
 	client := admin.NewMediaClient(m.cli.Conn())
 	return client.UpdateMedia(ctx, in, opts...)
+}
+
+func (m *defaultMedia) UpdateMediaTitle(ctx context.Context, in *MediaTitleReq, opts ...grpc.CallOption) (*AffectedResp, error) {
+	client := admin.NewMediaClient(m.cli.Conn())
+	return client.UpdateMediaTitle(ctx, in, opts...)
 }
 
 func (m *defaultMedia) GetMedia(ctx context.Context, in *Id, opts ...grpc.CallOption) (*MediaUnit, error) {

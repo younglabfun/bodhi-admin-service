@@ -19,11 +19,12 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Media_InsertMedia_FullMethodName = "/bodhi.Media/insertMedia"
-	Media_UpdateMedia_FullMethodName = "/bodhi.Media/updateMedia"
-	Media_GetMedia_FullMethodName    = "/bodhi.Media/getMedia"
-	Media_RemoveMedia_FullMethodName = "/bodhi.Media/removeMedia"
-	Media_ListMedia_FullMethodName   = "/bodhi.Media/listMedia"
+	Media_InsertMedia_FullMethodName      = "/bodhi.Media/insertMedia"
+	Media_UpdateMedia_FullMethodName      = "/bodhi.Media/updateMedia"
+	Media_UpdateMediaTitle_FullMethodName = "/bodhi.Media/updateMediaTitle"
+	Media_GetMedia_FullMethodName         = "/bodhi.Media/getMedia"
+	Media_RemoveMedia_FullMethodName      = "/bodhi.Media/removeMedia"
+	Media_ListMedia_FullMethodName        = "/bodhi.Media/listMedia"
 )
 
 // MediaClient is the client API for Media service.
@@ -32,6 +33,7 @@ const (
 type MediaClient interface {
 	InsertMedia(ctx context.Context, in *MediaReq, opts ...grpc.CallOption) (*AffectedResp, error)
 	UpdateMedia(ctx context.Context, in *MediaReq, opts ...grpc.CallOption) (*AffectedResp, error)
+	UpdateMediaTitle(ctx context.Context, in *MediaTitleReq, opts ...grpc.CallOption) (*AffectedResp, error)
 	GetMedia(ctx context.Context, in *Id, opts ...grpc.CallOption) (*MediaUnit, error)
 	RemoveMedia(ctx context.Context, in *Id, opts ...grpc.CallOption) (*AffectedResp, error)
 	ListMedia(ctx context.Context, in *PageReq, opts ...grpc.CallOption) (*ListMediaResp, error)
@@ -59,6 +61,16 @@ func (c *mediaClient) UpdateMedia(ctx context.Context, in *MediaReq, opts ...grp
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AffectedResp)
 	err := c.cc.Invoke(ctx, Media_UpdateMedia_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *mediaClient) UpdateMediaTitle(ctx context.Context, in *MediaTitleReq, opts ...grpc.CallOption) (*AffectedResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AffectedResp)
+	err := c.cc.Invoke(ctx, Media_UpdateMediaTitle_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -101,6 +113,7 @@ func (c *mediaClient) ListMedia(ctx context.Context, in *PageReq, opts ...grpc.C
 type MediaServer interface {
 	InsertMedia(context.Context, *MediaReq) (*AffectedResp, error)
 	UpdateMedia(context.Context, *MediaReq) (*AffectedResp, error)
+	UpdateMediaTitle(context.Context, *MediaTitleReq) (*AffectedResp, error)
 	GetMedia(context.Context, *Id) (*MediaUnit, error)
 	RemoveMedia(context.Context, *Id) (*AffectedResp, error)
 	ListMedia(context.Context, *PageReq) (*ListMediaResp, error)
@@ -119,6 +132,9 @@ func (UnimplementedMediaServer) InsertMedia(context.Context, *MediaReq) (*Affect
 }
 func (UnimplementedMediaServer) UpdateMedia(context.Context, *MediaReq) (*AffectedResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateMedia not implemented")
+}
+func (UnimplementedMediaServer) UpdateMediaTitle(context.Context, *MediaTitleReq) (*AffectedResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateMediaTitle not implemented")
 }
 func (UnimplementedMediaServer) GetMedia(context.Context, *Id) (*MediaUnit, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMedia not implemented")
@@ -182,6 +198,24 @@ func _Media_UpdateMedia_Handler(srv interface{}, ctx context.Context, dec func(i
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MediaServer).UpdateMedia(ctx, req.(*MediaReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Media_UpdateMediaTitle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MediaTitleReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MediaServer).UpdateMediaTitle(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Media_UpdateMediaTitle_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MediaServer).UpdateMediaTitle(ctx, req.(*MediaTitleReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -254,6 +288,10 @@ var Media_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "updateMedia",
 			Handler:    _Media_UpdateMedia_Handler,
+		},
+		{
+			MethodName: "updateMediaTitle",
+			Handler:    _Media_UpdateMediaTitle_Handler,
 		},
 		{
 			MethodName: "getMedia",
@@ -2424,6 +2462,374 @@ var UserRole_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "getUserRoles",
 			Handler:    _UserRole_GetUserRoles_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "admin.proto",
+}
+
+const (
+	Category_InsertCategory_FullMethodName  = "/bodhi.Category/insertCategory"
+	Category_UpdateCategory_FullMethodName  = "/bodhi.Category/updateCategory"
+	Category_UpdateStatus_FullMethodName    = "/bodhi.Category/updateStatus"
+	Category_RemoveCategory_FullMethodName  = "/bodhi.Category/removeCategory"
+	Category_GetCategory_FullMethodName     = "/bodhi.Category/getCategory"
+	Category_GetList_FullMethodName         = "/bodhi.Category/getList"
+	Category_GetListByParent_FullMethodName = "/bodhi.Category/getListByParent"
+	Category_GetListByClass_FullMethodName  = "/bodhi.Category/getListByClass"
+)
+
+// CategoryClient is the client API for Category service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type CategoryClient interface {
+	InsertCategory(ctx context.Context, in *CategoryReq, opts ...grpc.CallOption) (*AffectedResp, error)
+	UpdateCategory(ctx context.Context, in *CategoryReq, opts ...grpc.CallOption) (*AffectedResp, error)
+	UpdateStatus(ctx context.Context, in *Id, opts ...grpc.CallOption) (*AffectedResp, error)
+	RemoveCategory(ctx context.Context, in *Id, opts ...grpc.CallOption) (*AffectedResp, error)
+	GetCategory(ctx context.Context, in *Id, opts ...grpc.CallOption) (*CategoryUnit, error)
+	GetList(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*ListCategoryResp, error)
+	GetListByParent(ctx context.Context, in *Id, opts ...grpc.CallOption) (*ListCategoryResp, error)
+	GetListByClass(ctx context.Context, in *ClassReq, opts ...grpc.CallOption) (*ListCategoryResp, error)
+}
+
+type categoryClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewCategoryClient(cc grpc.ClientConnInterface) CategoryClient {
+	return &categoryClient{cc}
+}
+
+func (c *categoryClient) InsertCategory(ctx context.Context, in *CategoryReq, opts ...grpc.CallOption) (*AffectedResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AffectedResp)
+	err := c.cc.Invoke(ctx, Category_InsertCategory_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *categoryClient) UpdateCategory(ctx context.Context, in *CategoryReq, opts ...grpc.CallOption) (*AffectedResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AffectedResp)
+	err := c.cc.Invoke(ctx, Category_UpdateCategory_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *categoryClient) UpdateStatus(ctx context.Context, in *Id, opts ...grpc.CallOption) (*AffectedResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AffectedResp)
+	err := c.cc.Invoke(ctx, Category_UpdateStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *categoryClient) RemoveCategory(ctx context.Context, in *Id, opts ...grpc.CallOption) (*AffectedResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AffectedResp)
+	err := c.cc.Invoke(ctx, Category_RemoveCategory_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *categoryClient) GetCategory(ctx context.Context, in *Id, opts ...grpc.CallOption) (*CategoryUnit, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CategoryUnit)
+	err := c.cc.Invoke(ctx, Category_GetCategory_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *categoryClient) GetList(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*ListCategoryResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListCategoryResp)
+	err := c.cc.Invoke(ctx, Category_GetList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *categoryClient) GetListByParent(ctx context.Context, in *Id, opts ...grpc.CallOption) (*ListCategoryResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListCategoryResp)
+	err := c.cc.Invoke(ctx, Category_GetListByParent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *categoryClient) GetListByClass(ctx context.Context, in *ClassReq, opts ...grpc.CallOption) (*ListCategoryResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListCategoryResp)
+	err := c.cc.Invoke(ctx, Category_GetListByClass_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// CategoryServer is the server API for Category service.
+// All implementations must embed UnimplementedCategoryServer
+// for forward compatibility.
+type CategoryServer interface {
+	InsertCategory(context.Context, *CategoryReq) (*AffectedResp, error)
+	UpdateCategory(context.Context, *CategoryReq) (*AffectedResp, error)
+	UpdateStatus(context.Context, *Id) (*AffectedResp, error)
+	RemoveCategory(context.Context, *Id) (*AffectedResp, error)
+	GetCategory(context.Context, *Id) (*CategoryUnit, error)
+	GetList(context.Context, *Empty) (*ListCategoryResp, error)
+	GetListByParent(context.Context, *Id) (*ListCategoryResp, error)
+	GetListByClass(context.Context, *ClassReq) (*ListCategoryResp, error)
+	mustEmbedUnimplementedCategoryServer()
+}
+
+// UnimplementedCategoryServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedCategoryServer struct{}
+
+func (UnimplementedCategoryServer) InsertCategory(context.Context, *CategoryReq) (*AffectedResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method InsertCategory not implemented")
+}
+func (UnimplementedCategoryServer) UpdateCategory(context.Context, *CategoryReq) (*AffectedResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCategory not implemented")
+}
+func (UnimplementedCategoryServer) UpdateStatus(context.Context, *Id) (*AffectedResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateStatus not implemented")
+}
+func (UnimplementedCategoryServer) RemoveCategory(context.Context, *Id) (*AffectedResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveCategory not implemented")
+}
+func (UnimplementedCategoryServer) GetCategory(context.Context, *Id) (*CategoryUnit, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCategory not implemented")
+}
+func (UnimplementedCategoryServer) GetList(context.Context, *Empty) (*ListCategoryResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetList not implemented")
+}
+func (UnimplementedCategoryServer) GetListByParent(context.Context, *Id) (*ListCategoryResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetListByParent not implemented")
+}
+func (UnimplementedCategoryServer) GetListByClass(context.Context, *ClassReq) (*ListCategoryResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetListByClass not implemented")
+}
+func (UnimplementedCategoryServer) mustEmbedUnimplementedCategoryServer() {}
+func (UnimplementedCategoryServer) testEmbeddedByValue()                  {}
+
+// UnsafeCategoryServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to CategoryServer will
+// result in compilation errors.
+type UnsafeCategoryServer interface {
+	mustEmbedUnimplementedCategoryServer()
+}
+
+func RegisterCategoryServer(s grpc.ServiceRegistrar, srv CategoryServer) {
+	// If the following call pancis, it indicates UnimplementedCategoryServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&Category_ServiceDesc, srv)
+}
+
+func _Category_InsertCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CategoryReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CategoryServer).InsertCategory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Category_InsertCategory_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CategoryServer).InsertCategory(ctx, req.(*CategoryReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Category_UpdateCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CategoryReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CategoryServer).UpdateCategory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Category_UpdateCategory_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CategoryServer).UpdateCategory(ctx, req.(*CategoryReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Category_UpdateStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CategoryServer).UpdateStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Category_UpdateStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CategoryServer).UpdateStatus(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Category_RemoveCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CategoryServer).RemoveCategory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Category_RemoveCategory_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CategoryServer).RemoveCategory(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Category_GetCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CategoryServer).GetCategory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Category_GetCategory_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CategoryServer).GetCategory(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Category_GetList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CategoryServer).GetList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Category_GetList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CategoryServer).GetList(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Category_GetListByParent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CategoryServer).GetListByParent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Category_GetListByParent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CategoryServer).GetListByParent(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Category_GetListByClass_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ClassReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CategoryServer).GetListByClass(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Category_GetListByClass_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CategoryServer).GetListByClass(ctx, req.(*ClassReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// Category_ServiceDesc is the grpc.ServiceDesc for Category service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var Category_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "bodhi.Category",
+	HandlerType: (*CategoryServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "insertCategory",
+			Handler:    _Category_InsertCategory_Handler,
+		},
+		{
+			MethodName: "updateCategory",
+			Handler:    _Category_UpdateCategory_Handler,
+		},
+		{
+			MethodName: "updateStatus",
+			Handler:    _Category_UpdateStatus_Handler,
+		},
+		{
+			MethodName: "removeCategory",
+			Handler:    _Category_RemoveCategory_Handler,
+		},
+		{
+			MethodName: "getCategory",
+			Handler:    _Category_GetCategory_Handler,
+		},
+		{
+			MethodName: "getList",
+			Handler:    _Category_GetList_Handler,
+		},
+		{
+			MethodName: "getListByParent",
+			Handler:    _Category_GetListByParent_Handler,
+		},
+		{
+			MethodName: "getListByClass",
+			Handler:    _Category_GetListByClass_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

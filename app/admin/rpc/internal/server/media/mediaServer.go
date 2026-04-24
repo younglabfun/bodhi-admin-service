@@ -33,6 +33,11 @@ func (s *MediaServer) UpdateMedia(ctx context.Context, in *admin.MediaReq) (*adm
 	return l.UpdateMedia(in)
 }
 
+func (s *MediaServer) UpdateMediaTitle(ctx context.Context, in *admin.MediaTitleReq) (*admin.AffectedResp, error) {
+	l := medialogic.NewUpdateMediaTitleLogic(ctx, s.svcCtx)
+	return l.UpdateMediaTitle(in)
+}
+
 func (s *MediaServer) GetMedia(ctx context.Context, in *admin.Id) (*admin.MediaUnit, error) {
 	l := medialogic.NewGetMediaLogic(ctx, s.svcCtx)
 	return l.GetMedia(in)

@@ -55,7 +55,7 @@ type (
 	jwt: Auth
 	prefix: /api/v1/node
 )
-service adminapi-api {
+service admin-api {
 	@handler insertNode
 	post /insert (NodeReq) returns (AffectedResp)
 

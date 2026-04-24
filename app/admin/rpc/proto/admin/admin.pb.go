@@ -471,6 +471,58 @@ func (x *MediaReq) GetMeta() string {
 	return ""
 }
 
+type MediaTitleReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=Id,proto3" json:"Id"`
+	Title         string                 `protobuf:"bytes,2,opt,name=Title,proto3" json:"Title"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MediaTitleReq) Reset() {
+	*x = MediaTitleReq{}
+	mi := &file_admin_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MediaTitleReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MediaTitleReq) ProtoMessage() {}
+
+func (x *MediaTitleReq) ProtoReflect() protoreflect.Message {
+	mi := &file_admin_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MediaTitleReq.ProtoReflect.Descriptor instead.
+func (*MediaTitleReq) Descriptor() ([]byte, []int) {
+	return file_admin_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *MediaTitleReq) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *MediaTitleReq) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
 type MediaUnit struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=Id,proto3" json:"Id"`
@@ -487,7 +539,7 @@ type MediaUnit struct {
 
 func (x *MediaUnit) Reset() {
 	*x = MediaUnit{}
-	mi := &file_admin_proto_msgTypes[8]
+	mi := &file_admin_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -499,7 +551,7 @@ func (x *MediaUnit) String() string {
 func (*MediaUnit) ProtoMessage() {}
 
 func (x *MediaUnit) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[8]
+	mi := &file_admin_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -512,7 +564,7 @@ func (x *MediaUnit) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MediaUnit.ProtoReflect.Descriptor instead.
 func (*MediaUnit) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{8}
+	return file_admin_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *MediaUnit) GetId() int64 {
@@ -581,7 +633,7 @@ type ListMediaResp struct {
 
 func (x *ListMediaResp) Reset() {
 	*x = ListMediaResp{}
-	mi := &file_admin_proto_msgTypes[9]
+	mi := &file_admin_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -593,7 +645,7 @@ func (x *ListMediaResp) String() string {
 func (*ListMediaResp) ProtoMessage() {}
 
 func (x *ListMediaResp) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[9]
+	mi := &file_admin_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -606,7 +658,7 @@ func (x *ListMediaResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListMediaResp.ProtoReflect.Descriptor instead.
 func (*ListMediaResp) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{9}
+	return file_admin_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ListMediaResp) GetList() []*MediaUnit {
@@ -636,7 +688,7 @@ type NodeGroupReq struct {
 
 func (x *NodeGroupReq) Reset() {
 	*x = NodeGroupReq{}
-	mi := &file_admin_proto_msgTypes[10]
+	mi := &file_admin_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -648,7 +700,7 @@ func (x *NodeGroupReq) String() string {
 func (*NodeGroupReq) ProtoMessage() {}
 
 func (x *NodeGroupReq) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[10]
+	mi := &file_admin_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -661,7 +713,7 @@ func (x *NodeGroupReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NodeGroupReq.ProtoReflect.Descriptor instead.
 func (*NodeGroupReq) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{10}
+	return file_admin_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *NodeGroupReq) GetId() int64 {
@@ -704,7 +756,7 @@ type NodeGroupUnit struct {
 
 func (x *NodeGroupUnit) Reset() {
 	*x = NodeGroupUnit{}
-	mi := &file_admin_proto_msgTypes[11]
+	mi := &file_admin_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -716,7 +768,7 @@ func (x *NodeGroupUnit) String() string {
 func (*NodeGroupUnit) ProtoMessage() {}
 
 func (x *NodeGroupUnit) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[11]
+	mi := &file_admin_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -729,7 +781,7 @@ func (x *NodeGroupUnit) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NodeGroupUnit.ProtoReflect.Descriptor instead.
 func (*NodeGroupUnit) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{11}
+	return file_admin_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *NodeGroupUnit) GetId() int64 {
@@ -769,7 +821,7 @@ type NodeGroupList struct {
 
 func (x *NodeGroupList) Reset() {
 	*x = NodeGroupList{}
-	mi := &file_admin_proto_msgTypes[12]
+	mi := &file_admin_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -781,7 +833,7 @@ func (x *NodeGroupList) String() string {
 func (*NodeGroupList) ProtoMessage() {}
 
 func (x *NodeGroupList) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[12]
+	mi := &file_admin_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -794,7 +846,7 @@ func (x *NodeGroupList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NodeGroupList.ProtoReflect.Descriptor instead.
 func (*NodeGroupList) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{12}
+	return file_admin_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *NodeGroupList) GetList() []*NodeGroupUnit {
@@ -818,7 +870,7 @@ type NodeReq struct {
 
 func (x *NodeReq) Reset() {
 	*x = NodeReq{}
-	mi := &file_admin_proto_msgTypes[13]
+	mi := &file_admin_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -830,7 +882,7 @@ func (x *NodeReq) String() string {
 func (*NodeReq) ProtoMessage() {}
 
 func (x *NodeReq) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[13]
+	mi := &file_admin_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -843,7 +895,7 @@ func (x *NodeReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NodeReq.ProtoReflect.Descriptor instead.
 func (*NodeReq) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{13}
+	return file_admin_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *NodeReq) GetId() int64 {
@@ -896,7 +948,7 @@ type NodeUnit struct {
 
 func (x *NodeUnit) Reset() {
 	*x = NodeUnit{}
-	mi := &file_admin_proto_msgTypes[14]
+	mi := &file_admin_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -908,7 +960,7 @@ func (x *NodeUnit) String() string {
 func (*NodeUnit) ProtoMessage() {}
 
 func (x *NodeUnit) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[14]
+	mi := &file_admin_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -921,7 +973,7 @@ func (x *NodeUnit) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NodeUnit.ProtoReflect.Descriptor instead.
 func (*NodeUnit) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{14}
+	return file_admin_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *NodeUnit) GetId() int64 {
@@ -982,7 +1034,7 @@ type NodeListResp struct {
 
 func (x *NodeListResp) Reset() {
 	*x = NodeListResp{}
-	mi := &file_admin_proto_msgTypes[15]
+	mi := &file_admin_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -994,7 +1046,7 @@ func (x *NodeListResp) String() string {
 func (*NodeListResp) ProtoMessage() {}
 
 func (x *NodeListResp) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[15]
+	mi := &file_admin_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1007,7 +1059,7 @@ func (x *NodeListResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NodeListResp.ProtoReflect.Descriptor instead.
 func (*NodeListResp) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{15}
+	return file_admin_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *NodeListResp) GetList() []*NodeUnit {
@@ -1027,7 +1079,7 @@ type ListNodeResp struct {
 
 func (x *ListNodeResp) Reset() {
 	*x = ListNodeResp{}
-	mi := &file_admin_proto_msgTypes[16]
+	mi := &file_admin_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1039,7 +1091,7 @@ func (x *ListNodeResp) String() string {
 func (*ListNodeResp) ProtoMessage() {}
 
 func (x *ListNodeResp) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[16]
+	mi := &file_admin_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1052,7 +1104,7 @@ func (x *ListNodeResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListNodeResp.ProtoReflect.Descriptor instead.
 func (*ListNodeResp) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{16}
+	return file_admin_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *ListNodeResp) GetList() []*NodeUnit {
@@ -1079,7 +1131,7 @@ type MoveReq struct {
 
 func (x *MoveReq) Reset() {
 	*x = MoveReq{}
-	mi := &file_admin_proto_msgTypes[17]
+	mi := &file_admin_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1091,7 +1143,7 @@ func (x *MoveReq) String() string {
 func (*MoveReq) ProtoMessage() {}
 
 func (x *MoveReq) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[17]
+	mi := &file_admin_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1104,7 +1156,7 @@ func (x *MoveReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MoveReq.ProtoReflect.Descriptor instead.
 func (*MoveReq) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{17}
+	return file_admin_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *MoveReq) GetGroupId() int64 {
@@ -1130,7 +1182,7 @@ type BatchIdsReq struct {
 
 func (x *BatchIdsReq) Reset() {
 	*x = BatchIdsReq{}
-	mi := &file_admin_proto_msgTypes[18]
+	mi := &file_admin_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1142,7 +1194,7 @@ func (x *BatchIdsReq) String() string {
 func (*BatchIdsReq) ProtoMessage() {}
 
 func (x *BatchIdsReq) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[18]
+	mi := &file_admin_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1155,7 +1207,7 @@ func (x *BatchIdsReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BatchIdsReq.ProtoReflect.Descriptor instead.
 func (*BatchIdsReq) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{18}
+	return file_admin_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *BatchIdsReq) GetIds() []int64 {
@@ -1184,7 +1236,7 @@ type MenuReq struct {
 
 func (x *MenuReq) Reset() {
 	*x = MenuReq{}
-	mi := &file_admin_proto_msgTypes[19]
+	mi := &file_admin_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1196,7 +1248,7 @@ func (x *MenuReq) String() string {
 func (*MenuReq) ProtoMessage() {}
 
 func (x *MenuReq) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[19]
+	mi := &file_admin_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1209,7 +1261,7 @@ func (x *MenuReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MenuReq.ProtoReflect.Descriptor instead.
 func (*MenuReq) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{19}
+	return file_admin_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *MenuReq) GetId() int64 {
@@ -1308,7 +1360,7 @@ type MenuResp struct {
 
 func (x *MenuResp) Reset() {
 	*x = MenuResp{}
-	mi := &file_admin_proto_msgTypes[20]
+	mi := &file_admin_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1320,7 +1372,7 @@ func (x *MenuResp) String() string {
 func (*MenuResp) ProtoMessage() {}
 
 func (x *MenuResp) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[20]
+	mi := &file_admin_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1333,7 +1385,7 @@ func (x *MenuResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MenuResp.ProtoReflect.Descriptor instead.
 func (*MenuResp) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{20}
+	return file_admin_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *MenuResp) GetId() int64 {
@@ -1423,7 +1475,7 @@ type ListMenuReq struct {
 
 func (x *ListMenuReq) Reset() {
 	*x = ListMenuReq{}
-	mi := &file_admin_proto_msgTypes[21]
+	mi := &file_admin_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1435,7 +1487,7 @@ func (x *ListMenuReq) String() string {
 func (*ListMenuReq) ProtoMessage() {}
 
 func (x *ListMenuReq) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[21]
+	mi := &file_admin_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1448,7 +1500,7 @@ func (x *ListMenuReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListMenuReq.ProtoReflect.Descriptor instead.
 func (*ListMenuReq) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{21}
+	return file_admin_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *ListMenuReq) GetPid() int64 {
@@ -1486,7 +1538,7 @@ type MenuUnit struct {
 
 func (x *MenuUnit) Reset() {
 	*x = MenuUnit{}
-	mi := &file_admin_proto_msgTypes[22]
+	mi := &file_admin_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1498,7 +1550,7 @@ func (x *MenuUnit) String() string {
 func (*MenuUnit) ProtoMessage() {}
 
 func (x *MenuUnit) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[22]
+	mi := &file_admin_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1511,7 +1563,7 @@ func (x *MenuUnit) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MenuUnit.ProtoReflect.Descriptor instead.
 func (*MenuUnit) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{22}
+	return file_admin_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *MenuUnit) GetId() int64 {
@@ -1614,7 +1666,7 @@ type MenuListResp struct {
 
 func (x *MenuListResp) Reset() {
 	*x = MenuListResp{}
-	mi := &file_admin_proto_msgTypes[23]
+	mi := &file_admin_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1626,7 +1678,7 @@ func (x *MenuListResp) String() string {
 func (*MenuListResp) ProtoMessage() {}
 
 func (x *MenuListResp) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[23]
+	mi := &file_admin_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1639,7 +1691,7 @@ func (x *MenuListResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MenuListResp.ProtoReflect.Descriptor instead.
 func (*MenuListResp) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{23}
+	return file_admin_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *MenuListResp) GetList() []*MenuUnit {
@@ -1658,7 +1710,7 @@ type MenuTypeResp struct {
 
 func (x *MenuTypeResp) Reset() {
 	*x = MenuTypeResp{}
-	mi := &file_admin_proto_msgTypes[24]
+	mi := &file_admin_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1670,7 +1722,7 @@ func (x *MenuTypeResp) String() string {
 func (*MenuTypeResp) ProtoMessage() {}
 
 func (x *MenuTypeResp) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[24]
+	mi := &file_admin_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1683,7 +1735,7 @@ func (x *MenuTypeResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MenuTypeResp.ProtoReflect.Descriptor instead.
 func (*MenuTypeResp) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{24}
+	return file_admin_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *MenuTypeResp) GetMenuType() int64 {
@@ -1706,7 +1758,7 @@ type RoleReq struct {
 
 func (x *RoleReq) Reset() {
 	*x = RoleReq{}
-	mi := &file_admin_proto_msgTypes[25]
+	mi := &file_admin_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1718,7 +1770,7 @@ func (x *RoleReq) String() string {
 func (*RoleReq) ProtoMessage() {}
 
 func (x *RoleReq) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[25]
+	mi := &file_admin_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1731,7 +1783,7 @@ func (x *RoleReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RoleReq.ProtoReflect.Descriptor instead.
 func (*RoleReq) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{25}
+	return file_admin_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *RoleReq) GetRoleUuid() string {
@@ -1777,7 +1829,7 @@ type RoleUnit struct {
 
 func (x *RoleUnit) Reset() {
 	*x = RoleUnit{}
-	mi := &file_admin_proto_msgTypes[26]
+	mi := &file_admin_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1789,7 +1841,7 @@ func (x *RoleUnit) String() string {
 func (*RoleUnit) ProtoMessage() {}
 
 func (x *RoleUnit) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[26]
+	mi := &file_admin_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1802,7 +1854,7 @@ func (x *RoleUnit) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RoleUnit.ProtoReflect.Descriptor instead.
 func (*RoleUnit) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{26}
+	return file_admin_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *RoleUnit) GetRoleUuid() string {
@@ -1864,7 +1916,7 @@ type ListRoleResp struct {
 
 func (x *ListRoleResp) Reset() {
 	*x = ListRoleResp{}
-	mi := &file_admin_proto_msgTypes[27]
+	mi := &file_admin_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1876,7 +1928,7 @@ func (x *ListRoleResp) String() string {
 func (*ListRoleResp) ProtoMessage() {}
 
 func (x *ListRoleResp) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[27]
+	mi := &file_admin_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1889,7 +1941,7 @@ func (x *ListRoleResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListRoleResp.ProtoReflect.Descriptor instead.
 func (*ListRoleResp) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{27}
+	return file_admin_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *ListRoleResp) GetList() []*RoleUnit {
@@ -1915,7 +1967,7 @@ type RoleListResp struct {
 
 func (x *RoleListResp) Reset() {
 	*x = RoleListResp{}
-	mi := &file_admin_proto_msgTypes[28]
+	mi := &file_admin_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1927,7 +1979,7 @@ func (x *RoleListResp) String() string {
 func (*RoleListResp) ProtoMessage() {}
 
 func (x *RoleListResp) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[28]
+	mi := &file_admin_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1940,7 +1992,7 @@ func (x *RoleListResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RoleListResp.ProtoReflect.Descriptor instead.
 func (*RoleListResp) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{28}
+	return file_admin_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *RoleListResp) GetList() []*RoleUnit {
@@ -1962,7 +2014,7 @@ type LoginReq struct {
 
 func (x *LoginReq) Reset() {
 	*x = LoginReq{}
-	mi := &file_admin_proto_msgTypes[29]
+	mi := &file_admin_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1974,7 +2026,7 @@ func (x *LoginReq) String() string {
 func (*LoginReq) ProtoMessage() {}
 
 func (x *LoginReq) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[29]
+	mi := &file_admin_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1987,7 +2039,7 @@ func (x *LoginReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoginReq.ProtoReflect.Descriptor instead.
 func (*LoginReq) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{29}
+	return file_admin_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *LoginReq) GetUsername() string {
@@ -2023,7 +2075,7 @@ type TokenUnit struct {
 
 func (x *TokenUnit) Reset() {
 	*x = TokenUnit{}
-	mi := &file_admin_proto_msgTypes[30]
+	mi := &file_admin_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2035,7 +2087,7 @@ func (x *TokenUnit) String() string {
 func (*TokenUnit) ProtoMessage() {}
 
 func (x *TokenUnit) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[30]
+	mi := &file_admin_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2048,7 +2100,7 @@ func (x *TokenUnit) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TokenUnit.ProtoReflect.Descriptor instead.
 func (*TokenUnit) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{30}
+	return file_admin_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *TokenUnit) GetAccessToken() string {
@@ -2091,7 +2143,7 @@ type UserResp struct {
 
 func (x *UserResp) Reset() {
 	*x = UserResp{}
-	mi := &file_admin_proto_msgTypes[31]
+	mi := &file_admin_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2103,7 +2155,7 @@ func (x *UserResp) String() string {
 func (*UserResp) ProtoMessage() {}
 
 func (x *UserResp) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[31]
+	mi := &file_admin_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2116,7 +2168,7 @@ func (x *UserResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserResp.ProtoReflect.Descriptor instead.
 func (*UserResp) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{31}
+	return file_admin_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *UserResp) GetUserUuid() string {
@@ -2157,7 +2209,7 @@ type LoginResp struct {
 
 func (x *LoginResp) Reset() {
 	*x = LoginResp{}
-	mi := &file_admin_proto_msgTypes[32]
+	mi := &file_admin_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2169,7 +2221,7 @@ func (x *LoginResp) String() string {
 func (*LoginResp) ProtoMessage() {}
 
 func (x *LoginResp) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[32]
+	mi := &file_admin_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2182,7 +2234,7 @@ func (x *LoginResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoginResp.ProtoReflect.Descriptor instead.
 func (*LoginResp) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{32}
+	return file_admin_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *LoginResp) GetUser() *UserResp {
@@ -2212,7 +2264,7 @@ type RegisterReq struct {
 
 func (x *RegisterReq) Reset() {
 	*x = RegisterReq{}
-	mi := &file_admin_proto_msgTypes[33]
+	mi := &file_admin_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2224,7 +2276,7 @@ func (x *RegisterReq) String() string {
 func (*RegisterReq) ProtoMessage() {}
 
 func (x *RegisterReq) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[33]
+	mi := &file_admin_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2237,7 +2289,7 @@ func (x *RegisterReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RegisterReq.ProtoReflect.Descriptor instead.
 func (*RegisterReq) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{33}
+	return file_admin_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *RegisterReq) GetUsername() string {
@@ -2285,7 +2337,7 @@ type TokenReq struct {
 
 func (x *TokenReq) Reset() {
 	*x = TokenReq{}
-	mi := &file_admin_proto_msgTypes[34]
+	mi := &file_admin_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2297,7 +2349,7 @@ func (x *TokenReq) String() string {
 func (*TokenReq) ProtoMessage() {}
 
 func (x *TokenReq) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[34]
+	mi := &file_admin_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2310,7 +2362,7 @@ func (x *TokenReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TokenReq.ProtoReflect.Descriptor instead.
 func (*TokenReq) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{34}
+	return file_admin_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *TokenReq) GetUserUuid() string {
@@ -2336,7 +2388,7 @@ type TokenResp struct {
 
 func (x *TokenResp) Reset() {
 	*x = TokenResp{}
-	mi := &file_admin_proto_msgTypes[35]
+	mi := &file_admin_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2348,7 +2400,7 @@ func (x *TokenResp) String() string {
 func (*TokenResp) ProtoMessage() {}
 
 func (x *TokenResp) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[35]
+	mi := &file_admin_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2361,7 +2413,7 @@ func (x *TokenResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TokenResp.ProtoReflect.Descriptor instead.
 func (*TokenResp) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{35}
+	return file_admin_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *TokenResp) GetToken() *TokenUnit {
@@ -2383,7 +2435,7 @@ type PasswordReq struct {
 
 func (x *PasswordReq) Reset() {
 	*x = PasswordReq{}
-	mi := &file_admin_proto_msgTypes[36]
+	mi := &file_admin_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2395,7 +2447,7 @@ func (x *PasswordReq) String() string {
 func (*PasswordReq) ProtoMessage() {}
 
 func (x *PasswordReq) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[36]
+	mi := &file_admin_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2408,7 +2460,7 @@ func (x *PasswordReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PasswordReq.ProtoReflect.Descriptor instead.
 func (*PasswordReq) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{36}
+	return file_admin_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *PasswordReq) GetUserUuid() string {
@@ -2448,7 +2500,7 @@ type PermissionResp struct {
 
 func (x *PermissionResp) Reset() {
 	*x = PermissionResp{}
-	mi := &file_admin_proto_msgTypes[37]
+	mi := &file_admin_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2460,7 +2512,7 @@ func (x *PermissionResp) String() string {
 func (*PermissionResp) ProtoMessage() {}
 
 func (x *PermissionResp) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[37]
+	mi := &file_admin_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2473,7 +2525,7 @@ func (x *PermissionResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PermissionResp.ProtoReflect.Descriptor instead.
 func (*PermissionResp) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{37}
+	return file_admin_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *PermissionResp) GetPermission() []string {
@@ -2496,7 +2548,7 @@ type NewUserReq struct {
 
 func (x *NewUserReq) Reset() {
 	*x = NewUserReq{}
-	mi := &file_admin_proto_msgTypes[38]
+	mi := &file_admin_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2508,7 +2560,7 @@ func (x *NewUserReq) String() string {
 func (*NewUserReq) ProtoMessage() {}
 
 func (x *NewUserReq) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[38]
+	mi := &file_admin_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2521,7 +2573,7 @@ func (x *NewUserReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NewUserReq.ProtoReflect.Descriptor instead.
 func (*NewUserReq) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{38}
+	return file_admin_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *NewUserReq) GetUsername() string {
@@ -2575,7 +2627,7 @@ type UserReq struct {
 
 func (x *UserReq) Reset() {
 	*x = UserReq{}
-	mi := &file_admin_proto_msgTypes[39]
+	mi := &file_admin_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2587,7 +2639,7 @@ func (x *UserReq) String() string {
 func (*UserReq) ProtoMessage() {}
 
 func (x *UserReq) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[39]
+	mi := &file_admin_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2600,7 +2652,7 @@ func (x *UserReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserReq.ProtoReflect.Descriptor instead.
 func (*UserReq) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{39}
+	return file_admin_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *UserReq) GetUserUuid() string {
@@ -2678,7 +2730,7 @@ type UserUnit struct {
 
 func (x *UserUnit) Reset() {
 	*x = UserUnit{}
-	mi := &file_admin_proto_msgTypes[40]
+	mi := &file_admin_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2690,7 +2742,7 @@ func (x *UserUnit) String() string {
 func (*UserUnit) ProtoMessage() {}
 
 func (x *UserUnit) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[40]
+	mi := &file_admin_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2703,7 +2755,7 @@ func (x *UserUnit) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserUnit.ProtoReflect.Descriptor instead.
 func (*UserUnit) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{40}
+	return file_admin_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *UserUnit) GetUserUuid() string {
@@ -2793,7 +2845,7 @@ type ListUserResp struct {
 
 func (x *ListUserResp) Reset() {
 	*x = ListUserResp{}
-	mi := &file_admin_proto_msgTypes[41]
+	mi := &file_admin_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2805,7 +2857,7 @@ func (x *ListUserResp) String() string {
 func (*ListUserResp) ProtoMessage() {}
 
 func (x *ListUserResp) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[41]
+	mi := &file_admin_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2818,7 +2870,7 @@ func (x *ListUserResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListUserResp.ProtoReflect.Descriptor instead.
 func (*ListUserResp) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{41}
+	return file_admin_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *ListUserResp) GetList() []*UserUnit {
@@ -2845,7 +2897,7 @@ type UserPasswordReq struct {
 
 func (x *UserPasswordReq) Reset() {
 	*x = UserPasswordReq{}
-	mi := &file_admin_proto_msgTypes[42]
+	mi := &file_admin_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2857,7 +2909,7 @@ func (x *UserPasswordReq) String() string {
 func (*UserPasswordReq) ProtoMessage() {}
 
 func (x *UserPasswordReq) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[42]
+	mi := &file_admin_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2870,7 +2922,7 @@ func (x *UserPasswordReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserPasswordReq.ProtoReflect.Descriptor instead.
 func (*UserPasswordReq) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{42}
+	return file_admin_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *UserPasswordReq) GetUserUuid() string {
@@ -2898,7 +2950,7 @@ type UserRoleReq struct {
 
 func (x *UserRoleReq) Reset() {
 	*x = UserRoleReq{}
-	mi := &file_admin_proto_msgTypes[43]
+	mi := &file_admin_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2910,7 +2962,7 @@ func (x *UserRoleReq) String() string {
 func (*UserRoleReq) ProtoMessage() {}
 
 func (x *UserRoleReq) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[43]
+	mi := &file_admin_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2923,7 +2975,7 @@ func (x *UserRoleReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserRoleReq.ProtoReflect.Descriptor instead.
 func (*UserRoleReq) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{43}
+	return file_admin_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *UserRoleReq) GetUserUuid() string {
@@ -2950,7 +3002,7 @@ type UpdateUserRoleReq struct {
 
 func (x *UpdateUserRoleReq) Reset() {
 	*x = UpdateUserRoleReq{}
-	mi := &file_admin_proto_msgTypes[44]
+	mi := &file_admin_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2962,7 +3014,7 @@ func (x *UpdateUserRoleReq) String() string {
 func (*UpdateUserRoleReq) ProtoMessage() {}
 
 func (x *UpdateUserRoleReq) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[44]
+	mi := &file_admin_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2975,7 +3027,7 @@ func (x *UpdateUserRoleReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserRoleReq.ProtoReflect.Descriptor instead.
 func (*UpdateUserRoleReq) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{44}
+	return file_admin_proto_rawDescGZIP(), []int{45}
 }
 
 func (x *UpdateUserRoleReq) GetId() int64 {
@@ -3003,7 +3055,7 @@ type UserRoleUnit struct {
 
 func (x *UserRoleUnit) Reset() {
 	*x = UserRoleUnit{}
-	mi := &file_admin_proto_msgTypes[45]
+	mi := &file_admin_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3015,7 +3067,7 @@ func (x *UserRoleUnit) String() string {
 func (*UserRoleUnit) ProtoMessage() {}
 
 func (x *UserRoleUnit) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[45]
+	mi := &file_admin_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3028,7 +3080,7 @@ func (x *UserRoleUnit) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserRoleUnit.ProtoReflect.Descriptor instead.
 func (*UserRoleUnit) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{45}
+	return file_admin_proto_rawDescGZIP(), []int{46}
 }
 
 func (x *UserRoleUnit) GetId() int64 {
@@ -3061,7 +3113,7 @@ type UserRoleListResp struct {
 
 func (x *UserRoleListResp) Reset() {
 	*x = UserRoleListResp{}
-	mi := &file_admin_proto_msgTypes[46]
+	mi := &file_admin_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3073,7 +3125,7 @@ func (x *UserRoleListResp) String() string {
 func (*UserRoleListResp) ProtoMessage() {}
 
 func (x *UserRoleListResp) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[46]
+	mi := &file_admin_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3086,7 +3138,7 @@ func (x *UserRoleListResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserRoleListResp.ProtoReflect.Descriptor instead.
 func (*UserRoleListResp) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{46}
+	return file_admin_proto_rawDescGZIP(), []int{47}
 }
 
 func (x *UserRoleListResp) GetList() []*UserRoleUnit {
@@ -3094,6 +3146,270 @@ func (x *UserRoleListResp) GetList() []*UserRoleUnit {
 		return x.List
 	}
 	return nil
+}
+
+type CategoryReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=Id,proto3" json:"Id"`
+	ParentId      int64                  `protobuf:"varint,2,opt,name=ParentId,proto3" json:"ParentId"`
+	Title         string                 `protobuf:"bytes,3,opt,name=Title,proto3" json:"Title"`
+	Class         string                 `protobuf:"bytes,4,opt,name=Class,proto3" json:"Class"`
+	Sort          int64                  `protobuf:"varint,5,opt,name=Sort,proto3" json:"Sort"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CategoryReq) Reset() {
+	*x = CategoryReq{}
+	mi := &file_admin_proto_msgTypes[48]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CategoryReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CategoryReq) ProtoMessage() {}
+
+func (x *CategoryReq) ProtoReflect() protoreflect.Message {
+	mi := &file_admin_proto_msgTypes[48]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CategoryReq.ProtoReflect.Descriptor instead.
+func (*CategoryReq) Descriptor() ([]byte, []int) {
+	return file_admin_proto_rawDescGZIP(), []int{48}
+}
+
+func (x *CategoryReq) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *CategoryReq) GetParentId() int64 {
+	if x != nil {
+		return x.ParentId
+	}
+	return 0
+}
+
+func (x *CategoryReq) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *CategoryReq) GetClass() string {
+	if x != nil {
+		return x.Class
+	}
+	return ""
+}
+
+func (x *CategoryReq) GetSort() int64 {
+	if x != nil {
+		return x.Sort
+	}
+	return 0
+}
+
+type CategoryUnit struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=Id,proto3" json:"Id"`
+	ParentId      int64                  `protobuf:"varint,2,opt,name=ParentId,proto3" json:"ParentId"`
+	Title         string                 `protobuf:"bytes,3,opt,name=Title,proto3" json:"Title"`
+	Class         string                 `protobuf:"bytes,4,opt,name=Class,proto3" json:"Class"`
+	Sort          int64                  `protobuf:"varint,5,opt,name=Sort,proto3" json:"Sort"`
+	IsEnabled     int64                  `protobuf:"varint,6,opt,name=IsEnabled,proto3" json:"IsEnabled"`
+	CreatedAt     int64                  `protobuf:"varint,7,opt,name=CreatedAt,proto3" json:"CreatedAt"`
+	HasChildren   bool                   `protobuf:"varint,8,opt,name=hasChildren,proto3" json:"hasChildren"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CategoryUnit) Reset() {
+	*x = CategoryUnit{}
+	mi := &file_admin_proto_msgTypes[49]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CategoryUnit) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CategoryUnit) ProtoMessage() {}
+
+func (x *CategoryUnit) ProtoReflect() protoreflect.Message {
+	mi := &file_admin_proto_msgTypes[49]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CategoryUnit.ProtoReflect.Descriptor instead.
+func (*CategoryUnit) Descriptor() ([]byte, []int) {
+	return file_admin_proto_rawDescGZIP(), []int{49}
+}
+
+func (x *CategoryUnit) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *CategoryUnit) GetParentId() int64 {
+	if x != nil {
+		return x.ParentId
+	}
+	return 0
+}
+
+func (x *CategoryUnit) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *CategoryUnit) GetClass() string {
+	if x != nil {
+		return x.Class
+	}
+	return ""
+}
+
+func (x *CategoryUnit) GetSort() int64 {
+	if x != nil {
+		return x.Sort
+	}
+	return 0
+}
+
+func (x *CategoryUnit) GetIsEnabled() int64 {
+	if x != nil {
+		return x.IsEnabled
+	}
+	return 0
+}
+
+func (x *CategoryUnit) GetCreatedAt() int64 {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return 0
+}
+
+func (x *CategoryUnit) GetHasChildren() bool {
+	if x != nil {
+		return x.HasChildren
+	}
+	return false
+}
+
+type ListCategoryResp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	List          []*CategoryUnit        `protobuf:"bytes,1,rep,name=List,proto3" json:"List"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListCategoryResp) Reset() {
+	*x = ListCategoryResp{}
+	mi := &file_admin_proto_msgTypes[50]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListCategoryResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListCategoryResp) ProtoMessage() {}
+
+func (x *ListCategoryResp) ProtoReflect() protoreflect.Message {
+	mi := &file_admin_proto_msgTypes[50]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListCategoryResp.ProtoReflect.Descriptor instead.
+func (*ListCategoryResp) Descriptor() ([]byte, []int) {
+	return file_admin_proto_rawDescGZIP(), []int{50}
+}
+
+func (x *ListCategoryResp) GetList() []*CategoryUnit {
+	if x != nil {
+		return x.List
+	}
+	return nil
+}
+
+type ClassReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Class         string                 `protobuf:"bytes,1,opt,name=Class,proto3" json:"Class"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ClassReq) Reset() {
+	*x = ClassReq{}
+	mi := &file_admin_proto_msgTypes[51]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ClassReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClassReq) ProtoMessage() {}
+
+func (x *ClassReq) ProtoReflect() protoreflect.Message {
+	mi := &file_admin_proto_msgTypes[51]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClassReq.ProtoReflect.Descriptor instead.
+func (*ClassReq) Descriptor() ([]byte, []int) {
+	return file_admin_proto_rawDescGZIP(), []int{51}
+}
+
+func (x *ClassReq) GetClass() string {
+	if x != nil {
+		return x.Class
+	}
+	return ""
 }
 
 var File_admin_proto protoreflect.FileDescriptor
@@ -3128,7 +3444,10 @@ const file_admin_proto_rawDesc = "" +
 	"\x04Type\x18\x04 \x01(\tR\x04Type\x12\x12\n" +
 	"\x04Path\x18\x05 \x01(\tR\x04Path\x12\x12\n" +
 	"\x04Size\x18\x06 \x01(\x03R\x04Size\x12\x12\n" +
-	"\x04Meta\x18\a \x01(\tR\x04Meta\"\xbb\x01\n" +
+	"\x04Meta\x18\a \x01(\tR\x04Meta\"5\n" +
+	"\rMediaTitleReq\x12\x0e\n" +
+	"\x02Id\x18\x01 \x01(\x03R\x02Id\x12\x14\n" +
+	"\x05Title\x18\x02 \x01(\tR\x05Title\"\xbb\x01\n" +
 	"\tMediaUnit\x12\x0e\n" +
 	"\x02Id\x18\x01 \x01(\x03R\x02Id\x12\x14\n" +
 	"\x05Title\x18\x02 \x01(\tR\x05Title\x12\x1a\n" +
@@ -3326,10 +3645,30 @@ const file_admin_proto_rawDesc = "" +
 	"\bRoleUuid\x18\x02 \x01(\tR\bRoleUuid\x12\x1a\n" +
 	"\bRoleName\x18\x03 \x01(\tR\bRoleName\";\n" +
 	"\x10UserRoleListResp\x12'\n" +
-	"\x04List\x18\x01 \x03(\v2\x13.bodhi.UserRoleUnitR\x04List2\xfc\x01\n" +
+	"\x04List\x18\x01 \x03(\v2\x13.bodhi.UserRoleUnitR\x04List\"y\n" +
+	"\vCategoryReq\x12\x0e\n" +
+	"\x02Id\x18\x01 \x01(\x03R\x02Id\x12\x1a\n" +
+	"\bParentId\x18\x02 \x01(\x03R\bParentId\x12\x14\n" +
+	"\x05Title\x18\x03 \x01(\tR\x05Title\x12\x14\n" +
+	"\x05Class\x18\x04 \x01(\tR\x05Class\x12\x12\n" +
+	"\x04Sort\x18\x05 \x01(\x03R\x04Sort\"\xd8\x01\n" +
+	"\fCategoryUnit\x12\x0e\n" +
+	"\x02Id\x18\x01 \x01(\x03R\x02Id\x12\x1a\n" +
+	"\bParentId\x18\x02 \x01(\x03R\bParentId\x12\x14\n" +
+	"\x05Title\x18\x03 \x01(\tR\x05Title\x12\x14\n" +
+	"\x05Class\x18\x04 \x01(\tR\x05Class\x12\x12\n" +
+	"\x04Sort\x18\x05 \x01(\x03R\x04Sort\x12\x1c\n" +
+	"\tIsEnabled\x18\x06 \x01(\x03R\tIsEnabled\x12\x1c\n" +
+	"\tCreatedAt\x18\a \x01(\x03R\tCreatedAt\x12 \n" +
+	"\vhasChildren\x18\b \x01(\bR\vhasChildren\";\n" +
+	"\x10ListCategoryResp\x12'\n" +
+	"\x04List\x18\x01 \x03(\v2\x13.bodhi.CategoryUnitR\x04List\" \n" +
+	"\bClassReq\x12\x14\n" +
+	"\x05Class\x18\x01 \x01(\tR\x05Class2\xbb\x02\n" +
 	"\x05Media\x123\n" +
 	"\vinsertMedia\x12\x0f.bodhi.MediaReq\x1a\x13.bodhi.AffectedResp\x123\n" +
-	"\vupdateMedia\x12\x0f.bodhi.MediaReq\x1a\x13.bodhi.AffectedResp\x12'\n" +
+	"\vupdateMedia\x12\x0f.bodhi.MediaReq\x1a\x13.bodhi.AffectedResp\x12=\n" +
+	"\x10updateMediaTitle\x12\x14.bodhi.MediaTitleReq\x1a\x13.bodhi.AffectedResp\x12'\n" +
 	"\bgetMedia\x12\t.bodhi.Id\x1a\x10.bodhi.MediaUnit\x12-\n" +
 	"\vremoveMedia\x12\t.bodhi.Id\x1a\x13.bodhi.AffectedResp\x121\n" +
 	"\tlistMedia\x12\x0e.bodhi.PageReq\x1a\x14.bodhi.ListMediaResp2\xa1\x02\n" +
@@ -3396,7 +3735,16 @@ const file_admin_proto_rawDesc = "" +
 	"\x0einsertUserRole\x12\x12.bodhi.UserRoleReq\x1a\x13.bodhi.AffectedResp\x12?\n" +
 	"\x0eupdateUserRole\x12\x18.bodhi.UpdateUserRoleReq\x1a\x13.bodhi.AffectedResp\x120\n" +
 	"\x0eremoveUserRole\x12\t.bodhi.Id\x1a\x13.bodhi.AffectedResp\x124\n" +
-	"\fgetUserRoles\x12\v.bodhi.Uuid\x1a\x17.bodhi.UserRoleListRespB\tZ\a./adminb\x06proto3"
+	"\fgetUserRoles\x12\v.bodhi.Uuid\x1a\x17.bodhi.UserRoleListResp2\xb6\x03\n" +
+	"\bCategory\x129\n" +
+	"\x0einsertCategory\x12\x12.bodhi.CategoryReq\x1a\x13.bodhi.AffectedResp\x129\n" +
+	"\x0eupdateCategory\x12\x12.bodhi.CategoryReq\x1a\x13.bodhi.AffectedResp\x12.\n" +
+	"\fupdateStatus\x12\t.bodhi.Id\x1a\x13.bodhi.AffectedResp\x120\n" +
+	"\x0eremoveCategory\x12\t.bodhi.Id\x1a\x13.bodhi.AffectedResp\x12-\n" +
+	"\vgetCategory\x12\t.bodhi.Id\x1a\x13.bodhi.CategoryUnit\x120\n" +
+	"\agetList\x12\f.bodhi.Empty\x1a\x17.bodhi.ListCategoryResp\x125\n" +
+	"\x0fgetListByParent\x12\t.bodhi.Id\x1a\x17.bodhi.ListCategoryResp\x12:\n" +
+	"\x0egetListByClass\x12\x0f.bodhi.ClassReq\x1a\x17.bodhi.ListCategoryRespB\tZ\a./adminb\x06proto3"
 
 var (
 	file_admin_proto_rawDescOnce sync.Once
@@ -3410,7 +3758,7 @@ func file_admin_proto_rawDescGZIP() []byte {
 	return file_admin_proto_rawDescData
 }
 
-var file_admin_proto_msgTypes = make([]protoimpl.MessageInfo, 47)
+var file_admin_proto_msgTypes = make([]protoimpl.MessageInfo, 52)
 var file_admin_proto_goTypes = []any{
 	(*Empty)(nil),             // 0: bodhi.Empty
 	(*AffectedResp)(nil),      // 1: bodhi.AffectedResp
@@ -3420,164 +3768,188 @@ var file_admin_proto_goTypes = []any{
 	(*UuidStatusReq)(nil),     // 5: bodhi.UuidStatusReq
 	(*PageReq)(nil),           // 6: bodhi.PageReq
 	(*MediaReq)(nil),          // 7: bodhi.MediaReq
-	(*MediaUnit)(nil),         // 8: bodhi.MediaUnit
-	(*ListMediaResp)(nil),     // 9: bodhi.ListMediaResp
-	(*NodeGroupReq)(nil),      // 10: bodhi.NodeGroupReq
-	(*NodeGroupUnit)(nil),     // 11: bodhi.NodeGroupUnit
-	(*NodeGroupList)(nil),     // 12: bodhi.NodeGroupList
-	(*NodeReq)(nil),           // 13: bodhi.NodeReq
-	(*NodeUnit)(nil),          // 14: bodhi.NodeUnit
-	(*NodeListResp)(nil),      // 15: bodhi.NodeListResp
-	(*ListNodeResp)(nil),      // 16: bodhi.ListNodeResp
-	(*MoveReq)(nil),           // 17: bodhi.MoveReq
-	(*BatchIdsReq)(nil),       // 18: bodhi.BatchIdsReq
-	(*MenuReq)(nil),           // 19: bodhi.MenuReq
-	(*MenuResp)(nil),          // 20: bodhi.MenuResp
-	(*ListMenuReq)(nil),       // 21: bodhi.ListMenuReq
-	(*MenuUnit)(nil),          // 22: bodhi.MenuUnit
-	(*MenuListResp)(nil),      // 23: bodhi.MenuListResp
-	(*MenuTypeResp)(nil),      // 24: bodhi.MenuTypeResp
-	(*RoleReq)(nil),           // 25: bodhi.RoleReq
-	(*RoleUnit)(nil),          // 26: bodhi.RoleUnit
-	(*ListRoleResp)(nil),      // 27: bodhi.ListRoleResp
-	(*RoleListResp)(nil),      // 28: bodhi.RoleListResp
-	(*LoginReq)(nil),          // 29: bodhi.LoginReq
-	(*TokenUnit)(nil),         // 30: bodhi.TokenUnit
-	(*UserResp)(nil),          // 31: bodhi.UserResp
-	(*LoginResp)(nil),         // 32: bodhi.LoginResp
-	(*RegisterReq)(nil),       // 33: bodhi.RegisterReq
-	(*TokenReq)(nil),          // 34: bodhi.TokenReq
-	(*TokenResp)(nil),         // 35: bodhi.TokenResp
-	(*PasswordReq)(nil),       // 36: bodhi.PasswordReq
-	(*PermissionResp)(nil),    // 37: bodhi.PermissionResp
-	(*NewUserReq)(nil),        // 38: bodhi.NewUserReq
-	(*UserReq)(nil),           // 39: bodhi.UserReq
-	(*UserUnit)(nil),          // 40: bodhi.UserUnit
-	(*ListUserResp)(nil),      // 41: bodhi.ListUserResp
-	(*UserPasswordReq)(nil),   // 42: bodhi.UserPasswordReq
-	(*UserRoleReq)(nil),       // 43: bodhi.UserRoleReq
-	(*UpdateUserRoleReq)(nil), // 44: bodhi.UpdateUserRoleReq
-	(*UserRoleUnit)(nil),      // 45: bodhi.UserRoleUnit
-	(*UserRoleListResp)(nil),  // 46: bodhi.UserRoleListResp
+	(*MediaTitleReq)(nil),     // 8: bodhi.MediaTitleReq
+	(*MediaUnit)(nil),         // 9: bodhi.MediaUnit
+	(*ListMediaResp)(nil),     // 10: bodhi.ListMediaResp
+	(*NodeGroupReq)(nil),      // 11: bodhi.NodeGroupReq
+	(*NodeGroupUnit)(nil),     // 12: bodhi.NodeGroupUnit
+	(*NodeGroupList)(nil),     // 13: bodhi.NodeGroupList
+	(*NodeReq)(nil),           // 14: bodhi.NodeReq
+	(*NodeUnit)(nil),          // 15: bodhi.NodeUnit
+	(*NodeListResp)(nil),      // 16: bodhi.NodeListResp
+	(*ListNodeResp)(nil),      // 17: bodhi.ListNodeResp
+	(*MoveReq)(nil),           // 18: bodhi.MoveReq
+	(*BatchIdsReq)(nil),       // 19: bodhi.BatchIdsReq
+	(*MenuReq)(nil),           // 20: bodhi.MenuReq
+	(*MenuResp)(nil),          // 21: bodhi.MenuResp
+	(*ListMenuReq)(nil),       // 22: bodhi.ListMenuReq
+	(*MenuUnit)(nil),          // 23: bodhi.MenuUnit
+	(*MenuListResp)(nil),      // 24: bodhi.MenuListResp
+	(*MenuTypeResp)(nil),      // 25: bodhi.MenuTypeResp
+	(*RoleReq)(nil),           // 26: bodhi.RoleReq
+	(*RoleUnit)(nil),          // 27: bodhi.RoleUnit
+	(*ListRoleResp)(nil),      // 28: bodhi.ListRoleResp
+	(*RoleListResp)(nil),      // 29: bodhi.RoleListResp
+	(*LoginReq)(nil),          // 30: bodhi.LoginReq
+	(*TokenUnit)(nil),         // 31: bodhi.TokenUnit
+	(*UserResp)(nil),          // 32: bodhi.UserResp
+	(*LoginResp)(nil),         // 33: bodhi.LoginResp
+	(*RegisterReq)(nil),       // 34: bodhi.RegisterReq
+	(*TokenReq)(nil),          // 35: bodhi.TokenReq
+	(*TokenResp)(nil),         // 36: bodhi.TokenResp
+	(*PasswordReq)(nil),       // 37: bodhi.PasswordReq
+	(*PermissionResp)(nil),    // 38: bodhi.PermissionResp
+	(*NewUserReq)(nil),        // 39: bodhi.NewUserReq
+	(*UserReq)(nil),           // 40: bodhi.UserReq
+	(*UserUnit)(nil),          // 41: bodhi.UserUnit
+	(*ListUserResp)(nil),      // 42: bodhi.ListUserResp
+	(*UserPasswordReq)(nil),   // 43: bodhi.UserPasswordReq
+	(*UserRoleReq)(nil),       // 44: bodhi.UserRoleReq
+	(*UpdateUserRoleReq)(nil), // 45: bodhi.UpdateUserRoleReq
+	(*UserRoleUnit)(nil),      // 46: bodhi.UserRoleUnit
+	(*UserRoleListResp)(nil),  // 47: bodhi.UserRoleListResp
+	(*CategoryReq)(nil),       // 48: bodhi.CategoryReq
+	(*CategoryUnit)(nil),      // 49: bodhi.CategoryUnit
+	(*ListCategoryResp)(nil),  // 50: bodhi.ListCategoryResp
+	(*ClassReq)(nil),          // 51: bodhi.ClassReq
 }
 var file_admin_proto_depIdxs = []int32{
-	8,  // 0: bodhi.ListMediaResp.List:type_name -> bodhi.MediaUnit
-	11, // 1: bodhi.NodeGroupList.List:type_name -> bodhi.NodeGroupUnit
-	14, // 2: bodhi.NodeListResp.List:type_name -> bodhi.NodeUnit
-	14, // 3: bodhi.ListNodeResp.List:type_name -> bodhi.NodeUnit
-	22, // 4: bodhi.MenuListResp.List:type_name -> bodhi.MenuUnit
-	26, // 5: bodhi.ListRoleResp.List:type_name -> bodhi.RoleUnit
-	26, // 6: bodhi.RoleListResp.List:type_name -> bodhi.RoleUnit
-	31, // 7: bodhi.LoginResp.User:type_name -> bodhi.UserResp
-	30, // 8: bodhi.LoginResp.Token:type_name -> bodhi.TokenUnit
-	30, // 9: bodhi.TokenResp.Token:type_name -> bodhi.TokenUnit
-	40, // 10: bodhi.ListUserResp.List:type_name -> bodhi.UserUnit
-	45, // 11: bodhi.UserRoleListResp.List:type_name -> bodhi.UserRoleUnit
-	7,  // 12: bodhi.Media.insertMedia:input_type -> bodhi.MediaReq
-	7,  // 13: bodhi.Media.updateMedia:input_type -> bodhi.MediaReq
-	2,  // 14: bodhi.Media.getMedia:input_type -> bodhi.Id
-	2,  // 15: bodhi.Media.removeMedia:input_type -> bodhi.Id
-	6,  // 16: bodhi.Media.listMedia:input_type -> bodhi.PageReq
-	10, // 17: bodhi.NodeGroup.insertNodeGroup:input_type -> bodhi.NodeGroupReq
-	10, // 18: bodhi.NodeGroup.updateNodeGroup:input_type -> bodhi.NodeGroupReq
-	2,  // 19: bodhi.NodeGroup.removeNodeGroup:input_type -> bodhi.Id
-	2,  // 20: bodhi.NodeGroup.getNodeGroup:input_type -> bodhi.Id
-	0,  // 21: bodhi.NodeGroup.getNodeGroupList:input_type -> bodhi.Empty
-	13, // 22: bodhi.Node.insertNode:input_type -> bodhi.NodeReq
-	13, // 23: bodhi.Node.updateNode:input_type -> bodhi.NodeReq
-	2,  // 24: bodhi.Node.updateStatus:input_type -> bodhi.Id
-	2,  // 25: bodhi.Node.removeNode:input_type -> bodhi.Id
-	2,  // 26: bodhi.Node.getNode:input_type -> bodhi.Id
-	0,  // 27: bodhi.Node.getList:input_type -> bodhi.Empty
-	2,  // 28: bodhi.Node.getNodeListByGid:input_type -> bodhi.Id
-	6,  // 29: bodhi.Node.listNode:input_type -> bodhi.PageReq
-	17, // 30: bodhi.Node.batchMove:input_type -> bodhi.MoveReq
-	18, // 31: bodhi.Node.batchRemove:input_type -> bodhi.BatchIdsReq
-	19, // 32: bodhi.Menu.insertMenu:input_type -> bodhi.MenuReq
-	19, // 33: bodhi.Menu.updateMenu:input_type -> bodhi.MenuReq
-	4,  // 34: bodhi.Menu.updateStatus:input_type -> bodhi.StatusReq
-	2,  // 35: bodhi.Menu.removeMenu:input_type -> bodhi.Id
-	2,  // 36: bodhi.Menu.getMenu:input_type -> bodhi.Id
-	21, // 37: bodhi.Menu.getMenuListByPid:input_type -> bodhi.ListMenuReq
-	24, // 38: bodhi.Menu.getMenuListByType:input_type -> bodhi.MenuTypeResp
-	25, // 39: bodhi.Role.insertRole:input_type -> bodhi.RoleReq
-	25, // 40: bodhi.Role.updateRole:input_type -> bodhi.RoleReq
-	5,  // 41: bodhi.Role.updateStatus:input_type -> bodhi.UuidStatusReq
-	3,  // 42: bodhi.Role.removeRole:input_type -> bodhi.Uuid
-	3,  // 43: bodhi.Role.getRole:input_type -> bodhi.Uuid
-	6,  // 44: bodhi.Role.listRole:input_type -> bodhi.PageReq
-	0,  // 45: bodhi.Role.getList:input_type -> bodhi.Empty
-	29, // 46: bodhi.Account.login:input_type -> bodhi.LoginReq
-	33, // 47: bodhi.Account.register:input_type -> bodhi.RegisterReq
-	34, // 48: bodhi.Account.refreshToken:input_type -> bodhi.TokenReq
-	36, // 49: bodhi.Account.setPassword:input_type -> bodhi.PasswordReq
-	3,  // 50: bodhi.Account.getPermission:input_type -> bodhi.Uuid
-	38, // 51: bodhi.User.insertUser:input_type -> bodhi.NewUserReq
-	39, // 52: bodhi.User.updateUser:input_type -> bodhi.UserReq
-	3,  // 53: bodhi.User.updateStatus:input_type -> bodhi.Uuid
-	42, // 54: bodhi.User.updatePassword:input_type -> bodhi.UserPasswordReq
-	3,  // 55: bodhi.User.removeUser:input_type -> bodhi.Uuid
-	3,  // 56: bodhi.User.getUser:input_type -> bodhi.Uuid
-	6,  // 57: bodhi.User.listUser:input_type -> bodhi.PageReq
-	43, // 58: bodhi.UserRole.insertUserRole:input_type -> bodhi.UserRoleReq
-	44, // 59: bodhi.UserRole.updateUserRole:input_type -> bodhi.UpdateUserRoleReq
-	2,  // 60: bodhi.UserRole.removeUserRole:input_type -> bodhi.Id
-	3,  // 61: bodhi.UserRole.getUserRoles:input_type -> bodhi.Uuid
-	1,  // 62: bodhi.Media.insertMedia:output_type -> bodhi.AffectedResp
-	1,  // 63: bodhi.Media.updateMedia:output_type -> bodhi.AffectedResp
-	8,  // 64: bodhi.Media.getMedia:output_type -> bodhi.MediaUnit
-	1,  // 65: bodhi.Media.removeMedia:output_type -> bodhi.AffectedResp
-	9,  // 66: bodhi.Media.listMedia:output_type -> bodhi.ListMediaResp
-	1,  // 67: bodhi.NodeGroup.insertNodeGroup:output_type -> bodhi.AffectedResp
-	1,  // 68: bodhi.NodeGroup.updateNodeGroup:output_type -> bodhi.AffectedResp
-	1,  // 69: bodhi.NodeGroup.removeNodeGroup:output_type -> bodhi.AffectedResp
-	11, // 70: bodhi.NodeGroup.getNodeGroup:output_type -> bodhi.NodeGroupUnit
-	12, // 71: bodhi.NodeGroup.getNodeGroupList:output_type -> bodhi.NodeGroupList
-	1,  // 72: bodhi.Node.insertNode:output_type -> bodhi.AffectedResp
-	1,  // 73: bodhi.Node.updateNode:output_type -> bodhi.AffectedResp
-	1,  // 74: bodhi.Node.updateStatus:output_type -> bodhi.AffectedResp
-	1,  // 75: bodhi.Node.removeNode:output_type -> bodhi.AffectedResp
-	14, // 76: bodhi.Node.getNode:output_type -> bodhi.NodeUnit
-	15, // 77: bodhi.Node.getList:output_type -> bodhi.NodeListResp
-	15, // 78: bodhi.Node.getNodeListByGid:output_type -> bodhi.NodeListResp
-	16, // 79: bodhi.Node.listNode:output_type -> bodhi.ListNodeResp
-	1,  // 80: bodhi.Node.batchMove:output_type -> bodhi.AffectedResp
-	1,  // 81: bodhi.Node.batchRemove:output_type -> bodhi.AffectedResp
-	1,  // 82: bodhi.Menu.insertMenu:output_type -> bodhi.AffectedResp
-	1,  // 83: bodhi.Menu.updateMenu:output_type -> bodhi.AffectedResp
-	1,  // 84: bodhi.Menu.updateStatus:output_type -> bodhi.AffectedResp
-	1,  // 85: bodhi.Menu.removeMenu:output_type -> bodhi.AffectedResp
-	20, // 86: bodhi.Menu.getMenu:output_type -> bodhi.MenuResp
-	23, // 87: bodhi.Menu.getMenuListByPid:output_type -> bodhi.MenuListResp
-	23, // 88: bodhi.Menu.getMenuListByType:output_type -> bodhi.MenuListResp
-	1,  // 89: bodhi.Role.insertRole:output_type -> bodhi.AffectedResp
-	1,  // 90: bodhi.Role.updateRole:output_type -> bodhi.AffectedResp
-	1,  // 91: bodhi.Role.updateStatus:output_type -> bodhi.AffectedResp
-	1,  // 92: bodhi.Role.removeRole:output_type -> bodhi.AffectedResp
-	26, // 93: bodhi.Role.getRole:output_type -> bodhi.RoleUnit
-	27, // 94: bodhi.Role.listRole:output_type -> bodhi.ListRoleResp
-	28, // 95: bodhi.Role.getList:output_type -> bodhi.RoleListResp
-	32, // 96: bodhi.Account.login:output_type -> bodhi.LoginResp
-	1,  // 97: bodhi.Account.register:output_type -> bodhi.AffectedResp
-	35, // 98: bodhi.Account.refreshToken:output_type -> bodhi.TokenResp
-	1,  // 99: bodhi.Account.setPassword:output_type -> bodhi.AffectedResp
-	37, // 100: bodhi.Account.getPermission:output_type -> bodhi.PermissionResp
-	1,  // 101: bodhi.User.insertUser:output_type -> bodhi.AffectedResp
-	1,  // 102: bodhi.User.updateUser:output_type -> bodhi.AffectedResp
-	1,  // 103: bodhi.User.updateStatus:output_type -> bodhi.AffectedResp
-	1,  // 104: bodhi.User.updatePassword:output_type -> bodhi.AffectedResp
-	1,  // 105: bodhi.User.removeUser:output_type -> bodhi.AffectedResp
-	40, // 106: bodhi.User.getUser:output_type -> bodhi.UserUnit
-	41, // 107: bodhi.User.listUser:output_type -> bodhi.ListUserResp
-	1,  // 108: bodhi.UserRole.insertUserRole:output_type -> bodhi.AffectedResp
-	1,  // 109: bodhi.UserRole.updateUserRole:output_type -> bodhi.AffectedResp
-	1,  // 110: bodhi.UserRole.removeUserRole:output_type -> bodhi.AffectedResp
-	46, // 111: bodhi.UserRole.getUserRoles:output_type -> bodhi.UserRoleListResp
-	62, // [62:112] is the sub-list for method output_type
-	12, // [12:62] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	9,  // 0: bodhi.ListMediaResp.List:type_name -> bodhi.MediaUnit
+	12, // 1: bodhi.NodeGroupList.List:type_name -> bodhi.NodeGroupUnit
+	15, // 2: bodhi.NodeListResp.List:type_name -> bodhi.NodeUnit
+	15, // 3: bodhi.ListNodeResp.List:type_name -> bodhi.NodeUnit
+	23, // 4: bodhi.MenuListResp.List:type_name -> bodhi.MenuUnit
+	27, // 5: bodhi.ListRoleResp.List:type_name -> bodhi.RoleUnit
+	27, // 6: bodhi.RoleListResp.List:type_name -> bodhi.RoleUnit
+	32, // 7: bodhi.LoginResp.User:type_name -> bodhi.UserResp
+	31, // 8: bodhi.LoginResp.Token:type_name -> bodhi.TokenUnit
+	31, // 9: bodhi.TokenResp.Token:type_name -> bodhi.TokenUnit
+	41, // 10: bodhi.ListUserResp.List:type_name -> bodhi.UserUnit
+	46, // 11: bodhi.UserRoleListResp.List:type_name -> bodhi.UserRoleUnit
+	49, // 12: bodhi.ListCategoryResp.List:type_name -> bodhi.CategoryUnit
+	7,  // 13: bodhi.Media.insertMedia:input_type -> bodhi.MediaReq
+	7,  // 14: bodhi.Media.updateMedia:input_type -> bodhi.MediaReq
+	8,  // 15: bodhi.Media.updateMediaTitle:input_type -> bodhi.MediaTitleReq
+	2,  // 16: bodhi.Media.getMedia:input_type -> bodhi.Id
+	2,  // 17: bodhi.Media.removeMedia:input_type -> bodhi.Id
+	6,  // 18: bodhi.Media.listMedia:input_type -> bodhi.PageReq
+	11, // 19: bodhi.NodeGroup.insertNodeGroup:input_type -> bodhi.NodeGroupReq
+	11, // 20: bodhi.NodeGroup.updateNodeGroup:input_type -> bodhi.NodeGroupReq
+	2,  // 21: bodhi.NodeGroup.removeNodeGroup:input_type -> bodhi.Id
+	2,  // 22: bodhi.NodeGroup.getNodeGroup:input_type -> bodhi.Id
+	0,  // 23: bodhi.NodeGroup.getNodeGroupList:input_type -> bodhi.Empty
+	14, // 24: bodhi.Node.insertNode:input_type -> bodhi.NodeReq
+	14, // 25: bodhi.Node.updateNode:input_type -> bodhi.NodeReq
+	2,  // 26: bodhi.Node.updateStatus:input_type -> bodhi.Id
+	2,  // 27: bodhi.Node.removeNode:input_type -> bodhi.Id
+	2,  // 28: bodhi.Node.getNode:input_type -> bodhi.Id
+	0,  // 29: bodhi.Node.getList:input_type -> bodhi.Empty
+	2,  // 30: bodhi.Node.getNodeListByGid:input_type -> bodhi.Id
+	6,  // 31: bodhi.Node.listNode:input_type -> bodhi.PageReq
+	18, // 32: bodhi.Node.batchMove:input_type -> bodhi.MoveReq
+	19, // 33: bodhi.Node.batchRemove:input_type -> bodhi.BatchIdsReq
+	20, // 34: bodhi.Menu.insertMenu:input_type -> bodhi.MenuReq
+	20, // 35: bodhi.Menu.updateMenu:input_type -> bodhi.MenuReq
+	4,  // 36: bodhi.Menu.updateStatus:input_type -> bodhi.StatusReq
+	2,  // 37: bodhi.Menu.removeMenu:input_type -> bodhi.Id
+	2,  // 38: bodhi.Menu.getMenu:input_type -> bodhi.Id
+	22, // 39: bodhi.Menu.getMenuListByPid:input_type -> bodhi.ListMenuReq
+	25, // 40: bodhi.Menu.getMenuListByType:input_type -> bodhi.MenuTypeResp
+	26, // 41: bodhi.Role.insertRole:input_type -> bodhi.RoleReq
+	26, // 42: bodhi.Role.updateRole:input_type -> bodhi.RoleReq
+	5,  // 43: bodhi.Role.updateStatus:input_type -> bodhi.UuidStatusReq
+	3,  // 44: bodhi.Role.removeRole:input_type -> bodhi.Uuid
+	3,  // 45: bodhi.Role.getRole:input_type -> bodhi.Uuid
+	6,  // 46: bodhi.Role.listRole:input_type -> bodhi.PageReq
+	0,  // 47: bodhi.Role.getList:input_type -> bodhi.Empty
+	30, // 48: bodhi.Account.login:input_type -> bodhi.LoginReq
+	34, // 49: bodhi.Account.register:input_type -> bodhi.RegisterReq
+	35, // 50: bodhi.Account.refreshToken:input_type -> bodhi.TokenReq
+	37, // 51: bodhi.Account.setPassword:input_type -> bodhi.PasswordReq
+	3,  // 52: bodhi.Account.getPermission:input_type -> bodhi.Uuid
+	39, // 53: bodhi.User.insertUser:input_type -> bodhi.NewUserReq
+	40, // 54: bodhi.User.updateUser:input_type -> bodhi.UserReq
+	3,  // 55: bodhi.User.updateStatus:input_type -> bodhi.Uuid
+	43, // 56: bodhi.User.updatePassword:input_type -> bodhi.UserPasswordReq
+	3,  // 57: bodhi.User.removeUser:input_type -> bodhi.Uuid
+	3,  // 58: bodhi.User.getUser:input_type -> bodhi.Uuid
+	6,  // 59: bodhi.User.listUser:input_type -> bodhi.PageReq
+	44, // 60: bodhi.UserRole.insertUserRole:input_type -> bodhi.UserRoleReq
+	45, // 61: bodhi.UserRole.updateUserRole:input_type -> bodhi.UpdateUserRoleReq
+	2,  // 62: bodhi.UserRole.removeUserRole:input_type -> bodhi.Id
+	3,  // 63: bodhi.UserRole.getUserRoles:input_type -> bodhi.Uuid
+	48, // 64: bodhi.Category.insertCategory:input_type -> bodhi.CategoryReq
+	48, // 65: bodhi.Category.updateCategory:input_type -> bodhi.CategoryReq
+	2,  // 66: bodhi.Category.updateStatus:input_type -> bodhi.Id
+	2,  // 67: bodhi.Category.removeCategory:input_type -> bodhi.Id
+	2,  // 68: bodhi.Category.getCategory:input_type -> bodhi.Id
+	0,  // 69: bodhi.Category.getList:input_type -> bodhi.Empty
+	2,  // 70: bodhi.Category.getListByParent:input_type -> bodhi.Id
+	51, // 71: bodhi.Category.getListByClass:input_type -> bodhi.ClassReq
+	1,  // 72: bodhi.Media.insertMedia:output_type -> bodhi.AffectedResp
+	1,  // 73: bodhi.Media.updateMedia:output_type -> bodhi.AffectedResp
+	1,  // 74: bodhi.Media.updateMediaTitle:output_type -> bodhi.AffectedResp
+	9,  // 75: bodhi.Media.getMedia:output_type -> bodhi.MediaUnit
+	1,  // 76: bodhi.Media.removeMedia:output_type -> bodhi.AffectedResp
+	10, // 77: bodhi.Media.listMedia:output_type -> bodhi.ListMediaResp
+	1,  // 78: bodhi.NodeGroup.insertNodeGroup:output_type -> bodhi.AffectedResp
+	1,  // 79: bodhi.NodeGroup.updateNodeGroup:output_type -> bodhi.AffectedResp
+	1,  // 80: bodhi.NodeGroup.removeNodeGroup:output_type -> bodhi.AffectedResp
+	12, // 81: bodhi.NodeGroup.getNodeGroup:output_type -> bodhi.NodeGroupUnit
+	13, // 82: bodhi.NodeGroup.getNodeGroupList:output_type -> bodhi.NodeGroupList
+	1,  // 83: bodhi.Node.insertNode:output_type -> bodhi.AffectedResp
+	1,  // 84: bodhi.Node.updateNode:output_type -> bodhi.AffectedResp
+	1,  // 85: bodhi.Node.updateStatus:output_type -> bodhi.AffectedResp
+	1,  // 86: bodhi.Node.removeNode:output_type -> bodhi.AffectedResp
+	15, // 87: bodhi.Node.getNode:output_type -> bodhi.NodeUnit
+	16, // 88: bodhi.Node.getList:output_type -> bodhi.NodeListResp
+	16, // 89: bodhi.Node.getNodeListByGid:output_type -> bodhi.NodeListResp
+	17, // 90: bodhi.Node.listNode:output_type -> bodhi.ListNodeResp
+	1,  // 91: bodhi.Node.batchMove:output_type -> bodhi.AffectedResp
+	1,  // 92: bodhi.Node.batchRemove:output_type -> bodhi.AffectedResp
+	1,  // 93: bodhi.Menu.insertMenu:output_type -> bodhi.AffectedResp
+	1,  // 94: bodhi.Menu.updateMenu:output_type -> bodhi.AffectedResp
+	1,  // 95: bodhi.Menu.updateStatus:output_type -> bodhi.AffectedResp
+	1,  // 96: bodhi.Menu.removeMenu:output_type -> bodhi.AffectedResp
+	21, // 97: bodhi.Menu.getMenu:output_type -> bodhi.MenuResp
+	24, // 98: bodhi.Menu.getMenuListByPid:output_type -> bodhi.MenuListResp
+	24, // 99: bodhi.Menu.getMenuListByType:output_type -> bodhi.MenuListResp
+	1,  // 100: bodhi.Role.insertRole:output_type -> bodhi.AffectedResp
+	1,  // 101: bodhi.Role.updateRole:output_type -> bodhi.AffectedResp
+	1,  // 102: bodhi.Role.updateStatus:output_type -> bodhi.AffectedResp
+	1,  // 103: bodhi.Role.removeRole:output_type -> bodhi.AffectedResp
+	27, // 104: bodhi.Role.getRole:output_type -> bodhi.RoleUnit
+	28, // 105: bodhi.Role.listRole:output_type -> bodhi.ListRoleResp
+	29, // 106: bodhi.Role.getList:output_type -> bodhi.RoleListResp
+	33, // 107: bodhi.Account.login:output_type -> bodhi.LoginResp
+	1,  // 108: bodhi.Account.register:output_type -> bodhi.AffectedResp
+	36, // 109: bodhi.Account.refreshToken:output_type -> bodhi.TokenResp
+	1,  // 110: bodhi.Account.setPassword:output_type -> bodhi.AffectedResp
+	38, // 111: bodhi.Account.getPermission:output_type -> bodhi.PermissionResp
+	1,  // 112: bodhi.User.insertUser:output_type -> bodhi.AffectedResp
+	1,  // 113: bodhi.User.updateUser:output_type -> bodhi.AffectedResp
+	1,  // 114: bodhi.User.updateStatus:output_type -> bodhi.AffectedResp
+	1,  // 115: bodhi.User.updatePassword:output_type -> bodhi.AffectedResp
+	1,  // 116: bodhi.User.removeUser:output_type -> bodhi.AffectedResp
+	41, // 117: bodhi.User.getUser:output_type -> bodhi.UserUnit
+	42, // 118: bodhi.User.listUser:output_type -> bodhi.ListUserResp
+	1,  // 119: bodhi.UserRole.insertUserRole:output_type -> bodhi.AffectedResp
+	1,  // 120: bodhi.UserRole.updateUserRole:output_type -> bodhi.AffectedResp
+	1,  // 121: bodhi.UserRole.removeUserRole:output_type -> bodhi.AffectedResp
+	47, // 122: bodhi.UserRole.getUserRoles:output_type -> bodhi.UserRoleListResp
+	1,  // 123: bodhi.Category.insertCategory:output_type -> bodhi.AffectedResp
+	1,  // 124: bodhi.Category.updateCategory:output_type -> bodhi.AffectedResp
+	1,  // 125: bodhi.Category.updateStatus:output_type -> bodhi.AffectedResp
+	1,  // 126: bodhi.Category.removeCategory:output_type -> bodhi.AffectedResp
+	49, // 127: bodhi.Category.getCategory:output_type -> bodhi.CategoryUnit
+	50, // 128: bodhi.Category.getList:output_type -> bodhi.ListCategoryResp
+	50, // 129: bodhi.Category.getListByParent:output_type -> bodhi.ListCategoryResp
+	50, // 130: bodhi.Category.getListByClass:output_type -> bodhi.ListCategoryResp
+	72, // [72:131] is the sub-list for method output_type
+	13, // [13:72] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_admin_proto_init() }
@@ -3591,9 +3963,9 @@ func file_admin_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_admin_proto_rawDesc), len(file_admin_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   47,
+			NumMessages:   52,
 			NumExtensions: 0,
-			NumServices:   8,
+			NumServices:   9,
 		},
 		GoTypes:           file_admin_proto_goTypes,
 		DependencyIndexes: file_admin_proto_depIdxs,

@@ -24,12 +24,13 @@ func NewRemoveMediaLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Remov
 }
 
 func (l *RemoveMediaLogic) RemoveMedia(in *admin.Id) (*admin.AffectedResp, error) {
+	affected := false
 	err := l.svcCtx.MediaModel.Delete(l.ctx, in.Id)
 
-	if err != nil {
-		return nil, err
+	if err == nil {
+		affected = true
 	}
 	return &admin.AffectedResp{
-		Affected: true,
-	}, nil
+		Affected: affected,
+	}, err
 }

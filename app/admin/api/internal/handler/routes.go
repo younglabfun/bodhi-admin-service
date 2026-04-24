@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	account "bodhiadmin/app/admin/api/internal/handler/account"
+	category "bodhiadmin/app/admin/api/internal/handler/category"
 	media "bodhiadmin/app/admin/api/internal/handler/media"
 	menu "bodhiadmin/app/admin/api/internal/handler/menu"
 	node "bodhiadmin/app/admin/api/internal/handler/node"
@@ -25,6 +26,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: media.UploadHandler(serverCtx),
 			},
 		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/media"),
 	)
 
@@ -39,6 +41,26 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Method:  http.MethodGet,
 				Path:    "/get/:id",
 				Handler: media.GetMediaHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/image/:id",
+				Handler: media.GetImageHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/thumbnail/:id",
+				Handler: media.RebuildThumbnailHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/update",
+				Handler: media.UpdateMediaHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/remove",
+				Handler: media.RemoveMediaHandler(serverCtx),
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
@@ -326,5 +348,47 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/v1/user"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/insert",
+				Handler: category.InsertCategoryHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/update",
+				Handler: category.UpdateCategoryHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/update-status",
+				Handler: category.UpdateCategoryStatusHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/remove",
+				Handler: category.RemoveCategoryHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/get-list",
+				Handler: category.GetChildrenHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/list",
+				Handler: category.ListCategoryHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/:id",
+				Handler: category.GetCategoryHandler(serverCtx),
+			},
+		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/v1/category"),
 	)
 }

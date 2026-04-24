@@ -11,20 +11,21 @@ info (
 type (
     CategoryReq {
         Id int64 `json:"id,optional"`
-        Type int64 `json:"type"`
         ParentId int64 `json:"parentId"`
-        Name string `json:"name"`
+        Title string `json:"title"`
+        Class string `json:"class,optional"`
         Sort int64 `json:"sort"`
-        IsEnabled int64 `json:"isEnabled"`
     }
     CategoryUnit {
+
         Id int64 `json:"id"`
-        Type int64 `json:"type"`
         ParentId int64 `json:"parentId"`
-        Name string `json:"name"`
+        Class string `json:"class"`
+        Title string `json:"title"`
         Sort int64 `json:"sort"`
         IsEnabled int64 `json:"isEnabled"`
-        CreatedAt string `json:"createdAt"`
+//        CreatedAt string `json:"createdAt"`
+        hasChildren bool `json:"hasChildren"`
     }
     CategoryListResp {
         List []*CategoryUnit `json:"list"`
@@ -37,7 +38,7 @@ type (
     prefix: /api/v1/category
 )
 
-service adminapi-api {
+service admin-api {
     @handler insertCategory
     post /insert (CategoryReq) returns (AffectedResp)
 
@@ -45,13 +46,16 @@ service adminapi-api {
     post /update (CategoryReq) returns (AffectedResp)
 
     @handler updateCategoryStatus
-    post /updateStatus (IdReq) returns (AffectedResp)
+    post /update-status (IdReq) returns (AffectedResp)
 
     @handler removeCategory
     post /remove (IdReq) returns (AffectedResp)
 
     @handler getChildren
-    get /getChildren(Id) returns (CategoryListResp)
+    get /get-list(Id) returns (CategoryListResp)
+
+    @handler listCategory
+    get /list returns (CategoryListResp)
 
     @handler getCategory
     get /:id (IdPath) returns (CategoryUnit)
