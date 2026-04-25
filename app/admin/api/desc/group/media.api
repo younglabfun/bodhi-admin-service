@@ -16,9 +16,8 @@ type (
         Type        string `json:"type"`
         Size        int64 `json:"size"`
         Meta        string `json:"meta"`
-        Path         string  `json:"path"`
-        Mini         string  `json:"mini"`
-        Preview         string  `json:"preview"`
+        Path        string  `json:"path"`
+        Thumbnails  []string  `json:"thumbnails"`
         CreatedAt  	string `json:"createdAt"`
     }
     ListMediaResp{
@@ -59,7 +58,7 @@ service admin-api {
     get /image/:id (IdPath) returns (MediaUnit)
 
     @handler rebuildThumbnail
-    get /thumbnail/:id (IdPath) returns (AffectedResp)
+    get /rebuild/:id (IdPath) returns (AffectedResp)
 
     @handler updateMedia
     post /update (MediaReq) returns (AffectedResp)

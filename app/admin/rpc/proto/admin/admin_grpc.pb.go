@@ -2835,3 +2835,295 @@ var Category_ServiceDesc = grpc.ServiceDesc{
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "admin.proto",
 }
+
+const (
+	Article_InsertArticle_FullMethodName = "/bodhi.Article/insertArticle"
+	Article_UpdateArticle_FullMethodName = "/bodhi.Article/updateArticle"
+	Article_UpdateStatus_FullMethodName  = "/bodhi.Article/updateStatus"
+	Article_RemoveArticle_FullMethodName = "/bodhi.Article/removeArticle"
+	Article_GetArticle_FullMethodName    = "/bodhi.Article/getArticle"
+	Article_ListArticle_FullMethodName   = "/bodhi.Article/listArticle"
+)
+
+// ArticleClient is the client API for Article service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type ArticleClient interface {
+	InsertArticle(ctx context.Context, in *ArticleUnit, opts ...grpc.CallOption) (*AffectedResp, error)
+	UpdateArticle(ctx context.Context, in *ArticleUnit, opts ...grpc.CallOption) (*AffectedResp, error)
+	UpdateStatus(ctx context.Context, in *StatusReq, opts ...grpc.CallOption) (*AffectedResp, error)
+	RemoveArticle(ctx context.Context, in *Id, opts ...grpc.CallOption) (*AffectedResp, error)
+	GetArticle(ctx context.Context, in *Id, opts ...grpc.CallOption) (*ArticleUnit, error)
+	ListArticle(ctx context.Context, in *PageReq, opts ...grpc.CallOption) (*ListArticleResp, error)
+}
+
+type articleClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewArticleClient(cc grpc.ClientConnInterface) ArticleClient {
+	return &articleClient{cc}
+}
+
+func (c *articleClient) InsertArticle(ctx context.Context, in *ArticleUnit, opts ...grpc.CallOption) (*AffectedResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AffectedResp)
+	err := c.cc.Invoke(ctx, Article_InsertArticle_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *articleClient) UpdateArticle(ctx context.Context, in *ArticleUnit, opts ...grpc.CallOption) (*AffectedResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AffectedResp)
+	err := c.cc.Invoke(ctx, Article_UpdateArticle_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *articleClient) UpdateStatus(ctx context.Context, in *StatusReq, opts ...grpc.CallOption) (*AffectedResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AffectedResp)
+	err := c.cc.Invoke(ctx, Article_UpdateStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *articleClient) RemoveArticle(ctx context.Context, in *Id, opts ...grpc.CallOption) (*AffectedResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AffectedResp)
+	err := c.cc.Invoke(ctx, Article_RemoveArticle_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *articleClient) GetArticle(ctx context.Context, in *Id, opts ...grpc.CallOption) (*ArticleUnit, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ArticleUnit)
+	err := c.cc.Invoke(ctx, Article_GetArticle_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *articleClient) ListArticle(ctx context.Context, in *PageReq, opts ...grpc.CallOption) (*ListArticleResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListArticleResp)
+	err := c.cc.Invoke(ctx, Article_ListArticle_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ArticleServer is the server API for Article service.
+// All implementations must embed UnimplementedArticleServer
+// for forward compatibility.
+type ArticleServer interface {
+	InsertArticle(context.Context, *ArticleUnit) (*AffectedResp, error)
+	UpdateArticle(context.Context, *ArticleUnit) (*AffectedResp, error)
+	UpdateStatus(context.Context, *StatusReq) (*AffectedResp, error)
+	RemoveArticle(context.Context, *Id) (*AffectedResp, error)
+	GetArticle(context.Context, *Id) (*ArticleUnit, error)
+	ListArticle(context.Context, *PageReq) (*ListArticleResp, error)
+	mustEmbedUnimplementedArticleServer()
+}
+
+// UnimplementedArticleServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedArticleServer struct{}
+
+func (UnimplementedArticleServer) InsertArticle(context.Context, *ArticleUnit) (*AffectedResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method InsertArticle not implemented")
+}
+func (UnimplementedArticleServer) UpdateArticle(context.Context, *ArticleUnit) (*AffectedResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateArticle not implemented")
+}
+func (UnimplementedArticleServer) UpdateStatus(context.Context, *StatusReq) (*AffectedResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateStatus not implemented")
+}
+func (UnimplementedArticleServer) RemoveArticle(context.Context, *Id) (*AffectedResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveArticle not implemented")
+}
+func (UnimplementedArticleServer) GetArticle(context.Context, *Id) (*ArticleUnit, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetArticle not implemented")
+}
+func (UnimplementedArticleServer) ListArticle(context.Context, *PageReq) (*ListArticleResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListArticle not implemented")
+}
+func (UnimplementedArticleServer) mustEmbedUnimplementedArticleServer() {}
+func (UnimplementedArticleServer) testEmbeddedByValue()                 {}
+
+// UnsafeArticleServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ArticleServer will
+// result in compilation errors.
+type UnsafeArticleServer interface {
+	mustEmbedUnimplementedArticleServer()
+}
+
+func RegisterArticleServer(s grpc.ServiceRegistrar, srv ArticleServer) {
+	// If the following call pancis, it indicates UnimplementedArticleServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&Article_ServiceDesc, srv)
+}
+
+func _Article_InsertArticle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ArticleUnit)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ArticleServer).InsertArticle(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Article_InsertArticle_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ArticleServer).InsertArticle(ctx, req.(*ArticleUnit))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Article_UpdateArticle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ArticleUnit)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ArticleServer).UpdateArticle(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Article_UpdateArticle_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ArticleServer).UpdateArticle(ctx, req.(*ArticleUnit))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Article_UpdateStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ArticleServer).UpdateStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Article_UpdateStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ArticleServer).UpdateStatus(ctx, req.(*StatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Article_RemoveArticle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ArticleServer).RemoveArticle(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Article_RemoveArticle_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ArticleServer).RemoveArticle(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Article_GetArticle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ArticleServer).GetArticle(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Article_GetArticle_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ArticleServer).GetArticle(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Article_ListArticle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PageReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ArticleServer).ListArticle(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Article_ListArticle_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ArticleServer).ListArticle(ctx, req.(*PageReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// Article_ServiceDesc is the grpc.ServiceDesc for Article service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var Article_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "bodhi.Article",
+	HandlerType: (*ArticleServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "insertArticle",
+			Handler:    _Article_InsertArticle_Handler,
+		},
+		{
+			MethodName: "updateArticle",
+			Handler:    _Article_UpdateArticle_Handler,
+		},
+		{
+			MethodName: "updateStatus",
+			Handler:    _Article_UpdateStatus_Handler,
+		},
+		{
+			MethodName: "removeArticle",
+			Handler:    _Article_RemoveArticle_Handler,
+		},
+		{
+			MethodName: "getArticle",
+			Handler:    _Article_GetArticle_Handler,
+		},
+		{
+			MethodName: "listArticle",
+			Handler:    _Article_ListArticle_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "admin.proto",
+}

@@ -6,7 +6,6 @@ import (
 	"bodhiadmin/app/admin/rpc/proto/admin"
 	"bodhiadmin/common/utils"
 	"context"
-
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -32,12 +31,10 @@ func (l *RebuildThumbnailLogic) RebuildThumbnail(req *types.IdPath) (resp *types
 		return nil, err
 	}
 	affected := false
-	filename, err := utils.GetFilename(data.Filename)
+	//fmt.Println("get filename ", filename)
+	err = utils.DoProcessImage(data.Path, l.svcCtx.Config.AdminConf.UploadPath)
 	if err == nil {
-		err = utils.DoProcessImage(filename, l.svcCtx.Config.AdminConf.UploadPath)
-		if err == nil {
-			affected = true
-		}
+		affected = true
 	}
 
 	return &types.AffectedResp{

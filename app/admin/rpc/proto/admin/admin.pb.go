@@ -3412,6 +3412,310 @@ func (x *ClassReq) GetClass() string {
 	return ""
 }
 
+type ArticleUnit struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=Id,proto3" json:"Id"`
+	Slug          string                 `protobuf:"bytes,2,opt,name=Slug,proto3" json:"Slug"`
+	Title         string                 `protobuf:"bytes,3,opt,name=Title,proto3" json:"Title"`
+	Author        string                 `protobuf:"bytes,4,opt,name=Author,proto3" json:"Author"`
+	Content       string                 `protobuf:"bytes,5,opt,name=Content,proto3" json:"Content"`
+	CoverImg      string                 `protobuf:"bytes,6,opt,name=CoverImg,proto3" json:"CoverImg"`
+	CategoryIds   []int64                `protobuf:"varint,7,rep,packed,name=CategoryIds,proto3" json:"CategoryIds"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ArticleUnit) Reset() {
+	*x = ArticleUnit{}
+	mi := &file_admin_proto_msgTypes[52]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ArticleUnit) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ArticleUnit) ProtoMessage() {}
+
+func (x *ArticleUnit) ProtoReflect() protoreflect.Message {
+	mi := &file_admin_proto_msgTypes[52]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ArticleUnit.ProtoReflect.Descriptor instead.
+func (*ArticleUnit) Descriptor() ([]byte, []int) {
+	return file_admin_proto_rawDescGZIP(), []int{52}
+}
+
+func (x *ArticleUnit) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *ArticleUnit) GetSlug() string {
+	if x != nil {
+		return x.Slug
+	}
+	return ""
+}
+
+func (x *ArticleUnit) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *ArticleUnit) GetAuthor() string {
+	if x != nil {
+		return x.Author
+	}
+	return ""
+}
+
+func (x *ArticleUnit) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
+func (x *ArticleUnit) GetCoverImg() string {
+	if x != nil {
+		return x.CoverImg
+	}
+	return ""
+}
+
+func (x *ArticleUnit) GetCategoryIds() []int64 {
+	if x != nil {
+		return x.CategoryIds
+	}
+	return nil
+}
+
+type ArticleCategory struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=Id,proto3" json:"Id"`
+	Name          string                 `protobuf:"bytes,2,opt,name=Name,proto3" json:"Name"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ArticleCategory) Reset() {
+	*x = ArticleCategory{}
+	mi := &file_admin_proto_msgTypes[53]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ArticleCategory) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ArticleCategory) ProtoMessage() {}
+
+func (x *ArticleCategory) ProtoReflect() protoreflect.Message {
+	mi := &file_admin_proto_msgTypes[53]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ArticleCategory.ProtoReflect.Descriptor instead.
+func (*ArticleCategory) Descriptor() ([]byte, []int) {
+	return file_admin_proto_rawDescGZIP(), []int{53}
+}
+
+func (x *ArticleCategory) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *ArticleCategory) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+type ArticleDataUnit struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=Id,proto3" json:"Id"`
+	Slug          string                 `protobuf:"bytes,2,opt,name=Slug,proto3" json:"Slug"`
+	Title         string                 `protobuf:"bytes,3,opt,name=Title,proto3" json:"Title"`
+	IsCommend     int64                  `protobuf:"varint,4,opt,name=IsCommend,proto3" json:"IsCommend"`
+	IsTop         int64                  `protobuf:"varint,5,opt,name=IsTop,proto3" json:"IsTop"`
+	IsEnabled     int64                  `protobuf:"varint,6,opt,name=IsEnabled,proto3" json:"IsEnabled"`
+	Pv            int64                  `protobuf:"varint,7,opt,name=Pv,proto3" json:"Pv"`
+	CreatedAt     int64                  `protobuf:"varint,8,opt,name=CreatedAt,proto3" json:"CreatedAt"`
+	Categories    []*ArticleCategory     `protobuf:"bytes,9,rep,name=Categories,proto3" json:"Categories"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ArticleDataUnit) Reset() {
+	*x = ArticleDataUnit{}
+	mi := &file_admin_proto_msgTypes[54]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ArticleDataUnit) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ArticleDataUnit) ProtoMessage() {}
+
+func (x *ArticleDataUnit) ProtoReflect() protoreflect.Message {
+	mi := &file_admin_proto_msgTypes[54]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ArticleDataUnit.ProtoReflect.Descriptor instead.
+func (*ArticleDataUnit) Descriptor() ([]byte, []int) {
+	return file_admin_proto_rawDescGZIP(), []int{54}
+}
+
+func (x *ArticleDataUnit) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *ArticleDataUnit) GetSlug() string {
+	if x != nil {
+		return x.Slug
+	}
+	return ""
+}
+
+func (x *ArticleDataUnit) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *ArticleDataUnit) GetIsCommend() int64 {
+	if x != nil {
+		return x.IsCommend
+	}
+	return 0
+}
+
+func (x *ArticleDataUnit) GetIsTop() int64 {
+	if x != nil {
+		return x.IsTop
+	}
+	return 0
+}
+
+func (x *ArticleDataUnit) GetIsEnabled() int64 {
+	if x != nil {
+		return x.IsEnabled
+	}
+	return 0
+}
+
+func (x *ArticleDataUnit) GetPv() int64 {
+	if x != nil {
+		return x.Pv
+	}
+	return 0
+}
+
+func (x *ArticleDataUnit) GetCreatedAt() int64 {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return 0
+}
+
+func (x *ArticleDataUnit) GetCategories() []*ArticleCategory {
+	if x != nil {
+		return x.Categories
+	}
+	return nil
+}
+
+type ListArticleResp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	List          []*ArticleDataUnit     `protobuf:"bytes,1,rep,name=List,proto3" json:"List"`
+	Total         int64                  `protobuf:"varint,2,opt,name=Total,proto3" json:"Total"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListArticleResp) Reset() {
+	*x = ListArticleResp{}
+	mi := &file_admin_proto_msgTypes[55]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListArticleResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListArticleResp) ProtoMessage() {}
+
+func (x *ListArticleResp) ProtoReflect() protoreflect.Message {
+	mi := &file_admin_proto_msgTypes[55]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListArticleResp.ProtoReflect.Descriptor instead.
+func (*ListArticleResp) Descriptor() ([]byte, []int) {
+	return file_admin_proto_rawDescGZIP(), []int{55}
+}
+
+func (x *ListArticleResp) GetList() []*ArticleDataUnit {
+	if x != nil {
+		return x.List
+	}
+	return nil
+}
+
+func (x *ListArticleResp) GetTotal() int64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
 var File_admin_proto protoreflect.FileDescriptor
 
 const file_admin_proto_rawDesc = "" +
@@ -3664,7 +3968,33 @@ const file_admin_proto_rawDesc = "" +
 	"\x10ListCategoryResp\x12'\n" +
 	"\x04List\x18\x01 \x03(\v2\x13.bodhi.CategoryUnitR\x04List\" \n" +
 	"\bClassReq\x12\x14\n" +
-	"\x05Class\x18\x01 \x01(\tR\x05Class2\xbb\x02\n" +
+	"\x05Class\x18\x01 \x01(\tR\x05Class\"\xb7\x01\n" +
+	"\vArticleUnit\x12\x0e\n" +
+	"\x02Id\x18\x01 \x01(\x03R\x02Id\x12\x12\n" +
+	"\x04Slug\x18\x02 \x01(\tR\x04Slug\x12\x14\n" +
+	"\x05Title\x18\x03 \x01(\tR\x05Title\x12\x16\n" +
+	"\x06Author\x18\x04 \x01(\tR\x06Author\x12\x18\n" +
+	"\aContent\x18\x05 \x01(\tR\aContent\x12\x1a\n" +
+	"\bCoverImg\x18\x06 \x01(\tR\bCoverImg\x12 \n" +
+	"\vCategoryIds\x18\a \x03(\x03R\vCategoryIds\"5\n" +
+	"\x0fArticleCategory\x12\x0e\n" +
+	"\x02Id\x18\x01 \x01(\x03R\x02Id\x12\x12\n" +
+	"\x04Name\x18\x02 \x01(\tR\x04Name\"\x83\x02\n" +
+	"\x0fArticleDataUnit\x12\x0e\n" +
+	"\x02Id\x18\x01 \x01(\x03R\x02Id\x12\x12\n" +
+	"\x04Slug\x18\x02 \x01(\tR\x04Slug\x12\x14\n" +
+	"\x05Title\x18\x03 \x01(\tR\x05Title\x12\x1c\n" +
+	"\tIsCommend\x18\x04 \x01(\x03R\tIsCommend\x12\x14\n" +
+	"\x05IsTop\x18\x05 \x01(\x03R\x05IsTop\x12\x1c\n" +
+	"\tIsEnabled\x18\x06 \x01(\x03R\tIsEnabled\x12\x0e\n" +
+	"\x02Pv\x18\a \x01(\x03R\x02Pv\x12\x1c\n" +
+	"\tCreatedAt\x18\b \x01(\x03R\tCreatedAt\x126\n" +
+	"\n" +
+	"Categories\x18\t \x03(\v2\x16.bodhi.ArticleCategoryR\n" +
+	"Categories\"S\n" +
+	"\x0fListArticleResp\x12*\n" +
+	"\x04List\x18\x01 \x03(\v2\x16.bodhi.ArticleDataUnitR\x04List\x12\x14\n" +
+	"\x05Total\x18\x02 \x01(\x03R\x05Total2\xbb\x02\n" +
 	"\x05Media\x123\n" +
 	"\vinsertMedia\x12\x0f.bodhi.MediaReq\x1a\x13.bodhi.AffectedResp\x123\n" +
 	"\vupdateMedia\x12\x0f.bodhi.MediaReq\x1a\x13.bodhi.AffectedResp\x12=\n" +
@@ -3744,7 +4074,15 @@ const file_admin_proto_rawDesc = "" +
 	"\vgetCategory\x12\t.bodhi.Id\x1a\x13.bodhi.CategoryUnit\x120\n" +
 	"\agetList\x12\f.bodhi.Empty\x1a\x17.bodhi.ListCategoryResp\x125\n" +
 	"\x0fgetListByParent\x12\t.bodhi.Id\x1a\x17.bodhi.ListCategoryResp\x12:\n" +
-	"\x0egetListByClass\x12\x0f.bodhi.ClassReq\x1a\x17.bodhi.ListCategoryRespB\tZ\a./adminb\x06proto3"
+	"\x0egetListByClass\x12\x0f.bodhi.ClassReq\x1a\x17.bodhi.ListCategoryResp2\xc9\x02\n" +
+	"\aArticle\x128\n" +
+	"\rinsertArticle\x12\x12.bodhi.ArticleUnit\x1a\x13.bodhi.AffectedResp\x128\n" +
+	"\rupdateArticle\x12\x12.bodhi.ArticleUnit\x1a\x13.bodhi.AffectedResp\x125\n" +
+	"\fupdateStatus\x12\x10.bodhi.StatusReq\x1a\x13.bodhi.AffectedResp\x12/\n" +
+	"\rremoveArticle\x12\t.bodhi.Id\x1a\x13.bodhi.AffectedResp\x12+\n" +
+	"\n" +
+	"getArticle\x12\t.bodhi.Id\x1a\x12.bodhi.ArticleUnit\x125\n" +
+	"\vlistArticle\x12\x0e.bodhi.PageReq\x1a\x16.bodhi.ListArticleRespB\tZ\a./adminb\x06proto3"
 
 var (
 	file_admin_proto_rawDescOnce sync.Once
@@ -3758,7 +4096,7 @@ func file_admin_proto_rawDescGZIP() []byte {
 	return file_admin_proto_rawDescData
 }
 
-var file_admin_proto_msgTypes = make([]protoimpl.MessageInfo, 52)
+var file_admin_proto_msgTypes = make([]protoimpl.MessageInfo, 56)
 var file_admin_proto_goTypes = []any{
 	(*Empty)(nil),             // 0: bodhi.Empty
 	(*AffectedResp)(nil),      // 1: bodhi.AffectedResp
@@ -3812,6 +4150,10 @@ var file_admin_proto_goTypes = []any{
 	(*CategoryUnit)(nil),      // 49: bodhi.CategoryUnit
 	(*ListCategoryResp)(nil),  // 50: bodhi.ListCategoryResp
 	(*ClassReq)(nil),          // 51: bodhi.ClassReq
+	(*ArticleUnit)(nil),       // 52: bodhi.ArticleUnit
+	(*ArticleCategory)(nil),   // 53: bodhi.ArticleCategory
+	(*ArticleDataUnit)(nil),   // 54: bodhi.ArticleDataUnit
+	(*ListArticleResp)(nil),   // 55: bodhi.ListArticleResp
 }
 var file_admin_proto_depIdxs = []int32{
 	9,  // 0: bodhi.ListMediaResp.List:type_name -> bodhi.MediaUnit
@@ -3827,129 +4169,143 @@ var file_admin_proto_depIdxs = []int32{
 	41, // 10: bodhi.ListUserResp.List:type_name -> bodhi.UserUnit
 	46, // 11: bodhi.UserRoleListResp.List:type_name -> bodhi.UserRoleUnit
 	49, // 12: bodhi.ListCategoryResp.List:type_name -> bodhi.CategoryUnit
-	7,  // 13: bodhi.Media.insertMedia:input_type -> bodhi.MediaReq
-	7,  // 14: bodhi.Media.updateMedia:input_type -> bodhi.MediaReq
-	8,  // 15: bodhi.Media.updateMediaTitle:input_type -> bodhi.MediaTitleReq
-	2,  // 16: bodhi.Media.getMedia:input_type -> bodhi.Id
-	2,  // 17: bodhi.Media.removeMedia:input_type -> bodhi.Id
-	6,  // 18: bodhi.Media.listMedia:input_type -> bodhi.PageReq
-	11, // 19: bodhi.NodeGroup.insertNodeGroup:input_type -> bodhi.NodeGroupReq
-	11, // 20: bodhi.NodeGroup.updateNodeGroup:input_type -> bodhi.NodeGroupReq
-	2,  // 21: bodhi.NodeGroup.removeNodeGroup:input_type -> bodhi.Id
-	2,  // 22: bodhi.NodeGroup.getNodeGroup:input_type -> bodhi.Id
-	0,  // 23: bodhi.NodeGroup.getNodeGroupList:input_type -> bodhi.Empty
-	14, // 24: bodhi.Node.insertNode:input_type -> bodhi.NodeReq
-	14, // 25: bodhi.Node.updateNode:input_type -> bodhi.NodeReq
-	2,  // 26: bodhi.Node.updateStatus:input_type -> bodhi.Id
-	2,  // 27: bodhi.Node.removeNode:input_type -> bodhi.Id
-	2,  // 28: bodhi.Node.getNode:input_type -> bodhi.Id
-	0,  // 29: bodhi.Node.getList:input_type -> bodhi.Empty
-	2,  // 30: bodhi.Node.getNodeListByGid:input_type -> bodhi.Id
-	6,  // 31: bodhi.Node.listNode:input_type -> bodhi.PageReq
-	18, // 32: bodhi.Node.batchMove:input_type -> bodhi.MoveReq
-	19, // 33: bodhi.Node.batchRemove:input_type -> bodhi.BatchIdsReq
-	20, // 34: bodhi.Menu.insertMenu:input_type -> bodhi.MenuReq
-	20, // 35: bodhi.Menu.updateMenu:input_type -> bodhi.MenuReq
-	4,  // 36: bodhi.Menu.updateStatus:input_type -> bodhi.StatusReq
-	2,  // 37: bodhi.Menu.removeMenu:input_type -> bodhi.Id
-	2,  // 38: bodhi.Menu.getMenu:input_type -> bodhi.Id
-	22, // 39: bodhi.Menu.getMenuListByPid:input_type -> bodhi.ListMenuReq
-	25, // 40: bodhi.Menu.getMenuListByType:input_type -> bodhi.MenuTypeResp
-	26, // 41: bodhi.Role.insertRole:input_type -> bodhi.RoleReq
-	26, // 42: bodhi.Role.updateRole:input_type -> bodhi.RoleReq
-	5,  // 43: bodhi.Role.updateStatus:input_type -> bodhi.UuidStatusReq
-	3,  // 44: bodhi.Role.removeRole:input_type -> bodhi.Uuid
-	3,  // 45: bodhi.Role.getRole:input_type -> bodhi.Uuid
-	6,  // 46: bodhi.Role.listRole:input_type -> bodhi.PageReq
-	0,  // 47: bodhi.Role.getList:input_type -> bodhi.Empty
-	30, // 48: bodhi.Account.login:input_type -> bodhi.LoginReq
-	34, // 49: bodhi.Account.register:input_type -> bodhi.RegisterReq
-	35, // 50: bodhi.Account.refreshToken:input_type -> bodhi.TokenReq
-	37, // 51: bodhi.Account.setPassword:input_type -> bodhi.PasswordReq
-	3,  // 52: bodhi.Account.getPermission:input_type -> bodhi.Uuid
-	39, // 53: bodhi.User.insertUser:input_type -> bodhi.NewUserReq
-	40, // 54: bodhi.User.updateUser:input_type -> bodhi.UserReq
-	3,  // 55: bodhi.User.updateStatus:input_type -> bodhi.Uuid
-	43, // 56: bodhi.User.updatePassword:input_type -> bodhi.UserPasswordReq
-	3,  // 57: bodhi.User.removeUser:input_type -> bodhi.Uuid
-	3,  // 58: bodhi.User.getUser:input_type -> bodhi.Uuid
-	6,  // 59: bodhi.User.listUser:input_type -> bodhi.PageReq
-	44, // 60: bodhi.UserRole.insertUserRole:input_type -> bodhi.UserRoleReq
-	45, // 61: bodhi.UserRole.updateUserRole:input_type -> bodhi.UpdateUserRoleReq
-	2,  // 62: bodhi.UserRole.removeUserRole:input_type -> bodhi.Id
-	3,  // 63: bodhi.UserRole.getUserRoles:input_type -> bodhi.Uuid
-	48, // 64: bodhi.Category.insertCategory:input_type -> bodhi.CategoryReq
-	48, // 65: bodhi.Category.updateCategory:input_type -> bodhi.CategoryReq
-	2,  // 66: bodhi.Category.updateStatus:input_type -> bodhi.Id
-	2,  // 67: bodhi.Category.removeCategory:input_type -> bodhi.Id
-	2,  // 68: bodhi.Category.getCategory:input_type -> bodhi.Id
-	0,  // 69: bodhi.Category.getList:input_type -> bodhi.Empty
-	2,  // 70: bodhi.Category.getListByParent:input_type -> bodhi.Id
-	51, // 71: bodhi.Category.getListByClass:input_type -> bodhi.ClassReq
-	1,  // 72: bodhi.Media.insertMedia:output_type -> bodhi.AffectedResp
-	1,  // 73: bodhi.Media.updateMedia:output_type -> bodhi.AffectedResp
-	1,  // 74: bodhi.Media.updateMediaTitle:output_type -> bodhi.AffectedResp
-	9,  // 75: bodhi.Media.getMedia:output_type -> bodhi.MediaUnit
-	1,  // 76: bodhi.Media.removeMedia:output_type -> bodhi.AffectedResp
-	10, // 77: bodhi.Media.listMedia:output_type -> bodhi.ListMediaResp
-	1,  // 78: bodhi.NodeGroup.insertNodeGroup:output_type -> bodhi.AffectedResp
-	1,  // 79: bodhi.NodeGroup.updateNodeGroup:output_type -> bodhi.AffectedResp
-	1,  // 80: bodhi.NodeGroup.removeNodeGroup:output_type -> bodhi.AffectedResp
-	12, // 81: bodhi.NodeGroup.getNodeGroup:output_type -> bodhi.NodeGroupUnit
-	13, // 82: bodhi.NodeGroup.getNodeGroupList:output_type -> bodhi.NodeGroupList
-	1,  // 83: bodhi.Node.insertNode:output_type -> bodhi.AffectedResp
-	1,  // 84: bodhi.Node.updateNode:output_type -> bodhi.AffectedResp
-	1,  // 85: bodhi.Node.updateStatus:output_type -> bodhi.AffectedResp
-	1,  // 86: bodhi.Node.removeNode:output_type -> bodhi.AffectedResp
-	15, // 87: bodhi.Node.getNode:output_type -> bodhi.NodeUnit
-	16, // 88: bodhi.Node.getList:output_type -> bodhi.NodeListResp
-	16, // 89: bodhi.Node.getNodeListByGid:output_type -> bodhi.NodeListResp
-	17, // 90: bodhi.Node.listNode:output_type -> bodhi.ListNodeResp
-	1,  // 91: bodhi.Node.batchMove:output_type -> bodhi.AffectedResp
-	1,  // 92: bodhi.Node.batchRemove:output_type -> bodhi.AffectedResp
-	1,  // 93: bodhi.Menu.insertMenu:output_type -> bodhi.AffectedResp
-	1,  // 94: bodhi.Menu.updateMenu:output_type -> bodhi.AffectedResp
-	1,  // 95: bodhi.Menu.updateStatus:output_type -> bodhi.AffectedResp
-	1,  // 96: bodhi.Menu.removeMenu:output_type -> bodhi.AffectedResp
-	21, // 97: bodhi.Menu.getMenu:output_type -> bodhi.MenuResp
-	24, // 98: bodhi.Menu.getMenuListByPid:output_type -> bodhi.MenuListResp
-	24, // 99: bodhi.Menu.getMenuListByType:output_type -> bodhi.MenuListResp
-	1,  // 100: bodhi.Role.insertRole:output_type -> bodhi.AffectedResp
-	1,  // 101: bodhi.Role.updateRole:output_type -> bodhi.AffectedResp
-	1,  // 102: bodhi.Role.updateStatus:output_type -> bodhi.AffectedResp
-	1,  // 103: bodhi.Role.removeRole:output_type -> bodhi.AffectedResp
-	27, // 104: bodhi.Role.getRole:output_type -> bodhi.RoleUnit
-	28, // 105: bodhi.Role.listRole:output_type -> bodhi.ListRoleResp
-	29, // 106: bodhi.Role.getList:output_type -> bodhi.RoleListResp
-	33, // 107: bodhi.Account.login:output_type -> bodhi.LoginResp
-	1,  // 108: bodhi.Account.register:output_type -> bodhi.AffectedResp
-	36, // 109: bodhi.Account.refreshToken:output_type -> bodhi.TokenResp
-	1,  // 110: bodhi.Account.setPassword:output_type -> bodhi.AffectedResp
-	38, // 111: bodhi.Account.getPermission:output_type -> bodhi.PermissionResp
-	1,  // 112: bodhi.User.insertUser:output_type -> bodhi.AffectedResp
-	1,  // 113: bodhi.User.updateUser:output_type -> bodhi.AffectedResp
-	1,  // 114: bodhi.User.updateStatus:output_type -> bodhi.AffectedResp
-	1,  // 115: bodhi.User.updatePassword:output_type -> bodhi.AffectedResp
-	1,  // 116: bodhi.User.removeUser:output_type -> bodhi.AffectedResp
-	41, // 117: bodhi.User.getUser:output_type -> bodhi.UserUnit
-	42, // 118: bodhi.User.listUser:output_type -> bodhi.ListUserResp
-	1,  // 119: bodhi.UserRole.insertUserRole:output_type -> bodhi.AffectedResp
-	1,  // 120: bodhi.UserRole.updateUserRole:output_type -> bodhi.AffectedResp
-	1,  // 121: bodhi.UserRole.removeUserRole:output_type -> bodhi.AffectedResp
-	47, // 122: bodhi.UserRole.getUserRoles:output_type -> bodhi.UserRoleListResp
-	1,  // 123: bodhi.Category.insertCategory:output_type -> bodhi.AffectedResp
-	1,  // 124: bodhi.Category.updateCategory:output_type -> bodhi.AffectedResp
-	1,  // 125: bodhi.Category.updateStatus:output_type -> bodhi.AffectedResp
-	1,  // 126: bodhi.Category.removeCategory:output_type -> bodhi.AffectedResp
-	49, // 127: bodhi.Category.getCategory:output_type -> bodhi.CategoryUnit
-	50, // 128: bodhi.Category.getList:output_type -> bodhi.ListCategoryResp
-	50, // 129: bodhi.Category.getListByParent:output_type -> bodhi.ListCategoryResp
-	50, // 130: bodhi.Category.getListByClass:output_type -> bodhi.ListCategoryResp
-	72, // [72:131] is the sub-list for method output_type
-	13, // [13:72] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	53, // 13: bodhi.ArticleDataUnit.Categories:type_name -> bodhi.ArticleCategory
+	54, // 14: bodhi.ListArticleResp.List:type_name -> bodhi.ArticleDataUnit
+	7,  // 15: bodhi.Media.insertMedia:input_type -> bodhi.MediaReq
+	7,  // 16: bodhi.Media.updateMedia:input_type -> bodhi.MediaReq
+	8,  // 17: bodhi.Media.updateMediaTitle:input_type -> bodhi.MediaTitleReq
+	2,  // 18: bodhi.Media.getMedia:input_type -> bodhi.Id
+	2,  // 19: bodhi.Media.removeMedia:input_type -> bodhi.Id
+	6,  // 20: bodhi.Media.listMedia:input_type -> bodhi.PageReq
+	11, // 21: bodhi.NodeGroup.insertNodeGroup:input_type -> bodhi.NodeGroupReq
+	11, // 22: bodhi.NodeGroup.updateNodeGroup:input_type -> bodhi.NodeGroupReq
+	2,  // 23: bodhi.NodeGroup.removeNodeGroup:input_type -> bodhi.Id
+	2,  // 24: bodhi.NodeGroup.getNodeGroup:input_type -> bodhi.Id
+	0,  // 25: bodhi.NodeGroup.getNodeGroupList:input_type -> bodhi.Empty
+	14, // 26: bodhi.Node.insertNode:input_type -> bodhi.NodeReq
+	14, // 27: bodhi.Node.updateNode:input_type -> bodhi.NodeReq
+	2,  // 28: bodhi.Node.updateStatus:input_type -> bodhi.Id
+	2,  // 29: bodhi.Node.removeNode:input_type -> bodhi.Id
+	2,  // 30: bodhi.Node.getNode:input_type -> bodhi.Id
+	0,  // 31: bodhi.Node.getList:input_type -> bodhi.Empty
+	2,  // 32: bodhi.Node.getNodeListByGid:input_type -> bodhi.Id
+	6,  // 33: bodhi.Node.listNode:input_type -> bodhi.PageReq
+	18, // 34: bodhi.Node.batchMove:input_type -> bodhi.MoveReq
+	19, // 35: bodhi.Node.batchRemove:input_type -> bodhi.BatchIdsReq
+	20, // 36: bodhi.Menu.insertMenu:input_type -> bodhi.MenuReq
+	20, // 37: bodhi.Menu.updateMenu:input_type -> bodhi.MenuReq
+	4,  // 38: bodhi.Menu.updateStatus:input_type -> bodhi.StatusReq
+	2,  // 39: bodhi.Menu.removeMenu:input_type -> bodhi.Id
+	2,  // 40: bodhi.Menu.getMenu:input_type -> bodhi.Id
+	22, // 41: bodhi.Menu.getMenuListByPid:input_type -> bodhi.ListMenuReq
+	25, // 42: bodhi.Menu.getMenuListByType:input_type -> bodhi.MenuTypeResp
+	26, // 43: bodhi.Role.insertRole:input_type -> bodhi.RoleReq
+	26, // 44: bodhi.Role.updateRole:input_type -> bodhi.RoleReq
+	5,  // 45: bodhi.Role.updateStatus:input_type -> bodhi.UuidStatusReq
+	3,  // 46: bodhi.Role.removeRole:input_type -> bodhi.Uuid
+	3,  // 47: bodhi.Role.getRole:input_type -> bodhi.Uuid
+	6,  // 48: bodhi.Role.listRole:input_type -> bodhi.PageReq
+	0,  // 49: bodhi.Role.getList:input_type -> bodhi.Empty
+	30, // 50: bodhi.Account.login:input_type -> bodhi.LoginReq
+	34, // 51: bodhi.Account.register:input_type -> bodhi.RegisterReq
+	35, // 52: bodhi.Account.refreshToken:input_type -> bodhi.TokenReq
+	37, // 53: bodhi.Account.setPassword:input_type -> bodhi.PasswordReq
+	3,  // 54: bodhi.Account.getPermission:input_type -> bodhi.Uuid
+	39, // 55: bodhi.User.insertUser:input_type -> bodhi.NewUserReq
+	40, // 56: bodhi.User.updateUser:input_type -> bodhi.UserReq
+	3,  // 57: bodhi.User.updateStatus:input_type -> bodhi.Uuid
+	43, // 58: bodhi.User.updatePassword:input_type -> bodhi.UserPasswordReq
+	3,  // 59: bodhi.User.removeUser:input_type -> bodhi.Uuid
+	3,  // 60: bodhi.User.getUser:input_type -> bodhi.Uuid
+	6,  // 61: bodhi.User.listUser:input_type -> bodhi.PageReq
+	44, // 62: bodhi.UserRole.insertUserRole:input_type -> bodhi.UserRoleReq
+	45, // 63: bodhi.UserRole.updateUserRole:input_type -> bodhi.UpdateUserRoleReq
+	2,  // 64: bodhi.UserRole.removeUserRole:input_type -> bodhi.Id
+	3,  // 65: bodhi.UserRole.getUserRoles:input_type -> bodhi.Uuid
+	48, // 66: bodhi.Category.insertCategory:input_type -> bodhi.CategoryReq
+	48, // 67: bodhi.Category.updateCategory:input_type -> bodhi.CategoryReq
+	2,  // 68: bodhi.Category.updateStatus:input_type -> bodhi.Id
+	2,  // 69: bodhi.Category.removeCategory:input_type -> bodhi.Id
+	2,  // 70: bodhi.Category.getCategory:input_type -> bodhi.Id
+	0,  // 71: bodhi.Category.getList:input_type -> bodhi.Empty
+	2,  // 72: bodhi.Category.getListByParent:input_type -> bodhi.Id
+	51, // 73: bodhi.Category.getListByClass:input_type -> bodhi.ClassReq
+	52, // 74: bodhi.Article.insertArticle:input_type -> bodhi.ArticleUnit
+	52, // 75: bodhi.Article.updateArticle:input_type -> bodhi.ArticleUnit
+	4,  // 76: bodhi.Article.updateStatus:input_type -> bodhi.StatusReq
+	2,  // 77: bodhi.Article.removeArticle:input_type -> bodhi.Id
+	2,  // 78: bodhi.Article.getArticle:input_type -> bodhi.Id
+	6,  // 79: bodhi.Article.listArticle:input_type -> bodhi.PageReq
+	1,  // 80: bodhi.Media.insertMedia:output_type -> bodhi.AffectedResp
+	1,  // 81: bodhi.Media.updateMedia:output_type -> bodhi.AffectedResp
+	1,  // 82: bodhi.Media.updateMediaTitle:output_type -> bodhi.AffectedResp
+	9,  // 83: bodhi.Media.getMedia:output_type -> bodhi.MediaUnit
+	1,  // 84: bodhi.Media.removeMedia:output_type -> bodhi.AffectedResp
+	10, // 85: bodhi.Media.listMedia:output_type -> bodhi.ListMediaResp
+	1,  // 86: bodhi.NodeGroup.insertNodeGroup:output_type -> bodhi.AffectedResp
+	1,  // 87: bodhi.NodeGroup.updateNodeGroup:output_type -> bodhi.AffectedResp
+	1,  // 88: bodhi.NodeGroup.removeNodeGroup:output_type -> bodhi.AffectedResp
+	12, // 89: bodhi.NodeGroup.getNodeGroup:output_type -> bodhi.NodeGroupUnit
+	13, // 90: bodhi.NodeGroup.getNodeGroupList:output_type -> bodhi.NodeGroupList
+	1,  // 91: bodhi.Node.insertNode:output_type -> bodhi.AffectedResp
+	1,  // 92: bodhi.Node.updateNode:output_type -> bodhi.AffectedResp
+	1,  // 93: bodhi.Node.updateStatus:output_type -> bodhi.AffectedResp
+	1,  // 94: bodhi.Node.removeNode:output_type -> bodhi.AffectedResp
+	15, // 95: bodhi.Node.getNode:output_type -> bodhi.NodeUnit
+	16, // 96: bodhi.Node.getList:output_type -> bodhi.NodeListResp
+	16, // 97: bodhi.Node.getNodeListByGid:output_type -> bodhi.NodeListResp
+	17, // 98: bodhi.Node.listNode:output_type -> bodhi.ListNodeResp
+	1,  // 99: bodhi.Node.batchMove:output_type -> bodhi.AffectedResp
+	1,  // 100: bodhi.Node.batchRemove:output_type -> bodhi.AffectedResp
+	1,  // 101: bodhi.Menu.insertMenu:output_type -> bodhi.AffectedResp
+	1,  // 102: bodhi.Menu.updateMenu:output_type -> bodhi.AffectedResp
+	1,  // 103: bodhi.Menu.updateStatus:output_type -> bodhi.AffectedResp
+	1,  // 104: bodhi.Menu.removeMenu:output_type -> bodhi.AffectedResp
+	21, // 105: bodhi.Menu.getMenu:output_type -> bodhi.MenuResp
+	24, // 106: bodhi.Menu.getMenuListByPid:output_type -> bodhi.MenuListResp
+	24, // 107: bodhi.Menu.getMenuListByType:output_type -> bodhi.MenuListResp
+	1,  // 108: bodhi.Role.insertRole:output_type -> bodhi.AffectedResp
+	1,  // 109: bodhi.Role.updateRole:output_type -> bodhi.AffectedResp
+	1,  // 110: bodhi.Role.updateStatus:output_type -> bodhi.AffectedResp
+	1,  // 111: bodhi.Role.removeRole:output_type -> bodhi.AffectedResp
+	27, // 112: bodhi.Role.getRole:output_type -> bodhi.RoleUnit
+	28, // 113: bodhi.Role.listRole:output_type -> bodhi.ListRoleResp
+	29, // 114: bodhi.Role.getList:output_type -> bodhi.RoleListResp
+	33, // 115: bodhi.Account.login:output_type -> bodhi.LoginResp
+	1,  // 116: bodhi.Account.register:output_type -> bodhi.AffectedResp
+	36, // 117: bodhi.Account.refreshToken:output_type -> bodhi.TokenResp
+	1,  // 118: bodhi.Account.setPassword:output_type -> bodhi.AffectedResp
+	38, // 119: bodhi.Account.getPermission:output_type -> bodhi.PermissionResp
+	1,  // 120: bodhi.User.insertUser:output_type -> bodhi.AffectedResp
+	1,  // 121: bodhi.User.updateUser:output_type -> bodhi.AffectedResp
+	1,  // 122: bodhi.User.updateStatus:output_type -> bodhi.AffectedResp
+	1,  // 123: bodhi.User.updatePassword:output_type -> bodhi.AffectedResp
+	1,  // 124: bodhi.User.removeUser:output_type -> bodhi.AffectedResp
+	41, // 125: bodhi.User.getUser:output_type -> bodhi.UserUnit
+	42, // 126: bodhi.User.listUser:output_type -> bodhi.ListUserResp
+	1,  // 127: bodhi.UserRole.insertUserRole:output_type -> bodhi.AffectedResp
+	1,  // 128: bodhi.UserRole.updateUserRole:output_type -> bodhi.AffectedResp
+	1,  // 129: bodhi.UserRole.removeUserRole:output_type -> bodhi.AffectedResp
+	47, // 130: bodhi.UserRole.getUserRoles:output_type -> bodhi.UserRoleListResp
+	1,  // 131: bodhi.Category.insertCategory:output_type -> bodhi.AffectedResp
+	1,  // 132: bodhi.Category.updateCategory:output_type -> bodhi.AffectedResp
+	1,  // 133: bodhi.Category.updateStatus:output_type -> bodhi.AffectedResp
+	1,  // 134: bodhi.Category.removeCategory:output_type -> bodhi.AffectedResp
+	49, // 135: bodhi.Category.getCategory:output_type -> bodhi.CategoryUnit
+	50, // 136: bodhi.Category.getList:output_type -> bodhi.ListCategoryResp
+	50, // 137: bodhi.Category.getListByParent:output_type -> bodhi.ListCategoryResp
+	50, // 138: bodhi.Category.getListByClass:output_type -> bodhi.ListCategoryResp
+	1,  // 139: bodhi.Article.insertArticle:output_type -> bodhi.AffectedResp
+	1,  // 140: bodhi.Article.updateArticle:output_type -> bodhi.AffectedResp
+	1,  // 141: bodhi.Article.updateStatus:output_type -> bodhi.AffectedResp
+	1,  // 142: bodhi.Article.removeArticle:output_type -> bodhi.AffectedResp
+	52, // 143: bodhi.Article.getArticle:output_type -> bodhi.ArticleUnit
+	55, // 144: bodhi.Article.listArticle:output_type -> bodhi.ListArticleResp
+	80, // [80:145] is the sub-list for method output_type
+	15, // [15:80] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_admin_proto_init() }
@@ -3963,9 +4319,9 @@ func file_admin_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_admin_proto_rawDesc), len(file_admin_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   52,
+			NumMessages:   56,
 			NumExtensions: 0,
-			NumServices:   9,
+			NumServices:   10,
 		},
 		GoTypes:           file_admin_proto_goTypes,
 		DependencyIndexes: file_admin_proto_depIdxs,

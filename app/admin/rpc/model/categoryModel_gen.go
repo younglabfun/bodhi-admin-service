@@ -6,6 +6,7 @@ import (
 	"context"
 	"github.com/SpectatorNan/gorm-zero/gormc"
 	"gorm.io/gorm"
+	"gorm.io/plugin/soft_delete"
 )
 
 var ()
@@ -14,6 +15,7 @@ type (
 	categoryModel interface {
 		Insert(ctx context.Context, data *Category) error
 		FindOne(ctx context.Context, id int64) (*Category, error)
+		//FindOneByClass(ctx context.Context, class string) (*Category, error)
 		Update(ctx context.Context, data *Category) error
 		Delete(ctx context.Context, id int64) error
 
@@ -29,15 +31,15 @@ type (
 	}
 
 	Category struct {
-		Id        int64  `gorm:"column:id"`
-		ParentId  int64  `gorm:"column:parent_id"`  // 父id
-		Title     string `gorm:"column:title"`      // 分类名称
-		Class     string `gorm:"column:class"`      // 分类标识
-		Sort      int64  `gorm:"column:sort"`       // 排序
-		IsEnabled int64  `gorm:"column:is_enabled"` // 是否有效 0无效 1有效
-		IsDeleted int64  `gorm:"column:is_deleted"` // 是否删除 0未删 1已删
-		CreatedAt int64  `gorm:"column:created_at"` // 添加时间
-		UpdatedAt int64  `gorm:"column:updated_at"` // 更新时间
+		Id        int64                 `gorm:"column:id"`
+		ParentId  int64                 `gorm:"column:parent_id"`          // 父id
+		Title     string                `gorm:"column:title"`              // 分类名称
+		Class     string                `gorm:"column:class"`              // 分类标识
+		Sort      int64                 `gorm:"column:sort"`               // 排序
+		IsEnabled int64                 `gorm:"default:1"`                 // 是否有效 0无效 1有效
+		IsDeleted soft_delete.DeletedAt `gorm:"softDelete:flag,default:0"` // 是否删除
+		CreatedAt int64                 `gorm:"<-:create;autoCreateTime"`
+		UpdatedAt int64                 `gorm:"<-;autoUpdateTime"` // 更新时间
 
 		Children []Category `gorm:"foreignKey:ParentId;references:Id"`
 	}
@@ -62,6 +64,19 @@ func (m *defaultCategoryModel) Insert(ctx context.Context, data *Category) error
 func (m *defaultCategoryModel) FindOne(ctx context.Context, id int64) (*Category, error) {
 	var resp Category
 	err := m.conn.WithContext(ctx).Model(&Category{}).Where("`id` = ?", id).Take(&resp).Error
+	switch err {
+	case nil:
+		return &resp, nil
+	case gormc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
+func (m *defaultCategoryModel) FindOneByClass(ctx context.Context, class string) (*Category, error) {
+	var resp Category
+	err := m.conn.WithContext(ctx).Model(&Category{}).Where("`class` = ?", class).Take(&resp).Error
 	switch err {
 	case nil:
 		return &resp, nil

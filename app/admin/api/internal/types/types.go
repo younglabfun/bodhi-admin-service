@@ -2,16 +2,15 @@
 package types
 
 type MediaUnit struct {
-	Id        int64  `json:"id"`
-	Title     string `json:"title"`
-	Filename  string `json:"Filename"`
-	Type      string `json:"type"`
-	Size      int64  `json:"size"`
-	Meta      string `json:"meta"`
-	Path      string `json:"path"`
-	Mini      string `json:"mini"`
-	Preview   string `json:"preview"`
-	CreatedAt string `json:"createdAt"`
+	Id         int64    `json:"id"`
+	Title      string   `json:"title"`
+	Filename   string   `json:"Filename"`
+	Type       string   `json:"type"`
+	Size       int64    `json:"size"`
+	Meta       string   `json:"meta"`
+	Path       string   `json:"path"`
+	Thumbnails []string `json:"thumbnails"`
+	CreatedAt  string   `json:"createdAt"`
 }
 
 type ListMediaResp struct {
@@ -387,4 +386,25 @@ type CategoryUnit struct {
 
 type CategoryListResp struct {
 	List []*CategoryUnit `json:"list"`
+}
+
+type ArticleCategory struct {
+	Id   int64  `json:"id"`
+	Name string `json:"name"`
+}
+
+type ArticleUnit struct {
+	Id         int64              `json:"id"`
+	Title      string             `json:"title"`
+	Pv         int64              `json:"pv"`
+	IsCommend  int64              `json:"isCommend"`
+	IsTop      int64              `json:"isTop"`
+	IsEnabled  int64              `json:"isEnabled"`
+	CreatedAt  string             `json:"createdAt"`
+	Categories []*ArticleCategory `json:"categories"`
+}
+
+type ListArticleResp struct {
+	List  []*ArticleUnit `json:"list"`
+	Total int64          `json:"total"`
 }

@@ -36,7 +36,7 @@ type (
 @server (
 	group:  nodeGroup
 	jwt: Auth
-	prefix: /api/v1/nodeGroup
+	prefix: /api/v1/node-group
 )
 service admin-api {
 	@handler insertGroup
@@ -49,7 +49,7 @@ service admin-api {
 	post /remove (IdReq) returns (AffectedResp)
 
 	@handler getGroup
-	get /get/:id (IdPath) returns (NodeGroupResp)
+	get /:id (IdPath) returns (NodeGroupResp)
 
 	@handler getGroupList
 	get /get-list returns (ListNodeGroupResp)

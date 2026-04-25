@@ -1,4 +1,4 @@
-package categorylogic
+package articlelogic
 
 import (
 	"context"
@@ -10,28 +10,27 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type GetCategoryLogic struct {
+type GetArticleLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 	logx.Logger
 }
 
-func NewGetCategoryLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetCategoryLogic {
-	return &GetCategoryLogic{
+func NewGetArticleLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetArticleLogic {
+	return &GetArticleLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
 		Logger: logx.WithContext(ctx),
 	}
 }
 
-func (l *GetCategoryLogic) GetCategory(in *admin.Id) (*admin.CategoryUnit, error) {
-	data, err := l.svcCtx.CategoryModel.FindOne(l.ctx, in.Id)
+func (l *GetArticleLogic) GetArticle(in *admin.Id) (*admin.ArticleUnit, error) {
+	data, err := l.svcCtx.ArticleModel.FindOne(l.ctx, in.Id, true)
 	if err != nil {
 		return nil, err
 	}
-	var item admin.CategoryUnit
+	var item admin.ArticleUnit
 	_ = copier.Copy(&item, data)
-	//fmt.Println("data ", item)
 
 	return &item, nil
 }

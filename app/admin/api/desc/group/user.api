@@ -96,7 +96,7 @@ service admin-api {
     get /list (PageReq) returns (ListUserResp)
 
     @handler getUser
-    get /get/:uuid (UuidPath) returns (UserResp)
+    get /:uuid (UuidPath) returns (UserResp)
 
     @handler getUserRoles
     get /get-user-roles/:uuid (UuidPath) returns (UserRolesResp)

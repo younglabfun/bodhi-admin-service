@@ -1,0 +1,40 @@
+syntax = "v1"
+
+info (
+    title: "article api"
+    desc: "内容管理定义"
+    author: "jing.yang"
+    date: "2025-04-25"
+    version: "v1"
+)
+type (
+    ArticleCategory {
+        Id int64 `json:"id"`
+        Name string `json:"name"`
+    }
+    ArticleUnit {
+        Id         int64  `json:"id"`
+        Title      string `json:"title"`
+        Pv int64 `json:"pv"`
+        IsCommend   int64   `json:"isCommend"`
+        IsTop int64     `json:"isTop"`
+        IsEnabled int64     `json:"isEnabled"`
+        CreatedAt string `json:"createdAt"`
+        Categories []*ArticleCategory `json:"categories"`
+    }
+    ListArticleResp{
+        List []*ArticleUnit `json:"list"`
+        Total int64  `json:"total"`
+    }
+)
+
+@server(
+    group: article
+    jwt: Auth
+    prefix: /api/v1/article
+)
+
+service admin-api {
+	@handler listArticle
+    get /list (PageReq) returns (ListArticleResp)
+}

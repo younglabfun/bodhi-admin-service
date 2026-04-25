@@ -15,12 +15,16 @@ import (
 
 type (
 	AffectedResp      = admin.AffectedResp
+	ArticleCategory   = admin.ArticleCategory
+	ArticleDataUnit   = admin.ArticleDataUnit
+	ArticleUnit       = admin.ArticleUnit
 	BatchIdsReq       = admin.BatchIdsReq
 	CategoryReq       = admin.CategoryReq
 	CategoryUnit      = admin.CategoryUnit
 	ClassReq          = admin.ClassReq
 	Empty             = admin.Empty
 	Id                = admin.Id
+	ListArticleResp   = admin.ListArticleResp
 	ListCategoryResp  = admin.ListCategoryResp
 	ListMediaResp     = admin.ListMediaResp
 	ListMenuReq       = admin.ListMenuReq

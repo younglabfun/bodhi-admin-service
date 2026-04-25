@@ -69,7 +69,7 @@ service admin-api {
 	post /remove (IdReq) returns (AffectedResp)
 
 	@handler getNode
-	get /get/:id (IdPath) returns (NodeResp)
+	get /:id (IdPath) returns (NodeResp)
 
 	@handler getListData
 	get /get-list-data returns (NodeListResp)

@@ -70,7 +70,7 @@ func (l *UploadLogic) Upload(r *http.Request) (*types.AffectedResp, error) {
 	}
 
 	go func() {
-		fmt.Println("process file--- ", filename)
+		//fmt.Println("process file--- ", filename)
 		err = utils.DoProcessImage(filename, uploadDir)
 		if err != nil {
 			fmt.Printf("process err: %v\n", err)

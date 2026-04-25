@@ -10,15 +10,17 @@ import (
 type ServiceContext struct {
 	Config config.Config
 
-	MediaModel     model.MediaModel
-	MenuModel      model.MenuModel
-	NodeModel      model.NodeModel
-	NodeGroupModel model.NodeGroupModel
-	RoleModel      model.RoleModel
-	UserModel      model.UserModel
-	UserRoleModel  model.UserRoleModel
-	TokenModel     model.UserTokenModel
-	CategoryModel  model.CategoryModel
+	MediaModel               model.MediaModel
+	MenuModel                model.MenuModel
+	NodeModel                model.NodeModel
+	NodeGroupModel           model.NodeGroupModel
+	RoleModel                model.RoleModel
+	UserModel                model.UserModel
+	UserRoleModel            model.UserRoleModel
+	TokenModel               model.UserTokenModel
+	CategoryModel            model.CategoryModel
+	ArticleModel             model.ArticleModel
+	ArticleCategoryLinkModel model.ArticleCategoryLinkModel
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -30,7 +32,6 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	logx.Infof("Init MySQL connected...")
 
 	mediaModel := model.NewMediaModel(db)
-	categoryModel := model.NewCategoryModel(db)
 	menuModel := model.NewMenuModel(db)
 	nodeModel := model.NewNodeModel(db)
 	nodeGroupModel := model.NewNodeGroupModel(db)
@@ -40,17 +41,23 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	userRoleModel := model.NewUserRoleModel(db)
 	tokenModel := model.NewUserTokenModel(db)
 
+	categoryModel := model.NewCategoryModel(db)
+	articleModel := model.NewArticleModel(db)
+	articleLinkModel := model.NewArticleCategoryLinkModel(db)
+
 	return &ServiceContext{
 		Config: c,
 
-		MediaModel:     mediaModel,
-		CategoryModel:  categoryModel,
-		MenuModel:      menuModel,
-		NodeModel:      nodeModel,
-		NodeGroupModel: nodeGroupModel,
-		RoleModel:      roleModel,
-		UserModel:      userModel,
-		UserRoleModel:  userRoleModel,
-		TokenModel:     tokenModel,
+		MediaModel:               mediaModel,
+		MenuModel:                menuModel,
+		NodeModel:                nodeModel,
+		NodeGroupModel:           nodeGroupModel,
+		RoleModel:                roleModel,
+		UserModel:                userModel,
+		UserRoleModel:            userRoleModel,
+		TokenModel:               tokenModel,
+		CategoryModel:            categoryModel,
+		ArticleModel:             articleModel,
+		ArticleCategoryLinkModel: articleLinkModel,
 	}
 }

@@ -67,6 +67,6 @@ service admin-api {
 	get /get-list  returns (RoleListResp)
 
 	@handler getRole
-	get /get/:uuid (UuidPath) returns (RoleResp)
+	get /:uuid (UuidPath) returns (RoleResp)
 }
 

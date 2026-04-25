@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	account "bodhiadmin/app/admin/api/internal/handler/account"
+	article "bodhiadmin/app/admin/api/internal/handler/article"
 	category "bodhiadmin/app/admin/api/internal/handler/category"
 	media "bodhiadmin/app/admin/api/internal/handler/media"
 	menu "bodhiadmin/app/admin/api/internal/handler/menu"
@@ -49,7 +50,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/thumbnail/:id",
+				Path:    "/rebuild/:id",
 				Handler: media.RebuildThumbnailHandler(serverCtx),
 			},
 			{
@@ -139,7 +140,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/get/:id",
+				Path:    "/:id",
 				Handler: menu.GetMenuHandler(serverCtx),
 			},
 			{
@@ -186,7 +187,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/get/:id",
+				Path:    "/:id",
 				Handler: node.GetNodeHandler(serverCtx),
 			},
 			{
@@ -238,7 +239,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/get/:id",
+				Path:    "/:id",
 				Handler: nodeGroup.GetGroupHandler(serverCtx),
 			},
 			{
@@ -248,7 +249,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/v1/nodeGroup"),
+		rest.WithPrefix("/api/v1/node-group"),
 	)
 
 	server.AddRoutes(
@@ -285,7 +286,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/get/:uuid",
+				Path:    "/:uuid",
 				Handler: role.GetRoleHandler(serverCtx),
 			},
 		},
@@ -327,7 +328,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/get/:uuid",
+				Path:    "/:uuid",
 				Handler: user.GetUserHandler(serverCtx),
 			},
 			{
@@ -390,5 +391,17 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/v1/category"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodGet,
+				Path:    "/list",
+				Handler: article.ListArticleHandler(serverCtx),
+			},
+		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/v1/article"),
 	)
 }

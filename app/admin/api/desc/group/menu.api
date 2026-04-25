@@ -89,7 +89,7 @@ service admin-api {
     post /remove (IdReq) returns (AffectedResp)
 
     @handler getMenu
-    get /get/:id (IdPath) returns (MenuResp)
+    get /:id (IdPath) returns (MenuResp)
 
     @handler getMenuListByPid
     get /get-menu-list (ListMenuReq) returns (ListMenuResp)

@@ -29,7 +29,7 @@ func (l *GetCategoryLogic) GetCategory(req *types.IdPath) (*types.CategoryUnit, 
 	resp, err := l.svcCtx.CategoryRpc.GetCategory(l.ctx, &admin.Id{
 		Id: req.Id,
 	})
-	if err == nil {
+	if err != nil {
 		return nil, err
 	}
 	var data types.CategoryUnit

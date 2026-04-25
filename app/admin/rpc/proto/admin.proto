@@ -406,3 +406,42 @@ service Category {
   rpc getListByClass(ClassReq) returns (ListCategoryResp);
 }
 
+message ArticleUnit {
+  int64 Id = 1;
+  string Slug = 2;
+  string Title = 3;
+  string Author = 4;
+  string Content = 5;
+  string CoverImg = 6;
+  repeated int64 CategoryIds = 7;
+}
+
+message ArticleCategory {
+  int64 Id = 1;
+  string Name = 2;
+}
+message ArticleDataUnit {
+  int64 Id = 1;
+  string Slug = 2;
+  string Title = 3;
+  int64 IsCommend = 4;
+  int64 IsTop = 5;
+  int64 IsEnabled = 6;
+  int64 Pv = 7;
+  int64 CreatedAt = 8;
+  repeated ArticleCategory Categories = 9;
+}
+
+message ListArticleResp {
+  repeated ArticleDataUnit List = 1;
+  int64 Total = 2;
+}
+
+service Article {
+  rpc insertArticle(ArticleUnit) returns (AffectedResp);
+  rpc updateArticle(ArticleUnit) returns (AffectedResp);
+  rpc updateStatus(StatusReq) returns (AffectedResp);
+  rpc removeArticle(Id) returns (AffectedResp);
+  rpc getArticle(Id) returns (ArticleUnit);
+  rpc listArticle(PageReq) returns (ListArticleResp);
+}

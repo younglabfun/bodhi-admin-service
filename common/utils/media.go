@@ -15,35 +15,36 @@ import (
 	"time"
 )
 
-var thumbnailDir = "/thumbnails"
-var thumbnailConfig = map[string]int{
+var ThumbnailDir = "thumbnails"
+var ThumbnailConfig = map[string]int{
 	"small":  200,
-	"medium": 800,
+	"medium": 360,
+	"large":  800,
 }
 
 func GetThumbnails(originalFilename string) map[string]string {
 	var thumbnails = make(map[string]string)
-	for size, _ := range thumbnailConfig {
+	for size, _ := range ThumbnailConfig {
 		filename := GenerateThumbnailFilename(originalFilename, size)
 		thumbnails[size] = filename
 	}
 	return thumbnails
 }
 
-func GetFilename(filePath string) (string, error) {
+func GetFilename(filePath string) string {
 	if strings.Index(filePath, "/") < 0 {
-		return "", errors.New("file path is error")
+		return filePath
 	}
 	data := strings.Split(filePath, "/")
-	return data[len(data)-1], nil
+	return data[len(data)-1]
 }
 
 func RemoveFileAndThumbnails(filePath, uploadPath string) error {
 	if strings.Index(filePath, "/") < 0 {
 		return errors.New("file path is error")
 	}
-	filename, err := GetFilename(filePath)
-	thumbnailPath := uploadPath + strings.ReplaceAll(filePath, "/"+filename, "") + thumbnailDir
+	filename := GetFilename(filePath)
+	thumbnailPath := uploadPath + strings.ReplaceAll(filePath, "/"+filename, "") + "/" + ThumbnailDir
 	thumbnails := GetThumbnails(filename)
 	for _, v := range thumbnails {
 		t := thumbnailPath + "/" + v
@@ -55,7 +56,7 @@ func RemoveFileAndThumbnails(filePath, uploadPath string) error {
 	}
 
 	file := uploadPath + filePath
-	err = os.RemoveAll(file)
+	err := os.RemoveAll(file)
 	if err != nil {
 		logx.Errorf("remove file %s err %v", file, err)
 		return err
@@ -64,19 +65,23 @@ func RemoveFileAndThumbnails(filePath, uploadPath string) error {
 }
 
 // 处理上传图片的函数
-func DoProcessImage(filename, outputDir string) error {
+func DoProcessImage(filePath, outputDir string) error {
+	filename := GetFilename(filePath)
 	thumbnails := GetThumbnails(filename)
 	if len(thumbnails) == 0 {
 		return nil
 	}
 
+	fmt.Println("get thumbnails ", thumbnails)
 	// 1. 加载原图
-	src, err := imaging.Open(outputDir + "/" + filename)
+	src, err := imaging.Open(outputDir + filePath)
 	if err != nil {
 		return err
 	}
-	thumbnailPath := outputDir + thumbnailDir
+	path := strings.ReplaceAll(filePath, filename, "")
+	thumbnailPath := outputDir + path + ThumbnailDir
 	_, err = os.Stat(thumbnailPath)
+	fmt.Println("check thumbnailPath ---- ", err, thumbnailPath)
 	if err != nil && os.IsNotExist(err) {
 		err = os.MkdirAll(thumbnailPath, 0755)
 		if err != nil {
@@ -85,10 +90,11 @@ func DoProcessImage(filename, outputDir string) error {
 		}
 	}
 	for key, thumbnailFile := range thumbnails {
-		img := imaging.Resize(src, thumbnailConfig[key], 0, imaging.Lanczos) // 不裁切
+		img := imaging.Resize(src, ThumbnailConfig[key], 0, imaging.Lanczos) // 不裁切
 		file, err := os.Create(thumbnailPath + "/" + thumbnailFile)
 		if err != nil {
-			return err
+			fmt.Println("create thumbnails err ", err)
+			//return err
 		}
 		defer file.Close()
 		_ = webp.Encode(file, img, &webp.Options{Lossless: false, Quality: 85})
@@ -99,16 +105,18 @@ func DoProcessImage(filename, outputDir string) error {
 }
 
 func GetThumbnailFilename(filePath, suffix string) string {
-	filename, _ := GetFilename(filePath)
+	filename := GetFilename(filePath)
 	//fmt.Println("filename ", filePath, filename)
 	if len(filename) == 0 {
 		return ""
 	}
 	ext := filepath.Ext(filename)
-	path := strings.ReplaceAll(filePath, "/"+filename, "")
+	path := strings.ReplaceAll(filePath, filename, "")
 	//fmt.Println("filePath --- ", path)
 	nameOnly := strings.TrimSuffix(filename, ext)
-	thumbnail := fmt.Sprintf("%s%s/%s-%s%s", path, thumbnailDir, nameOnly, suffix, ".webp")
+	thumbnail := fmt.Sprintf("%s%s/%s-%s%s", path, ThumbnailDir, nameOnly, suffix, ".webp")
+
+	//fmt.Println("== thumbnail --- ", thumbnail)
 	return thumbnail
 }
 

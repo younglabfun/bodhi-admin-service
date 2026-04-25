@@ -209,6 +209,8 @@ CREATE TABLE `media` (
 PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+# 当category 作为全局分类使用时，可以使用class针对不同部分的分类进行划分
+# class为article，则该分类下所有子分类都是article的分类
 DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
 `id` int unsigned NOT NULL AUTO_INCREMENT,
@@ -221,7 +223,37 @@ CREATE TABLE `category` (
 `created_at` int unsigned NOT NULL DEFAULT '0' COMMENT '添加时间',
 `updated_at` int unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
 PRIMARY KEY (`id`)
+# UNIQUE KEY `class_index` (`class`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='分类表';
+
+
+DROP TABLE IF EXISTS `article`;
+CREATE TABLE `article` (
+`id` int unsigned NOT NULL AUTO_INCREMENT,
+`slug` varchar(127) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'slug',
+`cover_img` varchar(254) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '封面',
+`title` varchar(127) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '名称',
+`author` varchar(127) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '作者',
+`content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '内容',
+`pv` int unsigned NOT NULL DEFAULT '0' COMMENT '访问量',
+`is_commend` tinyint unsigned DEFAULT '0' COMMENT '是否推荐 0不推荐 1推荐',
+`is_top` tinyint unsigned DEFAULT '0' COMMENT '是否置顶 0正常 1置顶',
+`is_enabled` tinyint unsigned DEFAULT '1' COMMENT '是否有效 0无效 1有效',
+`is_deleted` tinyint unsigned DEFAULT '0' COMMENT '是否删除 0未删 1已删',
+`created_at` int unsigned NOT NULL DEFAULT '0' COMMENT '添加时间',
+`updated_at` int unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+PRIMARY KEY (`id`),
+UNIQUE KEY `article_slug_index` (`slug`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='文章表';
+
+DROP TABLE IF EXISTS `article_category_link`;
+CREATE TABLE `article_category_link` (
+`id` int unsigned NOT NULL AUTO_INCREMENT,
+`article_id` int NOT NULL COMMENT 'article id',
+`category_id` int NOT NULL COMMENT 'category id',
+PRIMARY KEY (`id`),
+KEY `article_category_index` (`article_id`,`category_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of user_token

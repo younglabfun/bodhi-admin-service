@@ -43,12 +43,15 @@ func (l *ListMediaLogic) ListMedia(req *types.PageReq) (*types.ListMediaResp, er
 		for _, v := range resp.List {
 			var item types.MediaUnit
 			_ = copier.Copy(&item, v)
-			small := utils.GetThumbnailFilename(v.Path, "small")
-			item.Mini = l.svcCtx.Config.AdminConf.ImagePath + small
-			medium := utils.GetThumbnailFilename(v.Path, "medium")
-			item.Preview = l.svcCtx.Config.AdminConf.ImagePath + medium
 			item.Path = l.svcCtx.Config.AdminConf.ImagePath + v.Path
 			item.CreatedAt = utils.UnixToStr(v.CreatedAt)
+
+			var thumbnails []string
+			for k, _ := range utils.ThumbnailConfig {
+				pic := utils.GetThumbnailFilename(v.Path, k)
+				thumbnails = append(thumbnails, l.svcCtx.Config.AdminConf.ImagePath+pic)
+			}
+			item.Thumbnails = thumbnails
 
 			list = append(list, &item)
 		}

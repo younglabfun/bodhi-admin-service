@@ -11,6 +11,7 @@ import (
 
 	"bodhiadmin/app/admin/rpc/internal/config"
 	accountServer "bodhiadmin/app/admin/rpc/internal/server/account"
+	articleServer "bodhiadmin/app/admin/rpc/internal/server/article"
 	categoryServer "bodhiadmin/app/admin/rpc/internal/server/category"
 	mediaServer "bodhiadmin/app/admin/rpc/internal/server/media"
 	menuServer "bodhiadmin/app/admin/rpc/internal/server/menu"
@@ -86,6 +87,7 @@ func main() {
 		admin.RegisterUserServer(grpcServer, userServer.NewUserServer(ctx))
 		admin.RegisterUserRoleServer(grpcServer, userroleServer.NewUserRoleServer(ctx))
 		admin.RegisterCategoryServer(grpcServer, categoryServer.NewCategoryServer(ctx))
+		admin.RegisterArticleServer(grpcServer, articleServer.NewArticleServer(ctx))
 
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {
 			reflection.Register(grpcServer)

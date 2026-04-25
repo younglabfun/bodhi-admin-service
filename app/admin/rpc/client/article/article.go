@@ -2,7 +2,7 @@
 // goctl 1.8.5
 // Source: admin.proto
 
-package userrole
+package article
 
 import (
 	"context"
@@ -71,40 +71,52 @@ type (
 	Uuid              = admin.Uuid
 	UuidStatusReq     = admin.UuidStatusReq
 
-	UserRole interface {
-		InsertUserRole(ctx context.Context, in *UserRoleReq, opts ...grpc.CallOption) (*AffectedResp, error)
-		UpdateUserRole(ctx context.Context, in *UpdateUserRoleReq, opts ...grpc.CallOption) (*AffectedResp, error)
-		RemoveUserRole(ctx context.Context, in *Id, opts ...grpc.CallOption) (*AffectedResp, error)
-		GetUserRoles(ctx context.Context, in *Uuid, opts ...grpc.CallOption) (*UserRoleListResp, error)
+	Article interface {
+		InsertArticle(ctx context.Context, in *ArticleUnit, opts ...grpc.CallOption) (*AffectedResp, error)
+		UpdateArticle(ctx context.Context, in *ArticleUnit, opts ...grpc.CallOption) (*AffectedResp, error)
+		UpdateStatus(ctx context.Context, in *StatusReq, opts ...grpc.CallOption) (*AffectedResp, error)
+		RemoveArticle(ctx context.Context, in *Id, opts ...grpc.CallOption) (*AffectedResp, error)
+		GetArticle(ctx context.Context, in *Id, opts ...grpc.CallOption) (*ArticleUnit, error)
+		ListArticle(ctx context.Context, in *PageReq, opts ...grpc.CallOption) (*ListArticleResp, error)
 	}
 
-	defaultUserRole struct {
+	defaultArticle struct {
 		cli zrpc.Client
 	}
 )
 
-func NewUserRole(cli zrpc.Client) UserRole {
-	return &defaultUserRole{
+func NewArticle(cli zrpc.Client) Article {
+	return &defaultArticle{
 		cli: cli,
 	}
 }
 
-func (m *defaultUserRole) InsertUserRole(ctx context.Context, in *UserRoleReq, opts ...grpc.CallOption) (*AffectedResp, error) {
-	client := admin.NewUserRoleClient(m.cli.Conn())
-	return client.InsertUserRole(ctx, in, opts...)
+func (m *defaultArticle) InsertArticle(ctx context.Context, in *ArticleUnit, opts ...grpc.CallOption) (*AffectedResp, error) {
+	client := admin.NewArticleClient(m.cli.Conn())
+	return client.InsertArticle(ctx, in, opts...)
 }
 
-func (m *defaultUserRole) UpdateUserRole(ctx context.Context, in *UpdateUserRoleReq, opts ...grpc.CallOption) (*AffectedResp, error) {
-	client := admin.NewUserRoleClient(m.cli.Conn())
-	return client.UpdateUserRole(ctx, in, opts...)
+func (m *defaultArticle) UpdateArticle(ctx context.Context, in *ArticleUnit, opts ...grpc.CallOption) (*AffectedResp, error) {
+	client := admin.NewArticleClient(m.cli.Conn())
+	return client.UpdateArticle(ctx, in, opts...)
 }
 
-func (m *defaultUserRole) RemoveUserRole(ctx context.Context, in *Id, opts ...grpc.CallOption) (*AffectedResp, error) {
-	client := admin.NewUserRoleClient(m.cli.Conn())
-	return client.RemoveUserRole(ctx, in, opts...)
+func (m *defaultArticle) UpdateStatus(ctx context.Context, in *StatusReq, opts ...grpc.CallOption) (*AffectedResp, error) {
+	client := admin.NewArticleClient(m.cli.Conn())
+	return client.UpdateStatus(ctx, in, opts...)
 }
 
-func (m *defaultUserRole) GetUserRoles(ctx context.Context, in *Uuid, opts ...grpc.CallOption) (*UserRoleListResp, error) {
-	client := admin.NewUserRoleClient(m.cli.Conn())
-	return client.GetUserRoles(ctx, in, opts...)
+func (m *defaultArticle) RemoveArticle(ctx context.Context, in *Id, opts ...grpc.CallOption) (*AffectedResp, error) {
+	client := admin.NewArticleClient(m.cli.Conn())
+	return client.RemoveArticle(ctx, in, opts...)
+}
+
+func (m *defaultArticle) GetArticle(ctx context.Context, in *Id, opts ...grpc.CallOption) (*ArticleUnit, error) {
+	client := admin.NewArticleClient(m.cli.Conn())
+	return client.GetArticle(ctx, in, opts...)
+}
+
+func (m *defaultArticle) ListArticle(ctx context.Context, in *PageReq, opts ...grpc.CallOption) (*ListArticleResp, error) {
+	client := admin.NewArticleClient(m.cli.Conn())
+	return client.ListArticle(ctx, in, opts...)
 }
