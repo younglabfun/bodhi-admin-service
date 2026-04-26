@@ -54,6 +54,10 @@ INSERT INTO `menu` (`id`, `pid`, `type`, `title`, `func_code`, `route`, `compone
 INSERT INTO `menu` (`id`, `pid`, `type`, `title`, `func_code`, `route`, `component`, `icon`, `href`, `sort`, `is_show`, `is_enabled`, `is_deleted`, `created_at`) VALUES (8, 7, 0, '用户', 'user:list', 'UserList', 'user/user-list', 'fa fa-user', 'user-list', 0, 1, 1, 0, 1724405103);
 INSERT INTO `menu` (`id`, `pid`, `type`, `title`, `func_code`, `route`, `component`, `icon`, `href`, `sort`, `is_show`, `is_enabled`, `is_deleted`, `created_at`) VALUES (9, 7, 0, '角色', 'role:list', 'RoleList', 'user/role-list', 'fa fa-user-secret', 'role-list', 1, 1, 1, 0, 1724405192);
 INSERT INTO `menu` (`id`, `pid`, `type`, `title`, `func_code`, `route`, `component`, `icon`, `href`, `sort`, `is_show`, `is_enabled`, `is_deleted`, `created_at`) VALUES (10, 0, 0, 'external-link', 'External-link', 'External-link', 'layout', '', 'https://panjiachen.github.io/vue-element-admin-site/#/', 7, 0, 0, 0, 1724405259);
+INSERT INTO `menu` (`id`, `pid`, `type`, `title`, `func_code`, `route`, `component`, `icon`, `href`, `sort`, `is_show`, `is_enabled`, `is_deleted`, `created_at`) VALUES (11, 12, 0, '媒体', 'media:list', 'MediaList', 'media/media-list', 'fa fa-file-picture-o', 'media-list', 6, 1, 1, 0, 1776860723);
+INSERT INTO `menu` (`id`, `pid`, `type`, `title`, `func_code`, `route`, `component`, `icon`, `href`, `sort`, `is_show`, `is_enabled`, `is_deleted`, `created_at`) VALUES (12, 0, 0, '内容管理', 'Content', 'Content', 'Layout', 'fa fa-file-text-o', '/article/article-list', 1, 1, 1, 0, 1776992478);
+INSERT INTO `menu` (`id`, `pid`, `type`, `title`, `func_code`, `route`, `component`, `icon`, `href`, `sort`, `is_show`, `is_enabled`, `is_deleted`, `created_at`) VALUES (13, 12, 0, '内容', 'articel:list', 'ArticleList', 'content/article-list', 'fa fa-file-text-o', 'article-list', 1, 1, 1, 0, 1776992478);
+INSERT INTO `menu` (`id`, `pid`, `type`, `title`, `func_code`, `route`, `component`, `icon`, `href`, `sort`, `is_show`, `is_enabled`, `is_deleted`, `created_at`) VALUES (14, 12, 0, '分类', 'category:list', 'CategoryList', 'content/category-list', 'fa fa-tree', 'category-list', 1, 1, 1, 0, 1776992478);
 COMMIT;
 
 -- ----------------------------
@@ -80,7 +84,7 @@ BEGIN;
 INSERT INTO `node` (`id`, `group_id`, `func_code`, `name`, `description`, `is_enabled`, `is_deleted`, `created_at`) VALUES (1, 1, 'user:remove', '删除用户', '删除用户权限', 1, 0, 1724576757);
 INSERT INTO `node` (`id`, `group_id`, `func_code`, `name`, `description`, `is_enabled`, `is_deleted`, `created_at`) VALUES (2, 1, 'user:edit', '编辑用户', '编辑用户权限', 1, 0, 1724580800);
 INSERT INTO `node` (`id`, `group_id`, `func_code`, `name`, `description`, `is_enabled`, `is_deleted`, `created_at`) VALUES (3, 1, 'user:create', '添加用户', '添加用户权限\n', 1, 0, 1724580811);
-INSERT INTO `node` (`id`, `group_id`, `func_code`, `name`, `description`, `is_enabled`, `is_deleted`, `created_at`) VALUES (4, 4, 'T:action', 'taction', 'test action', 0, 0, 1724580823);
+INSERT INTO `node` (`id`, `group_id`, `func_code`, `name`, `description`, `is_enabled`, `is_deleted`, `created_at`) VALUES (4, 4, 'media:list', '媒体列表', '', 1, 0, 1724580823);
 INSERT INTO `node` (`id`, `group_id`, `func_code`, `name`, `description`, `is_enabled`, `is_deleted`, `created_at`) VALUES (5, 0, 'Dashboard', '工作台', '工作台页面', 1, 0, 1725158526);
 INSERT INTO `node` (`id`, `group_id`, `func_code`, `name`, `description`, `is_enabled`, `is_deleted`, `created_at`) VALUES (6, 1, 'user:list', '用户管理', '管理用户权限', 1, 0, 1725186018);
 INSERT INTO `node` (`id`, `group_id`, `func_code`, `name`, `description`, `is_enabled`, `is_deleted`, `created_at`) VALUES (7, 1, 'role:list', '角色管理', '角色管理', 1, 0, 1725186061);
@@ -92,9 +96,23 @@ INSERT INTO `node` (`id`, `group_id`, `func_code`, `name`, `description`, `is_en
 INSERT INTO `node` (`id`, `group_id`, `func_code`, `name`, `description`, `is_enabled`, `is_deleted`, `created_at`) VALUES (13, 5, 'menu:edit', '编辑菜单', '', 1, 0, 1725191183);
 INSERT INTO `node` (`id`, `group_id`, `func_code`, `name`, `description`, `is_enabled`, `is_deleted`, `created_at`) VALUES (14, 1, 'role:create', '添加角色', '', 1, 0, 1725191721);
 INSERT INTO `node` (`id`, `group_id`, `func_code`, `name`, `description`, `is_enabled`, `is_deleted`, `created_at`) VALUES (15, 1, 'role:edit', '编辑角色', '', 1, 0, 1725191743);
-INSERT INTO `node` (`id`, `group_id`, `func_code`, `name`, `description`, `is_enabled`, `is_deleted`, `created_at`) VALUES (16, 5, 'node:create', '添加功能', '', 1, 0, 1725191807);
-INSERT INTO `node` (`id`, `group_id`, `func_code`, `name`, `description`, `is_enabled`, `is_deleted`, `created_at`) VALUES (17, 5, 'node:edit', '编辑功能', '', 1, 0, 1725191828);
-INSERT INTO `node` (`id`, `group_id`, `func_code`, `name`, `description`, `is_enabled`, `is_deleted`, `created_at`) VALUES (18, 5, 'node:remove', '删除功能', '', 1, 0, 1725191882);
+INSERT INTO `node` (`id`, `group_id`, `func_code`, `name`, `description`, `is_enabled`, `is_deleted`, `created_at`) VALUES (16, 5, 'node:create', '添加功能', '', 1, 0, 1725191743);
+INSERT INTO `node` (`id`, `group_id`, `func_code`, `name`, `description`, `is_enabled`, `is_deleted`, `created_at`) VALUES (17, 5, 'node:edit', '编辑功能', '', 1, 0, 1725191743);
+INSERT INTO `node` (`id`, `group_id`, `func_code`, `name`, `description`, `is_enabled`, `is_deleted`, `created_at`) VALUES (18, 5, 'node:remove', '删除功能', '', 1, 0, 1725191743);
+INSERT INTO `node` (`id`, `group_id`, `func_code`, `name`, `description`, `is_enabled`, `is_deleted`, `created_at`) VALUES (19, 4, 'media:create', '添加媒体', '', 1, 0, 1725191743);
+INSERT INTO `node` (`id`, `group_id`, `func_code`, `name`, `description`, `is_enabled`, `is_deleted`, `created_at`) VALUES (20, 4, 'media:remove', '删除媒体', '', 1, 0, 1725191743);
+INSERT INTO `node` (`id`, `group_id`, `func_code`, `name`, `description`, `is_enabled`, `is_deleted`, `created_at`) VALUES (21, 3, 'article:list', '内容管理', '', 1, 0, 1725191743);
+INSERT INTO `node` (`id`, `group_id`, `func_code`, `name`, `description`, `is_enabled`, `is_deleted`, `created_at`) VALUES (22, 4, 'media:edit', '编辑title', '', 1, 0, 1725191743);
+INSERT INTO `node` (`id`, `group_id`, `func_code`, `name`, `description`, `is_enabled`, `is_deleted`, `created_at`) VALUES (23, 3, 'category:list', '分类管理', '', 1, 0, 1725191743);
+INSERT INTO `node` (`id`, `group_id`, `func_code`, `name`, `description`, `is_enabled`, `is_deleted`, `created_at`) VALUES (24, 3, 'category:create', '添加分类', '', 1, 0, 1725191743);
+INSERT INTO `node` (`id`, `group_id`, `func_code`, `name`, `description`, `is_enabled`, `is_deleted`, `created_at`) VALUES (25, 3, 'category:remove', '删除分类', '', 1, 0, 1725191743);
+INSERT INTO `node` (`id`, `group_id`, `func_code`, `name`, `description`, `is_enabled`, `is_deleted`, `created_at`) VALUES (26, 3, 'category:edit', '编辑分类', '', 1, 0, 1725191743);
+INSERT INTO `node` (`id`, `group_id`, `func_code`, `name`, `description`, `is_enabled`, `is_deleted`, `created_at`) VALUES (27, 3, 'articel:list', '内容管理', '', 1, 0, 1725191743);
+INSERT INTO `node` (`id`, `group_id`, `func_code`, `name`, `description`, `is_enabled`, `is_deleted`, `created_at`) VALUES (28, 3, 'article:create', '添加内容', '', 1, 0, 1725191743);
+INSERT INTO `node` (`id`, `group_id`, `func_code`, `name`, `description`, `is_enabled`, `is_deleted`, `created_at`) VALUES (29, 3, 'article:edit', '编辑内容', '', 1, 0, 1725191743);
+INSERT INTO `node` (`id`, `group_id`, `func_code`, `name`, `description`, `is_enabled`, `is_deleted`, `created_at`) VALUES (30, 3, 'article:remove', '删除内容', '', 1, 0, 1725191743);
+INSERT INTO `node` (`id`, `group_id`, `func_code`, `name`, `description`, `is_enabled`, `is_deleted`, `created_at`) VALUES (31, 1, 'user:setAuth', '授权', '', 1, 0, 1725191743);
+INSERT INTO `node` (`id`, `group_id`, `func_code`, `name`, `description`, `is_enabled`, `is_deleted`, `created_at`) VALUES (32, 1, 'user:setPwd', '修改密码', '', 1, 0, 1725191743);
 COMMIT;
 
 -- ----------------------------
@@ -116,9 +134,9 @@ CREATE TABLE `node_group` (
 -- Records of node_group
 -- ----------------------------
 BEGIN;
-INSERT INTO `node_group` (`id`, `title`, `name`, `sort`, `is_deleted`, `created_at`) VALUES (1, '用户及角色管理', 'user', 0, 0, 1724573894);
-INSERT INTO `node_group` (`id`, `title`, `name`, `sort`, `is_deleted`, `created_at`) VALUES (3, 't222', 'ttt', 0, 0, 1724574570);
-INSERT INTO `node_group` (`id`, `title`, `name`, `sort`, `is_deleted`, `created_at`) VALUES (4, 'new', 'nnn', 1, 0, 1724727084);
+INSERT INTO `node_group` (`id`, `title`, `name`, `sort`, `is_deleted`, `created_at`) VALUES (1, '用户及角色', 'user', 9, 0, 1724573894);
+INSERT INTO `node_group` (`id`, `title`, `name`, `sort`, `is_deleted`, `created_at`) VALUES (3, '内容管理', 'article', 1, 0, 1724574570);
+INSERT INTO `node_group` (`id`, `title`, `name`, `sort`, `is_deleted`, `created_at`) VALUES (4, '媒体管理', 'media', 1, 0, 1724727084);
 INSERT INTO `node_group` (`id`, `title`, `name`, `sort`, `is_deleted`, `created_at`) VALUES (5, '系统配置', 'setting', 99, 0, 1725190953);
 COMMIT;
 
