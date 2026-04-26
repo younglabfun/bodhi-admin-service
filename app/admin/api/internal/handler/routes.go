@@ -400,6 +400,31 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/list",
 				Handler: article.ListArticleHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/insert",
+				Handler: article.InsertArticleHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/update",
+				Handler: article.UpdateArticleHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/update-status",
+				Handler: article.UpdateStatusHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/:id",
+				Handler: article.GetArticleHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/remove",
+				Handler: article.RemoveArticleHandler(serverCtx),
+			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/v1/article"),

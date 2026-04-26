@@ -1,63 +1,62 @@
 syntax = "v1"
 
 info (
-    title: "category api"
-    desc: "分类管理定义"
-    author: "jing.yang"
-    date: "2025-04-23"
-    version: "v1"
+	title: "category api"
+	desc: "分类管理定义"
+	author: "jing.yang"
+	date: "2025-04-23"
+	version: "v1"
 )
 
 type (
-    CategoryReq {
-        Id int64 `json:"id,optional"`
-        ParentId int64 `json:"parentId"`
-        Title string `json:"title"`
-        Class string `json:"class,optional"`
-        Sort int64 `json:"sort"`
-    }
-    CategoryUnit {
+	CategoryReq {
+		Id       int64  `json:"id,optional"`
+		ParentId int64  `json:"parentId"`
+		Title    string `json:"title"`
+		Class    string `json:"class,optional"`
+		Sort     int64  `json:"sort"`
+	}
+	CategoryUnit {
+		Id        int64  `json:"id"`
+		ParentId  int64  `json:"parentId"`
+		Class     string `json:"class"`
+		Title     string `json:"title"`
+		Sort      int64  `json:"sort"`
+		IsEnabled int64  `json:"isEnabled"`
+		// CreatedAt string `json:"createdAt"`
+		HasChildren bool `json:"hasChildren"`
+	}
+	CategoryListResp {
+		List []*CategoryUnit `json:"list"`
+	}
 
-        Id int64 `json:"id"`
-        ParentId int64 `json:"parentId"`
-        Class string `json:"class"`
-        Title string `json:"title"`
-        Sort int64 `json:"sort"`
-        IsEnabled int64 `json:"isEnabled"`
-//        CreatedAt string `json:"createdAt"`
-        hasChildren bool `json:"hasChildren"`
-    }
-    CategoryListResp {
-        List []*CategoryUnit `json:"list"`
-    }
 )
 
 @server(
-    group: category
-    jwt: Auth
-    prefix: /api/v1/category
+	group: category
+	jwt: Auth
+	prefix: /api/v1/category
 )
 
 service admin-api {
-    @handler insertCategory
-    post /insert (CategoryReq) returns (AffectedResp)
+	@handler insertCategory
+	post /insert (CategoryReq) returns (AffectedResp)
 
-    @handler updateCategory
-    post /update (CategoryReq) returns (AffectedResp)
+	@handler updateCategory
+	post /update (CategoryReq) returns (AffectedResp)
 
-    @handler updateCategoryStatus
-    post /update-status (IdReq) returns (AffectedResp)
+	@handler updateCategoryStatus
+	post /update-status (IdReq) returns (AffectedResp)
 
-    @handler removeCategory
-    post /remove (IdReq) returns (AffectedResp)
+	@handler removeCategory
+	post /remove (IdReq) returns (AffectedResp)
 
-    @handler getChildren
-    get /get-list(Id) returns (CategoryListResp)
+	@handler getChildren
+	get /get-list(Id) returns (CategoryListResp)
 
-    @handler listCategory
-    get /list returns (CategoryListResp)
+	@handler listCategory
+	get /list returns (CategoryListResp)
 
-    @handler getCategory
-    get /:id (IdPath) returns (CategoryUnit)
+	@handler getCategory
+	get /:id (IdPath) returns (CategoryUnit)
 }
-

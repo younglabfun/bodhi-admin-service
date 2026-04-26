@@ -48,7 +48,7 @@ type (
 		UpdatedAt int64                 `gorm:"<-;autoUpdateTime"` // 更新时间
 
 		CategoryLinks []ArticleCategoryLink `gorm:"foreignKey:ArticleId;references:Id"`
-		Categories    []Category            `gorm:"many2many:article_category;joinForeignKey:ArticleId;joinReferences:CategoryId"`
+		Categories    []Category            `gorm:"many2many:article_category_link;joinForeignKey:ArticleId;joinReferences:CategoryId"`
 	}
 )
 
@@ -151,7 +151,7 @@ func (m *defaultArticleModel) FindListByPage(ctx context.Context, req PageReq) (
 	value := strings.TrimSpace(req.Value)
 	if len(value) != 0 {
 		key := "%" + value + "%"
-		db.Where("`title` LIKE ? OR `author` LIKE ? ", key, key)
+		db.Where("`title` LIKE ? OR `author` LIKE ?  OR `slug` LIKE ? ", key, key)
 	}
 	db.Count(&total)
 	db.Preload("Categories")
@@ -165,7 +165,7 @@ func (m *defaultArticleModel) FindListByPage(ctx context.Context, req PageReq) (
 }
 
 func (m *defaultArticleModel) Update(ctx context.Context, data *Article) error {
-	err := m.conn.WithContext(ctx).Omit("is_enabled").Save(data).Error
+	err := m.conn.WithContext(ctx).Omit("pv, is_enabled, is_top, is_commend").Save(data).Error
 	return err
 }
 

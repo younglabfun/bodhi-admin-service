@@ -1,40 +1,76 @@
 syntax = "v1"
 
 info (
-    title: "article api"
-    desc: "内容管理定义"
-    author: "jing.yang"
-    date: "2025-04-25"
-    version: "v1"
+	title: "article api"
+	desc: "内容管理定义"
+	author: "jing.yang"
+	date: "2025-04-25"
+	version: "v1"
 )
 type (
-    ArticleCategory {
-        Id int64 `json:"id"`
-        Name string `json:"name"`
-    }
-    ArticleUnit {
-        Id         int64  `json:"id"`
-        Title      string `json:"title"`
-        Pv int64 `json:"pv"`
-        IsCommend   int64   `json:"isCommend"`
-        IsTop int64     `json:"isTop"`
-        IsEnabled int64     `json:"isEnabled"`
-        CreatedAt string `json:"createdAt"`
-        Categories []*ArticleCategory `json:"categories"`
-    }
-    ListArticleResp{
-        List []*ArticleUnit `json:"list"`
-        Total int64  `json:"total"`
-    }
+	ArticleCategory {
+		Id    int64  `json:"id"`
+		Title string `json:"title"`
+	}
+	ArticleUnit {
+		Id         int64              `json:"id"`
+		Title      string             `json:"title"`
+		Slug      string             `json:"slug"`
+		Pv         int64              `json:"pv"`
+		IsCommend  int64              `json:"isCommend"`
+		IsTop      int64              `json:"isTop"`
+		IsEnabled  int64              `json:"isEnabled"`
+		CreatedAt  string             `json:"createdAt"`
+		Categories []*ArticleCategory `json:"categories"`
+	}
+	ListArticleResp {
+		List  []*ArticleUnit `json:"list"`
+		Total int64          `json:"total"`
+	}
+	ArticleReq {
+		Id          int64   `json:"id,optional"`
+		Slug        string  `json:"slug"`
+		Title       string  `json:"title"`
+		Author      string  `json:"author,optional"`
+		Content     string  `json:"content"`
+		CoverImg    string  `json:"coverImg,optional"`
+		CategoryIds []int64 `json:"categoryIds,optional"`
+	}
+	ArticleResp {
+		Id          int64    `json:"id"`
+		Slug        string   `json:"slug"`
+		Title       string   `json:"title"`
+		Author      string   `json:"author"`
+		Content     string   `json:"content"`
+		CoverImg    string   `json:"coverImg"`
+		Thumbnails  []string `json:"thumbnails"`
+		CategoryIds []int64  `json:"categoryIds"`
+	}
 )
 
 @server(
-    group: article
-    jwt: Auth
-    prefix: /api/v1/article
+	group: article
+	jwt: Auth
+	prefix: /api/v1/article
 )
 
 service admin-api {
 	@handler listArticle
-    get /list (PageReq) returns (ListArticleResp)
+	get /list (PageReq) returns (ListArticleResp)
+
+	@handler insertArticle
+	post /insert (ArticleReq) returns (AffectedResp)
+
+	@handler updateArticle
+	post /update (ArticleReq) returns (AffectedResp)
+
+	@handler updateStatus
+	post /update-status (StatusReq) returns (AffectedResp)
+
+	@handler getArticle
+	get /:id (IdPath) returns (ArticleResp)
+
+	@handler removeArticle
+	post /remove (IdReq) returns (AffectedResp)
+
 }

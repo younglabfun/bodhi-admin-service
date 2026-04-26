@@ -160,3 +160,12 @@ func ContainsStr(slice []string, element string) bool {
 	}
 	return false
 }
+
+func ContainsInt64(elems []int64, v int64) bool {
+	for _, s := range elems {
+		if v == s {
+			return true
+		}
+	}
+	return false
+}

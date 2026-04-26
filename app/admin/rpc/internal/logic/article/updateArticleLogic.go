@@ -31,10 +31,10 @@ func (l *UpdateArticleLogic) UpdateArticle(in *admin.ArticleUnit) (*admin.Affect
 	if err != nil {
 		return nil, err
 	}
-	//err = l.svcCtx.ArticleCategoryLinkModel.UpdateCategoryLink(l.ctx, in.Id, in.CategoryIds)
-	//if err != nil {
-	//	return nil, err
-	//}
+	err = l.svcCtx.ArticleCategoryLinkModel.UpdateCategoryLink(l.ctx, in.Id, in.CategoryIds)
+	if err != nil {
+		return nil, err
+	}
 
 	return &admin.AffectedResp{
 		Affected: true,

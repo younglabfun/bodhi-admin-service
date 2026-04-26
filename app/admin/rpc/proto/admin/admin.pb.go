@@ -3507,7 +3507,7 @@ func (x *ArticleUnit) GetCategoryIds() []int64 {
 type ArticleCategory struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=Id,proto3" json:"Id"`
-	Name          string                 `protobuf:"bytes,2,opt,name=Name,proto3" json:"Name"`
+	Title         string                 `protobuf:"bytes,2,opt,name=Title,proto3" json:"Title"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3549,9 +3549,9 @@ func (x *ArticleCategory) GetId() int64 {
 	return 0
 }
 
-func (x *ArticleCategory) GetName() string {
+func (x *ArticleCategory) GetTitle() string {
 	if x != nil {
-		return x.Name
+		return x.Title
 	}
 	return ""
 }
@@ -3976,10 +3976,10 @@ const file_admin_proto_rawDesc = "" +
 	"\x06Author\x18\x04 \x01(\tR\x06Author\x12\x18\n" +
 	"\aContent\x18\x05 \x01(\tR\aContent\x12\x1a\n" +
 	"\bCoverImg\x18\x06 \x01(\tR\bCoverImg\x12 \n" +
-	"\vCategoryIds\x18\a \x03(\x03R\vCategoryIds\"5\n" +
+	"\vCategoryIds\x18\a \x03(\x03R\vCategoryIds\"7\n" +
 	"\x0fArticleCategory\x12\x0e\n" +
-	"\x02Id\x18\x01 \x01(\x03R\x02Id\x12\x12\n" +
-	"\x04Name\x18\x02 \x01(\tR\x04Name\"\x83\x02\n" +
+	"\x02Id\x18\x01 \x01(\x03R\x02Id\x12\x14\n" +
+	"\x05Title\x18\x02 \x01(\tR\x05Title\"\x83\x02\n" +
 	"\x0fArticleDataUnit\x12\x0e\n" +
 	"\x02Id\x18\x01 \x01(\x03R\x02Id\x12\x12\n" +
 	"\x04Slug\x18\x02 \x01(\tR\x04Slug\x12\x14\n" +

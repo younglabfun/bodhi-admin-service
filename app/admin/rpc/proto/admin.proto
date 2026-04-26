@@ -418,7 +418,7 @@ message ArticleUnit {
 
 message ArticleCategory {
   int64 Id = 1;
-  string Name = 2;
+  string Title = 2;
 }
 message ArticleDataUnit {
   int64 Id = 1;

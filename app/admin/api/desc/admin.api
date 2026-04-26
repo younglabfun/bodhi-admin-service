@@ -7,9 +7,9 @@ info (
 	version: "v0.1"
 )
 
+import "group/base.api"
 import "group/media.api"
 import "group/account.api"
-import "group/base.api"
 import "group/menu.api"
 import "group/node.api"
 import "group/nodeGroup.api"

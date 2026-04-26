@@ -3,6 +3,7 @@
 package model
 
 import (
+	"bodhiadmin/common/utils"
 	"context"
 	"github.com/SpectatorNan/gorm-zero/gormc"
 	"gorm.io/gorm"
@@ -16,6 +17,12 @@ type (
 		FindOne(ctx context.Context, id int64) (*ArticleCategoryLink, error)
 		Update(ctx context.Context, data *ArticleCategoryLink) error
 		Delete(ctx context.Context, id int64) error
+
+		UpdateCategoryLink(ctx context.Context, articleId int64, categoryIds []int64) error
+		FindAllByAid(ctx context.Context, articleId int64) ([]*ArticleCategoryLink, error)
+		BatchInsert(ctx context.Context, articleId int64, categoryIds []int64) error
+		Clear(ctx context.Context, articleId int64) error
+		BatchRemove(ctx context.Context, ids []int64) error
 	}
 
 	defaultArticleCategoryLinkModel struct {
@@ -39,6 +46,74 @@ func newArticleCategoryLinkModel(conn *gorm.DB) *defaultArticleCategoryLinkModel
 		conn:  conn,
 		table: "`article_category_link`",
 	}
+}
+
+func (m *defaultArticleCategoryLinkModel) UpdateCategoryLink(ctx context.Context, articleId int64, categoryIds []int64) error {
+	oldList, err := m.FindAllByAid(ctx, articleId)
+	if err != nil {
+		return err
+	}
+	if len(oldList) == 0 {
+		if len(categoryIds) != 0 {
+			err = m.BatchInsert(ctx, articleId, categoryIds)
+		}
+	} else {
+		if len(categoryIds) == 0 {
+			err = m.Clear(ctx, articleId)
+		} else {
+			var oldCids []int64
+			var delIds []int64
+			for _, v := range oldList {
+				oldCids = append(oldCids, v.CategoryId)
+				if !utils.ContainsInt64(categoryIds, v.CategoryId) {
+					delIds = append(delIds, v.Id)
+				}
+			}
+			var newCids []int64
+			for _, n := range categoryIds {
+				if !utils.ContainsInt64(oldCids, n) {
+					newCids = append(newCids, n)
+				}
+			}
+			_ = m.BatchRemove(ctx, delIds)
+			err = m.BatchInsert(ctx, articleId, newCids)
+		}
+	}
+	return err
+}
+
+func (m *defaultArticleCategoryLinkModel) BatchRemove(ctx context.Context, ids []int64) error {
+	if len(ids) == 0 {
+		return nil
+	}
+	err := m.conn.WithContext(ctx).Where("id IN ?", ids).Delete(&ArticleCategoryLink{}).Error
+	return err
+}
+func (m *defaultArticleCategoryLinkModel) Clear(ctx context.Context, articleId int64) error {
+	err := m.conn.WithContext(ctx).Where("article_id = ?", articleId).Delete(&ArticleCategoryLink{}).Error
+	return err
+}
+
+func (m *defaultArticleCategoryLinkModel) BatchInsert(ctx context.Context, articleId int64, categoryIds []int64) error {
+	if len(categoryIds) == 0 {
+		return nil
+	}
+	var list []*ArticleCategoryLink
+	for _, v := range categoryIds {
+		list = append(list, &ArticleCategoryLink{
+			CategoryId: v,
+			ArticleId:  articleId,
+		})
+	}
+	err := m.conn.WithContext(ctx).Model(ArticleCategoryLink{}).CreateInBatches(list, 100).Error
+	return err
+}
+func (m *defaultArticleCategoryLinkModel) FindAllByAid(ctx context.Context, articleId int64) ([]*ArticleCategoryLink, error) {
+	var list []*ArticleCategoryLink
+	db := m.conn.WithContext(ctx).Model(ArticleCategoryLink{})
+	db.Where("article_id = ?", articleId)
+	err := db.Find(&list).Error
+	return list, err
 }
 
 func (m *defaultArticleCategoryLinkModel) Insert(ctx context.Context, data *ArticleCategoryLink) error {

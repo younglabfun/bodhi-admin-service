@@ -31,6 +31,9 @@ func (l *GetArticleLogic) GetArticle(in *admin.Id) (*admin.ArticleUnit, error) {
 	}
 	var item admin.ArticleUnit
 	_ = copier.Copy(&item, data)
+	for _, v := range data.CategoryLinks {
+		item.CategoryIds = append(item.CategoryIds, v.CategoryId)
+	}
 
 	return &item, nil
 }
