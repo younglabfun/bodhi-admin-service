@@ -190,7 +190,7 @@ func SetAdminApiConf() error {
 		TAB + "UploadPath: uploads/" + "\n" +
 		TAB + "ImagePath: /images/" + "\n" +
 		TAB + "Debug: " + DEBUG + "\n\n"
-	err := utils.WriteFile(CONFFILE, conf)
+	err := utils.WriteFile(APICONFFILE, conf)
 	if err != nil {
 		return err
 	}
